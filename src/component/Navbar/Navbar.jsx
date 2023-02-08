@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import StoreFront from "../../assets/StoreFront.png";
 import User from "../../assets/User.png";
 import { CgMenuLeft } from "react-icons/cg";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Navbar = () => {
+  const [nav, setNav] = useState(false);
+
+  function handleNav() {
+    setNav(!nav);
+  }
   return (
-    <nav className="py-5 px-8">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="py-5 px-6">
+      <div className="flex justify-between items-center">
         <div className="navLogo flex items-center gap-2">
           <div className="">
             <img className="w-7 h-7" src={StoreFront} alt="" />
@@ -16,7 +22,7 @@ const Navbar = () => {
           </p>
         </div>
 
-        <div className="hidden">
+        <div className="hidden md:flex">
           <div className="text-white flex items-center gap-5 font-medium font-work-sans space-x-5">
             <a href="#">Marketplace</a>
             <a href="#">Rankings</a>
@@ -26,19 +32,30 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-        <div>
-          <CgMenuLeft className="text-white text-2xl" />
+        <div className="block md:hidden" onClick={handleNav}>
+          {!nav ? (
+            <AiOutlineClose className="text-white text-2xl" />
+          ) : (
+            <CgMenuLeft className="text-white text-2xl" />
+          )}
+          {/* <CgMenuLeft className="text-white text-2xl" /> */}
         </div>
 
-        <div className="fixed flex flex-col left-0 top-0 w-[60%] h-full border-r border-r-gray-900 text-white pt-6  bg-[#2b2b2b]">
-          <div className="navLogo flex items-center gap-2">
+        <div
+          className={
+            !nav
+              ? "fixed flex flex-col left-0 top-0 w-[60%] h-full border-r border-r-gray-900 text-white pt-6 ease-in-out duration-500  bg-[#2b2b2b]"
+              : "fixed left-[-100%]"
+          }
+        >
+          {/* <div className="navLogo flex items-center gap-2 mx-5 ">
             <div className="">
               <img className="w-7 h-7" src={StoreFront} alt="" />
             </div>
             <p className="font-mono text-white font-bold text-xl">
               NFT Marketplace
             </p>
-          </div>
+          </div> */}
 
           <div className="flex flex-col mt-8 text-center">
             <a className="p-4 border-b border-gray-800" href="#">
