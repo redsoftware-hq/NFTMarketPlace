@@ -17,7 +17,7 @@ const Navbar = () => {
           <div className="">
             <img className="w-7 h-7" src={StoreFront} alt="" />
           </div>
-          <p className="font-mono text-white font-bold text-xl">
+          <p className="font-mono text-white font-bold text-lg md:text-xl">
             NFT Marketplace
           </p>
         </div>
@@ -33,7 +33,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="block md:hidden" onClick={handleNav}>
-          {!nav ? (
+          {nav ? (
             <AiOutlineClose className="text-white text-2xl" />
           ) : (
             <CgMenuLeft className="text-white text-2xl" />
@@ -43,7 +43,7 @@ const Navbar = () => {
 
         <div
           className={
-            !nav
+            nav
               ? "fixed flex flex-col left-0 top-0 w-[60%] h-full border-r border-r-gray-900 text-white pt-6 ease-in-out duration-500  bg-[#2b2b2b]"
               : "fixed left-[-100%]"
           }

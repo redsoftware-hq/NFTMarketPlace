@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         "work-sans": ["Work Sans", "sans-serif"],
+        "space-mono": ["Space Mono", "monospace", "sans-serif"],
       },
     },
   },
