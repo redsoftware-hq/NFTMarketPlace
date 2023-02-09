@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import StoreFront from "../../assets/StoreFront.png";
-import User from "../../assets/User.png";
+import StoreFront from "../../assets/icons/StoreFront.png";
+import User from "../../assets/icons/User.png";
 import { CgMenuLeft } from "react-icons/cg";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -11,7 +11,7 @@ const Navbar = () => {
     setNav(!nav);
   }
   return (
-    <nav className="py-5 px-6">
+    <nav className="py-5 md:py-8 md:px-10 px-5">
       <div className="flex justify-between items-center">
         <div className="navLogo flex items-center gap-2">
           <div className="">
@@ -22,7 +22,7 @@ const Navbar = () => {
           </p>
         </div>
 
-        <div className="hidden md:flex">
+        <div className="hidden lg:flex">
           <div className="text-white flex items-center gap-5 font-medium font-work-sans space-x-5">
             <a href="#">Marketplace</a>
             <a href="#">Rankings</a>
@@ -32,7 +32,7 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-        <div className="block md:hidden" onClick={handleNav}>
+        <div className="block lg:hidden" onClick={handleNav}>
           {nav ? (
             <AiOutlineClose className="text-white text-2xl" />
           ) : (

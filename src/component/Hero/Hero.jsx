@@ -1,15 +1,15 @@
 import React from "react";
-import Rocket from "../../assets/RocketLaunch.png";
-import imagePlace from "../../assets/Image Placeholder.png";
-import avatar from "../../assets/Avatar Placeholder.png";
+import Rocket from "../../assets/icons/RocketLaunch.png";
+import imagePlace from "../../assets/banner/Image Placeholder.png";
+import avatar from "../../assets/banner/Avatar Placeholder.png";
 
 const Hero = () => {
   return (
-    <div className="container mx-auto px-10">
-      <div className="py-12">
-        <div className="flex justify-between flex-col md:flex-row gap-5">
+    <section className="container mx-auto">
+      <div className="py-12 px-8 md:px-12 lg:px-20">
+        <div className="flex justify-between flex-col md:flex-row gap-10">
           <div className="space-y-5">
-            <h1 className="text-white font-medium md:text-6xl text-2xl capitalize leading-8 md:leading-15 tracking-wide font-work-sans">
+            <h1 className="text-white font-medium lg:text-7xl md:text-5xl text-2xl capitalize leading-8 md:leading-15 tracking-wide font-work-sans">
               Discover <br /> digital art & <br /> Collect NFTs
             </h1>
 
@@ -41,7 +41,7 @@ const Hero = () => {
 
           <div className="">
             <div className="img-div">
-              <img className="w-full object-cover" src={imagePlace} alt="" />
+              <img className="" src={imagePlace} alt="" />
             </div>
 
             <div className=" bg-[#3b3b3b] text-white py-4 px-3 rounded-b-xl space-y-3">
@@ -56,7 +56,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
