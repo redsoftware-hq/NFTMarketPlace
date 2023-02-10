@@ -18,6 +18,15 @@ const CollectionCard = ({ item }) => {
             1025+
           </div>
         </div>
+        <div className="artist-info text-white">
+          <p className="font-medium text-lg tracking-wider">{item.design}</p>
+          <div className="flex items-center gap-2 mt-2">
+            <span>
+              <img className="w-5" src={item.avatar} alt="" />
+            </span>
+            <span>{item.artistName}</span>
+          </div>
+        </div>
       </div>
     </>
   );

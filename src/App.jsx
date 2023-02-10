@@ -1,3 +1,4 @@
+import Categories from "./component/Categories/Categories";
 import Hero from "./component/Hero/Hero";
 import Navbar from "./component/Navbar/Navbar";
 import TopCreatersSec from "./component/TopCreators/TopCreatersSec";
@@ -10,6 +11,7 @@ function App() {
       <Hero />
       <TrendingSec />
       <TopCreatersSec />
+      <Categories />
     </div>
   );
 }

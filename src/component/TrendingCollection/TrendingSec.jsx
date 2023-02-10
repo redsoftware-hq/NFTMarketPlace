@@ -1,5 +1,5 @@
 import React from "react";
-import { Collection } from "../../utils/collections";
+import { Collection } from "../../utils/TrendingCollections";
 import CollectionCard from "../Cards/CollectionCard";
 
 const TrendingSec = () => {
