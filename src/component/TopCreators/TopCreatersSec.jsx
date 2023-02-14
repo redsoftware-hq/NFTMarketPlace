@@ -27,7 +27,7 @@ const TopCreatersSec = () => {
 					</div>
 
 					<div className="creators-container">
-						<div className="mt-10 creators-card grid content-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+						<div className="mt-10 creators-card flex flex-1 flex-wrap justify-between gap-10">
 							{artistsData &&
 								artistsData.map((item, index) => {
 									return <ArtistCard key={index} item={item} />;

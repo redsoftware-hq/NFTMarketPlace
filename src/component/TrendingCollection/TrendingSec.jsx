@@ -1,6 +1,6 @@
 import React from "react";
 import CollectionCard from "../Cards/CollectionCard";
-import { Collection } from "../../utils/TrendingCollections";
+import { collection } from "../../utils/TrendingCollections";
 
 const TrendingSec = () => {
 	return (
@@ -16,10 +16,10 @@ const TrendingSec = () => {
 						</p>
 					</div>
 
-					<div className="card-Container">
-						<div className="py-14 main-card grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-							{Collection &&
-								Collection.map((item, index) => {
+					<div className="card-container">
+						<div className="py-14 collection-card flex flex-1 flex-wrap justify-between">
+							{collection &&
+								collection.map((item, index) => {
 									return <CollectionCard key={index} item={item} />;
 								})}
 						</div>
