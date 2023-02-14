@@ -18,7 +18,24 @@ const Hero = () => {
 							buy and sell art from more <br /> than 20k NFT artists.
 						</p>
 						<div>
-							<button className="py-3 px-10 bg-[#A259FF] rounded-2xl flex items-center capitalize text-white text-xs md:text-lg gap-2">
+							<button
+								className="
+							py-3 
+							px-10 
+							bg-[#A259FF] 
+							rounded-2xl 
+							flex 
+							items-center 
+							capitalize
+							 text-white 
+							 text-xs 
+							 md:text-lg 
+							 gap-2 
+							 transition-all 
+							 duration-300 
+							 hover:scale-110
+							"
+							>
 								<img className="w-4 md:w-5" src={Rocket} alt="" /> get started
 							</button>
 						</div>
@@ -39,7 +56,7 @@ const Hero = () => {
 						</div>
 					</div>
 
-					<div className="">
+					<div className="hero-cover-image transform transition-all hover:animate-pulse cursor-pointer duration-500">
 						<div className="img-div">
 							<img className="" src={imagePlace} alt="" />
 						</div>

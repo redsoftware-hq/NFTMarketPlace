@@ -20,7 +20,27 @@ const TopCreatersSec = () => {
 								Checkout Top Rated Creators on the NFT <br /> Marketplace
 							</p>
 						</div>
-						<button className="py-3 px-10 hidden md:flex bg-[#2b2b2b] border-2 border-[#A259FF] hover:text-[#A259FF] ease-in-out duration-300 rounded-2xl items-center capitalize text-white text-xs md:text-sm font-medium gap-2">
+						<button
+							className="
+							py-3 
+						px-10 
+						hidden 
+						md:flex 
+						bg-[#2b2b2b] 
+						border-2 border-[#A259FF] 
+						hover:text-[#A259FF] 
+						ease-in-out 
+						duration-300 
+						rounded-2xl 
+						items-center 
+						capitalize
+						text-white 
+						text-xs 
+						md:text-sm 
+						font-medium 
+						gap-2
+						"
+						>
 							<img className="w-4 md:w-5" src={RocketPurple} alt="" /> view
 							rankings
 						</button>
@@ -34,7 +54,32 @@ const TopCreatersSec = () => {
 								})}
 						</div>
 						<div>
-							<button className="w-full mt-8 py-5 px-10 flex items-center justify-center md:hidden lg:hidden bg-[#2b2b2b] border-2 border-[#A259FF] hover:text-[#A259FF] ease-in-out duration-300 rounded-2xl capitalize text-white text-sm font-semibold gap-2 lg:mr-8">
+							<button
+								className="
+							w-full 
+							mt-8 
+							py-5 
+							px-10 
+							flex 
+							items-center 
+							justify-center 
+							md:hidden 
+							lg:hidden 
+							bg-[#2b2b2b] 
+							border-2 
+							border-[#A259FF] 
+							hover:text-[#A259FF] 
+							ease-in-out 
+							duration-300 
+							rounded-2xl 
+							capitalize
+							text-white 
+							text-sm 
+							font-semibold 
+							gap-2 
+							lg:mr-8
+							"
+							>
 								<img className="w-4 md:w-5" src={RocketPurple} alt="" /> view
 								rankings
 							</button>
