@@ -7,7 +7,7 @@ import c6 from "../assets/categories/c6.png";
 import c7 from "../assets/categories/c7.png";
 import c8 from "../assets/categories/c8.png";
 
-export const artistsData = [
+export const categoriesData = [
   {
     id: 1,
     image: c1,

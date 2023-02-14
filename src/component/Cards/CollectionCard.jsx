@@ -3,8 +3,8 @@ import React from "react";
 const CollectionCard = ({ item }) => {
   return (
     <>
-      <div className="card-1 grid grid-flow-row max-w-[320px] max-h-[525px] gap-2">
-        <div className="grid min-w-80">
+      <div className="card-1 grid grid-flow-row w-full h-full gap-2">
+        <div className="">
           <img className="w-full" src={item?.url} alt="" />
         </div>
         <div className="grid grid-cols-3 gap-3">
