@@ -11,87 +11,34 @@ import art1 from "../assets/collections/art1.png";
 import art2 from "../assets/collections/art2.png";
 import art3 from "../assets/collections/art3.png";
 
-export let Collection = [
-  {
-    id: 1,
-    url: Puppy,
-    thumbnailOne: Mouse,
-    thumbnailTwo: Bear,
-    design: "DSGN Animals",
-    artistName: "MrFox",
-    avatar: art1,
-  },
+export let collection = [
+	{
+		id: 1,
+		url: Puppy,
+		thumbnailOne: Mouse,
+		thumbnailTwo: Bear,
+		design: "DSGN Animals",
+		artistName: "MrFox",
+		avatar: art1,
+	},
 
-  {
-    id: 2,
-    url: Mushroom_1,
-    thumbnailOne: Mushroom_2,
-    thumbnailTwo: Mushroom_3,
-    design: "Magic Mushrooms",
-    artistName: "Shroomie",
-    avatar: art2,
-  },
+	{
+		id: 2,
+		url: Mushroom_1,
+		thumbnailOne: Mushroom_2,
+		thumbnailTwo: Mushroom_3,
+		design: "Magic Mushrooms",
+		artistName: "Shroomie",
+		avatar: art2,
+	},
 
-  {
-    id: 3,
-    url: Robot_1,
-    thumbnailOne: Robot_2,
-    thumbnailTwo: Robot_3,
-    design: "Disco Machines",
-    artistName: "BeKind2Robots",
-    avatar: art3,
-  },
+	{
+		id: 3,
+		url: Robot_1,
+		thumbnailOne: Robot_2,
+		thumbnailTwo: Robot_3,
+		design: "Disco Machines",
+		artistName: "BeKind2Robots",
+		avatar: art3,
+	},
 ];
-
-{
-  /* <div className="card-1 grid grid-flow-row max-w-[320px] max-h-[525px] gap-2">
-                <div className="grid min-w-80">
-                  <img className="w-full" src={Puppy} alt="" />
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div>
-                    <img className="w-full" src={Mouse} alt="" />
-                  </div>
-                  <div>
-                    <img className="w-full" src={Bear} alt="" />
-                  </div>
-                  <div className="w-full bg-[#A259FF] text-white rounded-2xl flex items-center justify-center font-space-mono font-bold text-lg">
-                    1025+
-                  </div>
-                </div>
-              </div>
-
-              <div className="card-2 hidden md:grid grid-flow-row max-w-[320px] max-h-[525px] gap-2">
-                <div className="grid min-w-80">
-                  <img className="w-full" src={Mushroom_1} alt="" />
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div>
-                    <img className="w-full" src={Mushroom_2} alt="" />
-                  </div>
-                  <div>
-                    <img className="w-full" src={Mushroom_3} alt="" />
-                  </div>
-                  <div className="w-full bg-[#A259FF] text-white rounded-2xl flex items-center justify-center font-space-mono font-bold text-lg">
-                    1025+
-                  </div>
-                </div>
-              </div>
-
-              <div className="card-3 hidden lg:grid grid-flow-row max-w-[320px] max-h-[525px] gap-2">
-                <div className="grid min-w-80">
-                  <img className="w-full" src={Robot_1} alt="" />
-                </div>
-                <div className="grid grid-cols-3 gap-3">
-                  <div>
-                    <img className="w-full" src={Robot_2} alt="" />
-                  </div>
-                  <div>
-                    <img className="w-full" src={Robot_3} alt="" />
-                  </div>
-                  <div className="w-full bg-[#A259FF] text-white rounded-2xl flex items-center justify-center font-space-mono font-bold text-lg">
-                    1025+
-                  </div>
-                </div>
-              </div> */
-}
