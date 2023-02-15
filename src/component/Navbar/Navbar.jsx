@@ -38,10 +38,6 @@ const Navbar = () => {
 		setWalletData({ balance: ethers.utils.formatEther(balance) });
 	};
 
-	useEffect(() => {
-		console.log("walletData", walletData);
-	}, [walletData]);
-
 	function handleNav() {
 		setNav(!nav);
 	}
@@ -72,7 +68,9 @@ const Navbar = () => {
 									className="hover:text-[#A259FF] duration-300"
 									onClick={handleConnect}
 								>
-									{walletData.account ? "Wallet Connected" : "Connect Wallet"}
+									{walletData.walletAddress
+										? "Wallet Connected"
+										: "Connect Wallet"}
 								</button>
 							</div>
 							{walletData.walletAddress && walletData.network && (
