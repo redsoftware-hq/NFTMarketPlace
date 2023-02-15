@@ -8,7 +8,7 @@ const TrendingSec = () => {
 			<section className="container mx-auto">
 				<div className="py-10 px-7 md:px-10 lg:px-20">
 					<div className="text-white space-y-2">
-						<h4 className="capitalize text-lg md:text-3xl lg:text-4xl font-semibold tracking-wide">
+						<h4 className="capitalize text-3xl md:text-4xl font-semibold">
 							trending collection
 						</h4>
 						<p className="capitalize text-sm md:text-xl tracking-wider">
@@ -17,7 +17,7 @@ const TrendingSec = () => {
 					</div>
 
 					<div className="card-container">
-						<div className="py-14 collection-card flex flex-1 flex-wrap justify-between">
+						<div className="py-14 main-card grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 							{collection &&
 								collection.map((item, index) => {
 									return <CollectionCard key={index} item={item} />;
