@@ -36,10 +36,10 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className=" w-full">
+          <div className="w-full">
             <div className="img-div lg:h-[400px]">
               <img
-                className="w-full h-full object-cover rounded-t-2xl"
+                className="w-full h-full object-cover rounded-t-2xl hover:backdrop-opacity-10"
                 src={imagePlace}
                 alt=""
               />
