@@ -3,7 +3,7 @@ import React from "react";
 const CategoryCard = ({ item }) => {
   return (
     <>
-      <div className="w-full h-full">
+      <div className="w-full h-full hover:scale-105 duration-300 cursor-pointer">
         <div>
           <img
             className="w-[148px] h-[142px] md:w-[150] md:h-[142px] lg:w-[240px] lg:h-[240px] xl:w-full xl:h-full"

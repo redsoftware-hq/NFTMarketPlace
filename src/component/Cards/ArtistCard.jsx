@@ -3,7 +3,7 @@ import React from "react";
 const ArtistCard = ({ item }) => {
   return (
     <>
-      <div className="bg-[#3b3b3b] w-full h-full flex lg:flex-col items-center rounded-2xl p-4 gap-3">
+      <div className="bg-[#3b3b3b] w-full h-full flex lg:flex-col items-center rounded-2xl p-4 gap-3 hover:scale-105 duration-300 cursor-pointer">
         <div className="relative profile-rank flex">
           <span className="absolute top-[-5px] left-[-10px] lg:left-[-40px] lg:top-0">
             <img className="w-7" src={item.rank} alt="" />

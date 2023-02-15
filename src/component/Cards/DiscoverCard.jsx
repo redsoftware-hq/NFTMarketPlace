@@ -3,7 +3,7 @@ import React from "react";
 const DiscoverCard = ({ item }) => {
   return (
     <>
-      <div className="w-full">
+      <div className="w-full hover:scale-105 duration-300 cursor-pointer">
         <div>
           <img className="w-full" src={item.image} alt="" />
         </div>
