@@ -1,6 +1,6 @@
 import React from "react";
+import { artistsData } from "../../utils/artistsCollection";
 import ArtistCard from "../Cards/ArtistCard";
-import { artistsData } from "../../utils/ArtistsCollection";
 import RocketPurple from "../../assets/icons/RocketLaunchPurple.png";
 
 const TopCreatersSec = () => {
@@ -10,7 +10,7 @@ const TopCreatersSec = () => {
 				<div className="px-7 md:px-10 lg:px-20 lg:py-10">
 					<div className="text-white flex items-center justify-between">
 						<div>
-							<h4 className="capitalize text-3xl md:text-3xl lg:text-4xl font-semibold tracking-wide">
+							<h4 className="capitalize text-3xl lg:text-4xl font-semibold tracking-wide">
 								top creators
 							</h4>
 							<p className="md:hidden lg:block capitalize text-lg mt-3">
