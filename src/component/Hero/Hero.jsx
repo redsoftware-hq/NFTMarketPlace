@@ -1,7 +1,7 @@
 import React from "react";
 import Rocket from "../../assets/icons/RocketLaunch.png";
-import imagePlace from "../../assets/banner/Image Placeholder.png";
 import avatar from "../../assets/banner/Avatar Placeholder.png";
+import imagePlace from "../../assets/banner/Image Placeholder.png";
 
 const Hero = () => {
   return (

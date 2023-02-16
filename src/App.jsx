@@ -10,20 +10,20 @@ import TrendingSec from "./component/TrendingCollection/TrendingSec";
 import WorkingSec from "./component/WorkingSec/WorkingSec";
 
 function App() {
-  return (
-    <div className="App">
-      <Navbar />
-      <Hero />
-      <TrendingSec />
-      <TopCreatersSec />
-      <Categories />
-      <Discover />
-      <TimerSec />
-      <WorkingSec />
-      <NewsLetter />
-      <Footer />
-    </div>
-  );
+	return (
+		<div className="App">
+			<Navbar />
+			<Hero />
+			<TrendingSec />
+			<TopCreatersSec />
+			<Categories />
+			<Discover />
+			<TimerSec />
+			<WorkingSec />
+			<NewsLetter />
+			<Footer />
+		</div>
+	);
 }
 
 export default App;

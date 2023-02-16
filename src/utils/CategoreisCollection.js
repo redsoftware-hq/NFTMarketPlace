@@ -8,44 +8,44 @@ import c7 from "../assets/categories/c7.png";
 import c8 from "../assets/categories/c8.png";
 
 export const categoriesData = [
-  {
-    id: 1,
-    image: c1,
-    name: "Art",
-  },
-  {
-    id: 2,
-    image: c2,
-    name: "Collectibles",
-  },
-  {
-    id: 3,
-    image: c3,
-    name: "Music",
-  },
-  {
-    id: 4,
-    image: c4,
-    name: "Photography",
-  },
-  {
-    id: 5,
-    image: c5,
-    name: "Video",
-  },
-  {
-    id: 6,
-    image: c6,
-    name: "Utility",
-  },
-  {
-    id: 7,
-    image: c7,
-    name: "Sport",
-  },
-  {
-    id: 8,
-    image: c8,
-    name: "Virtual Worlds",
-  },
+	{
+		id: 1,
+		image: c1,
+		name: "Art",
+	},
+	{
+		id: 2,
+		image: c2,
+		name: "Collectibles",
+	},
+	{
+		id: 3,
+		image: c3,
+		name: "Music",
+	},
+	{
+		id: 4,
+		image: c4,
+		name: "Photography",
+	},
+	{
+		id: 5,
+		image: c5,
+		name: "Video",
+	},
+	{
+		id: 6,
+		image: c6,
+		name: "Utility",
+	},
+	{
+		id: 7,
+		image: c7,
+		name: "Sport",
+	},
+	{
+		id: 8,
+		image: c8,
+		name: "Virtual Worlds",
+	},
 ];
