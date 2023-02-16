@@ -3,11 +3,13 @@ import NFTCard from "../component/Cards/NFTCard";
 import MakeOffer from "../component/MakeOffer/MakeOffer";
 import Navbar from "../component/Navbar/Navbar";
 import Properties from "../component/Properties/Properties";
+import artistAvatar from "../assets/details/a1.png";
+import nftContent from "../assets/details/bg.png";
 const nft = {
   artistName: "Shroomie",
-  artistAvatar: "/img/details/a1.png",
+  artistAvatar: artistAvatar,
   name: "Magic Mushrooms",
-  content: "/img/details/bg.png",
+  content: nftContent,
   price: "0.0031937",
   fiatPrice: "4.95",
   isAvailable: true,
