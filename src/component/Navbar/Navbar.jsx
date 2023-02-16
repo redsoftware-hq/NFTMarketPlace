@@ -2,7 +2,7 @@ import { ethers } from "ethers";
 import { CgMenuLeft } from "react-icons/cg";
 import User from "../../assets/icons/User.png";
 import React, { useState, useEffect, useReducer } from "react";
-import StoreFront from "../../assets/icons/StoreFront.png";
+import logo from "../../assets/icons/logo-metajuice.png";
 import { AiOutlineClose, AiOutlineInfoCircle } from "react-icons/ai";
 
 const Navbar = () => {
@@ -46,26 +46,26 @@ const Navbar = () => {
     <nav className="py-5 md:py-8 md:px-10 px-5">
       <div className="flex justify-between items-center">
         <div className="navLogo flex items-center gap-2 cursor-pointer">
-          <div className="">
-            <img className="w-7 h-7" src={StoreFront} alt="" />
+          <div className="w-auto h-[2rem]">
+            <img className="w-full h-full" src={logo} alt="" />
           </div>
-          <p className="font-mono text-white font-bold text-lg md:text-xl">
+          {/* <p className="font-mono text-white font-bold text-lg md:text-xl">
             NFT Marketplace
-          </p>
+          </p> */}
         </div>
 
         <div className="hidden lg:flex">
           <div className="text-white flex items-center gap-5 font-medium font-work-sans space-x-5">
-            <a className="hover:text-[#A259FF] duration-300" href="#">
+            <a className="hover:text-[#F15623] duration-300" href="#">
               Marketplace
             </a>
-            <a className="hover:text-[#A259FF] duration-300" href="#">
+            <a className="hover:text-[#F15623] duration-300" href="#">
               Rankings
             </a>
             <div className="flex justify-between items-center gap-2">
               <div>
                 <button
-                  className="hover:text-[#A259FF] duration-300"
+                  className="hover:text-[#F15623] duration-300"
                   onClick={handleConnect}
                 >
                   {walletData.walletAddress
@@ -100,7 +100,7 @@ const Navbar = () => {
                 </div>
               )}
             </div>
-            <button className="bg-[#A259FF] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#A259FF] hover:bg-transparent duration-300">
+            <button className="bg-[#F15623] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300">
               <img className="w-5" src={User} alt="" /> Sign Up
             </button>
           </div>
@@ -122,26 +122,26 @@ const Navbar = () => {
         >
           <div className="flex flex-col mt-8 text-center">
             <a
-              className="p-4 border-b border-gray-800 hover:text-[#A259FF] duration-300"
+              className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300"
               href="#"
             >
               Marketplace
             </a>
             <a
-              className="p-4 border-b border-gray-800 hover:text-[#A259FF] duration-300"
+              className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300"
               href="#"
             >
               Rankings
             </a>
             <a
-              className="p-4 border-b border-gray-800 hover:text-[#A259FF] duration-300"
+              className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300"
               href="#"
             >
               Connect Wallet
             </a>
           </div>
           <div className="flex justify-center mt-3 text-center">
-            <button className="bg-[#A259FF] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#A259FF] hover:bg-transparent duration-300">
+            <button className="bg-[#F15623] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300">
               <img className="w-5" src={User} alt="" /> Sign Up
             </button>
           </div>
