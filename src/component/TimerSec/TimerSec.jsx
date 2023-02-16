@@ -16,7 +16,7 @@ const TimerSec = () => {
           className="w-full h-full absolute"
           style={{
             background:
-              "linear-gradient(180deg, rgba(162, 89, 255, 0) 0%, #A259FF 100%)",
+              "linear-gradient(180deg, rgba(162, 89, 255, 0) 0%, #F15623 100%)",
           }}
         >
           <div className="container mx-auto">
@@ -35,7 +35,7 @@ const TimerSec = () => {
                     <h2 className="text-white text-5xl md:text-4xl lg:text-5xl capitalize font-bold">
                       magic mushrooms
                     </h2>
-                    <button className="py-5 px-16 hidden md:flex items-center bg-[#ffff] hover:bg-transparent border-2 border-[#A259FF] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3">
+                    <button className="py-5 px-16 hidden md:flex items-center bg-[#ffff] hover:bg-transparent border-2 border-[#F15623] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3">
                       <img className="w-4 md:w-6" src={PurpleEye} alt="" /> See
                       NFT
                     </button>
