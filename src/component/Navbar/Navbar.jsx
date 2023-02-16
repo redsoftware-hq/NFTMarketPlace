@@ -76,14 +76,14 @@ const Navbar = () => {
 							{walletData.walletAddress && walletData.network && (
 								<div className="relative group cursor-pointer">
 									<AiOutlineInfoCircle />
-									<div className="absolute z-10 py-3 px-5 hidden w-auto text-sm text-white bg-[#3b3b3b] rounded-lg shadow-md top-8 right-0 group-hover:block space-y-3">
+									<div className="absolute z-10 py-3 px-5 hidden w-[200px] text-sm text-white bg-[#3b3b3b] rounded-lg shadow-md top-8 right-0 group-hover:block space-y-3">
 										<div className="flex flex-col mt-1">
 											<span className="font-normal">Address:</span>
 											<span className="font-light">{`${walletData.walletAddress.substring(
 												0,
-												6
+												9
 											)}....${walletData.walletAddress.substring(
-												walletData.walletAddress.length - 6
+												walletData.walletAddress.length - 9
 											)}`}</span>
 										</div>
 										<div className="flex flex-col">
@@ -94,7 +94,9 @@ const Navbar = () => {
 										</div>
 										<div className="flex flex-col">
 											<span className="font-normal">Wallet Balance:</span>
-											<span className="font-light">{walletData.balance}</span>
+											<span className="font-light">
+												{`${Number(walletData.balance).toFixed(2)} eth`}
+											</span>
 										</div>
 									</div>
 								</div>
