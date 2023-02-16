@@ -1,10 +1,8 @@
-import { FiArrowDown, FiArrowUp } from "react-icons/fi";
-export default function AccordionLayout({
-  title,
-  handleToggle,
-  isOpen,
-  children,
-}) {
+import { FiArrowDown } from "react-icons/fi";
+import { useState } from "react";
+export default function AccordionLayout({ title, children }) {
+  const [isOpen, setisOpen] = useState(false);
+  const handleToggle = () => setisOpen(!isOpen);
   return (
     <>
       <div
