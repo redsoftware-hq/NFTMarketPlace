@@ -39,7 +39,7 @@ const Hero = () => {
           <div className="w-full">
             <div className="img-div lg:h-[400px]">
               <img
-                className="w-full h-full object-cover rounded-t-2xl hover:backdrop-opacity-10"
+                className="w-full h-full object-cover rounded-t-2xl hover:brightness-50 duration-200 cursor-pointer"
                 src={imagePlace}
                 alt=""
               />
@@ -48,7 +48,7 @@ const Hero = () => {
             <div className=" bg-[#3b3b3b] text-white py-4 px-3 rounded-b-2xl space-y-3 ">
               <h6 className="font-medium capitalize">space walking</h6>
               <div className="flex items-center gap-2">
-                <span>
+                <span className="cursor-pointer">
                   <img className="w-4" src={avatar} alt="" />
                 </span>
                 <span className="text-xs font-normal">Aminakid</span>
