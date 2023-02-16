@@ -15,9 +15,9 @@ function App() {
 			<Navbar />
 			<Hero />
 			<TrendingSec />
+			<Discover />
 			<TopCreatersSec />
 			<Categories />
-			<Discover />
 			<TimerSec />
 			<WorkingSec />
 			<NewsLetter />
