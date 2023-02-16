@@ -23,7 +23,9 @@ export default function AccordionLayout({
         )}
       </div>
       {isOpen && (
-        <div className="px-4 py-2 bg-[#3b3b3b] rounded-2xl">{children}</div>
+        <div className="w-11/12 md:w-[98%] px-4 py-2 bg-[#3b3b3b] rounded-2xl">
+          {children}
+        </div>
       )}
     </>
   );
