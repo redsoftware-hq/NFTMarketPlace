@@ -1,7 +1,4 @@
-import {
-  BsFillArrowDownCircleFill,
-  BsFillArrowUpCircleFill,
-} from "react-icons/bs";
+import { FiArrowDown, FiArrowUp } from "react-icons/fi";
 export default function AccordionLayout({
   title,
   handleToggle,
@@ -11,21 +8,23 @@ export default function AccordionLayout({
   return (
     <>
       <div
-        className="flex flex-row w-full item-center gap-4 justify-between"
+        className="flex flex-row w-full item-center gap-4 justify-between py-2"
         onClick={handleToggle}
       >
         <div className="text-white text-lg">{title}</div>
         {!isOpen ? (
           <div className="text-white">
-            <BsFillArrowDownCircleFill className="w-8 h-8" />
+            <FiArrowDown className="w-6 h-6 transform shrink-0 rotate-270 duration-300" />
           </div>
         ) : (
           <div className="text-white">
-            <BsFillArrowUpCircleFill className="w-8 h-8" />
+            <FiArrowDown className="w-6 h-6 transform rotate-180 duration-300" />
           </div>
         )}
       </div>
-      {isOpen && <div>{children}</div>}
+      {isOpen && (
+        <div className="px-4 py-2 bg-[#3b3b3b] rounded-2xl">{children}</div>
+      )}
     </>
   );
 }
