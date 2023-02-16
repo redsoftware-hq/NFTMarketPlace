@@ -25,15 +25,15 @@ function AvailableListings() {
         </h4>
         <span className="text-[#858584] text-xs">Last updated moments ago</span>
       </div>
-      <div className="flex flex-col gap-3 items-center">
+      <div className="flex flex-col gap-3 items-center px-2 lg:items-start">
         {listings &&
           listings.map((listing, index) => {
             return (
               <div
                 key={index}
-                className="bg-[#3b3b3b] rounded-2xl p-4 gap-3 flex items-center flex-wrap max-w-[330px] justify-between lg:max-w-[515px] md:max-w-[500px]"
+                className="bg-[#3b3b3b] rounded-2xl p-4 gap-3 flex items-center flex-wrap  justify-between  max-w-[330px] md:max-w-[500px] lg:w-full lg:max-w-[620px]"
               >
-                <div className="text-[#858584] font-work-sans text-sm">
+                <div className="text-[#858584] font-work-sans text-sm basis-3/5">
                   Listed by
                   <span className="text-white px-2 font-space-mono text-base">
                     {listing.listedBy}
