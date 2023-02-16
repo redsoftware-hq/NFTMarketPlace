@@ -18,7 +18,7 @@ const Hero = () => {
               sell art from more than 20k NFT artists.
             </p>
             <div>
-              <button className="py-3 px-10 bg-[#A259FF] rounded-2xl flex items-center capitalize text-white text-xs md:text-lg gap-2 border-2 border-[transparent] hover:border-[#A259FF] hover:bg-transparent duration-300">
+              <button className="py-3 px-10 bg-[#F15623] rounded-2xl flex items-center capitalize text-white text-xs md:text-lg gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300">
                 <img className="w-4 md:w-5" src={Rocket} alt="" /> get started
               </button>
             </div>

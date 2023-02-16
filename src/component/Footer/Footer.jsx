@@ -1,5 +1,6 @@
 import React from "react";
-import StoreFront from "../../assets/icons/StoreFront.png";
+import logo from "../../assets/icons/logo-metajuice.png";
+// import StoreFront from "../../assets/icons/StoreFront.png";
 import Discord from "../../assets/FooterSec/discord.png";
 import Yt from "../../assets/FooterSec/yt.png";
 import Twitter from "../../assets/FooterSec/twitter.png";
@@ -14,12 +15,12 @@ const Footer = () => {
             <div className="main-container flex flex-col lg:flex-row lg:justify-between gap-6">
               <div className="conatiner-1 text-white">
                 <div className="img-title flex items-center gap-2 cursor-pointer">
-                  <div>
-                    <img className="w-8" src={StoreFront} alt="" />
+                  <div className="w-auto h-[2rem]">
+                    <img className="w-full h-full" src={logo} alt="" />
                   </div>
-                  <h6 className="font-space-mono text-lg font-medium">
+                  {/* <h6 className="font-space-mono text-lg font-medium">
                     NFT Marketplace
-                  </h6>
+                  </h6> */}
                 </div>
                 <div className="social-div text-[#cccc] mt-5 space-y-3">
                   <p className="text-sm">
@@ -76,13 +77,13 @@ const Footer = () => {
                         <input
                           type="text"
                           placeholder="Enter Your Email Address"
-                          className="w-full px-5 py-2 md:py-3 placeholder-[#2b2b2b] placeholder:text-sm focus:outline-none focus:border-[#A259FF] rounded-2xl bg-white text-[#2b2b2b]"
+                          className="w-full px-5 py-2 md:py-3 placeholder-[#2b2b2b] placeholder:text-sm focus:outline-none focus:border-[#F15623] rounded-2xl bg-white text-[#2b2b2b]"
                         />
                       </div>
                       <div className="md:absolute right-0">
                         <button
                           type="submit"
-                          className="flex w-full lg:text-base items-center justify-center gap-2 rounded-2xl bg-[#A259FF] px-14 py-2 md:py-3 md:px-14"
+                          className="flex w-full lg:text-base items-center justify-center gap-2 rounded-2xl bg-[#F15623] px-14 py-2 md:py-3 md:px-14"
                         >
                           Subscribe
                         </button>
