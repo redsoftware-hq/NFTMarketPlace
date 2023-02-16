@@ -9,7 +9,7 @@ function NFTCard({ content, isAvailable }) {
         />
       </div>
       <span className="px-4 py-2 text-white font-space-mono font-semibold text-base float-right">
-        Available
+        {availabilty}
       </span>
     </div>
   );
