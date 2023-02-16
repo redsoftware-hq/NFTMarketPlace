@@ -4,7 +4,7 @@ function MakeOffer({ nft }) {
   return (
     <div className="p-2 flex flex-col gap-3 w-full">
       <div className="bg-[#3B3B3B] p-3 flex gap-2 justify-evenly rounded-2xl max-w-[135px]">
-        {nft.artistAvatar && <img src={nft.artistAvatar} />}
+        <img src={nft.artistAvatar} alt="" />
         <span className="text-white font-space-mono font-medium text-base">
           {nft.artistName}
         </span>
