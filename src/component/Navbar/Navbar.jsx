@@ -64,7 +64,10 @@ const Navbar = () => {
             >
               Marketplace
             </NavLink>
-            <NavLink className="hover:text-[#F15623] duration-300">
+            <NavLink
+              to="rankings"
+              className="hover:text-[#F15623] duration-300"
+            >
               Rankings
             </NavLink>
             <div className="flex justify-between items-center gap-2">
