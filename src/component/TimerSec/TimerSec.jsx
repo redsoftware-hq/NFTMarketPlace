@@ -4,7 +4,7 @@ import PurpleEye from "../../assets/timersec/eye.png";
 import { useTimer } from "react-timer-hook";
 
 const TimerSec = () => {
-  const time = new Date();
+  let time = new Date();
   time.setHours(time.getHours() + 1);
 
   const { seconds, minutes, hours } = useTimer({
