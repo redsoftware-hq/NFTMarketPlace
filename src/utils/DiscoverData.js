@@ -14,6 +14,7 @@ export let discoverData = [
     avatarName: "MoonDancer",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
 
   {
@@ -24,6 +25,7 @@ export let discoverData = [
     avatarName: "NebulaKid",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
 
   {
@@ -34,5 +36,6 @@ export let discoverData = [
     avatarName: "Spaceone",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
 ];
