@@ -20,31 +20,21 @@ export const categoriesData = [
 	},
 	{
 		id: 3,
-		image: c3,
-		name: "Music",
-	},
-	{
-		id: 4,
 		image: c4,
 		name: "Photography",
 	},
 	{
-		id: 5,
+		id: 4,
 		image: c5,
 		name: "Video",
 	},
 	{
-		id: 6,
+		id: 5,
 		image: c6,
 		name: "Utility",
 	},
 	{
-		id: 7,
-		image: c7,
-		name: "Sport",
-	},
-	{
-		id: 8,
+		id: 6,
 		image: c8,
 		name: "Virtual Worlds",
 	},
