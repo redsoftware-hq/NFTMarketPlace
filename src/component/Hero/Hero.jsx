@@ -19,7 +19,7 @@ const Hero = () => {
 								<img className="w-4 md:w-5" src={Rocket} alt="" /> get started
 							</button>
 						</div>
-						<div className="flex justify-between text-white font-light capitalize font-work-sans text-lg pt-7">
+						<div className="flex flex-1 items-end justify-between text-white font-light capitalize font-work-sans text-lg pt-7">
 							<p className="">
 								<span className="text-2xl font-space-mono text-[#F15623]">
 									240k+
