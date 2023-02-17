@@ -5,7 +5,7 @@ import { useTimer } from "react-timer-hook";
 
 const TimerSec = () => {
   let time = new Date();
-  time.setHours(time.getHours() + 1);
+  time.setHours(time.getHours() + 12);
 
   const { seconds, minutes, hours } = useTimer({
     expiryTimestamp: time,
