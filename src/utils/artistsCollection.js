@@ -16,60 +16,32 @@ import Artist7 from "../assets/artists/artist7.png";
 import Artist8 from "../assets/artists/artist8.png";
 
 export const artistsData = [
-  {
-    id: 1,
-    rank: one,
-    artistImage: Artist1,
-    name: "Keepitreal",
-    totalSales: "34.53 ETH",
-  },
-  {
-    id: 2,
-    rank: two,
-    artistImage: Artist2,
-    name: "DigiLab",
-    totalSales: "34.53 ETH",
-  },
-  {
-    id: 3,
-    rank: three,
-    artistImage: Artist3,
-    name: "GravityOne",
-    totalSales: "34.53 ETH",
-  },
-  {
-    id: 4,
-    rank: four,
-    artistImage: Artist4,
-    name: "Juanie",
-    totalSales: "34.53 ETH",
-  },
-  {
-    id: 5,
-    rank: five,
-    artistImage: Artist5,
-    name: "BlueWhale",
-    totalSales: "34.53 ETH",
-  },
-  {
-    id: 6,
-    rank: six,
-    artistImage: Artist6,
-    name: "Mr Fox",
-    totalSales: "34.53 ETH",
-  },
-  {
-    id: 7,
-    rank: seven,
-    artistImage: Artist7,
-    name: "Shroomie",
-    totalSales: "34.53 ETH",
-  },
-  {
-    id: 8,
-    rank: eight,
-    artistImage: Artist8,
-    name: "Robotica",
-    totalSales: "34.53 ETH",
-  },
+	{
+		id: 1,
+		rank: one,
+		artistImage: Artist1,
+		name: "Keepitreal",
+		totalSales: "34.53 ETH",
+	},
+	{
+		id: 2,
+		rank: two,
+		artistImage: Artist2,
+		name: "DigiLab",
+		totalSales: "34.53 ETH",
+	},
+	{
+		id: 3,
+		rank: three,
+		artistImage: Artist3,
+		name: "GravityOne",
+		totalSales: "34.53 ETH",
+	},
+	{
+		id: 4,
+		rank: four,
+		artistImage: Artist4,
+		name: "Juanie",
+		totalSales: "34.53 ETH",
+	},
 ];

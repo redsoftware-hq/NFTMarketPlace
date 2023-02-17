@@ -1,9 +1,11 @@
 import Bg from "../../assets/timersec/bg.png";
+import { useNavigate } from "react-router-dom";
 import Shroomie from "../../assets/timersec/s.png";
 import PurpleEye from "../../assets/timersec/eye.png";
 import { useTimer } from "react-timer-hook";
 
 const TimerSec = () => {
+  const navigate = useNavigate();
   let time = new Date();
   time.setHours(time.getHours() + 12);
 
@@ -24,7 +26,7 @@ const TimerSec = () => {
           className="w-full h-full absolute"
           style={{
             background:
-              "linear-gradient(180deg, rgba(162, 89, 255, 0) 0%, #A259FF 100%)",
+              "linear-gradient(180deg, rgba(162, 89, 255, 0) 0%, #F15623 100%)",
           }}
         >
           <div className="container mx-auto">
@@ -43,7 +45,10 @@ const TimerSec = () => {
                     <h2 className="text-white text-5xl md:text-4xl lg:text-5xl capitalize font-bold">
                       magic mushrooms
                     </h2>
-                    <button className="py-5 px-16 hidden md:flex items-center bg-[#ffff] hover:bg-transparent border-2 border-[#A259FF] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3">
+                    <button
+                      onClick={() => navigate("details")}
+                      className="py-5 px-16 hidden md:flex items-center bg-[#ffff] hover:bg-[#3b3b3b] border-2 border-[#F15623] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3"
+                    >
                       <img className="w-4 md:w-6" src={PurpleEye} alt="" /> See
                       NFT
                     </button>
@@ -63,7 +68,7 @@ const TimerSec = () => {
                         <span className="text-5xl font-extrabold flex gap-3">
                           <span>:</span>
                           <span className="flex flex-col gap-5">
-                            {minutes < 10 ? "0" + minutes : minutes}{" "}
+                            {minutes < 10 ? "0" + minutes : minutes}
                             <span className="text-sm">Minutes</span>
                           </span>
                         </span>
@@ -72,14 +77,17 @@ const TimerSec = () => {
                         <span className="text-5xl font-extrabold flex gap-3">
                           <span>:</span>
                           <span className="flex flex-col gap-5">
-                            {seconds < 10 ? "0" + seconds : seconds}{" "}
+                            {seconds < 10 ? "0" + seconds : seconds}
                             <span className="text-sm">Seconds</span>
                           </span>
                         </span>
                       </p>
                     </div>
                   </div>
-                  <button className="py-5 px-24 md:hidden flex items-center mx-auto w-full bg-[#ffff] hover:bg-transparent border-2 border-[#A259FF] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3 mt-5">
+                  <button
+                    onClick={() => navigate("details")}
+                    className="py-5 px-24 md:hidden flex items-center mx-auto w-full bg-[#ffff] hover:bg-transparent border-2 border-[#A259FF] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3 mt-5"
+                  >
                     <img className="w-5" src={PurpleEye} alt="" /> See NFT
                   </button>
                 </div>
