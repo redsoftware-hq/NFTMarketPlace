@@ -1,7 +1,7 @@
 import React from "react";
 import ArtistCard from "../Cards/ArtistCard";
-import { artistsData } from "../../utils/ArtistsCollection";
-import RocketPurple from "../../assets/icons/RocketLaunchPurple.png";
+import { artistsData } from "../../../utils/ArtistsCollection";
+import RocketPurple from "../../../assets/icons/RocketLaunchPurple.png";
 
 const TopCreatersSec = () => {
   return (

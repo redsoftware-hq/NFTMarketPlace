@@ -1,4 +1,4 @@
-import PrimaryButton from "../common/PrimaryButton";
+import PrimaryButton from "../Buttons/PrimaryButton";
 
 function MakeOffer({ nft }) {
   return (

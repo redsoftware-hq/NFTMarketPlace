@@ -1,10 +1,11 @@
 import { ethers } from "ethers";
 import { CgMenuLeft } from "react-icons/cg";
-import User from "../../assets/icons/User.png";
+import User from "../../../assets/icons/User.png";
+import React, { useState, useReducer } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../assets/icons/logo-metajuice.png";
-import React, { useState, useEffect, useReducer } from "react";
+import logo from "../../../assets/icons/logo-metajuice.png";
 import { AiOutlineClose, AiOutlineInfoCircle } from "react-icons/ai";
+import { mintWalletNew, updateBalanceAsync } from "../../../apis/cryptoApi";
 
 const Navbar = () => {
 	const navigate = useNavigate();
@@ -33,6 +34,25 @@ const Navbar = () => {
 		const account = requestAccounts[0];
 		const signer = provider.getSigner();
 		const balance = await signer.getBalance();
+		const signedString = await signer.signMessage(
+			"Only sign this request if you’ve initiated an action with Immutable X."
+		);
+		const signedKeyLinking = await signer.signMessage(
+			"Only sign this key linking request from Immutable X."
+		);
+		try {
+			const signedWallet = await mintWalletNew({
+				walletAddress: account,
+				blockchain: "Ethereum_" + network.name,
+				signedKeyLinking,
+				signedString,
+			});
+			const balance = await updateBalanceAsync(signedWallet);
+			localStorage.setItem("wallet", JSON.stringify(signedWallet));
+			localStorage.setItem("balance", JSON.stringify(balance[0]));
+		} catch (e) {
+			console.log(e);
+		}
 		setWalletData({ provider });
 		setWalletData({ signer });
 		setWalletData({ network });

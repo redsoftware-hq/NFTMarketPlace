@@ -1,4 +1,4 @@
-import Accordion from "../common/Accordion";
+import Accordion from "./Accordion";
 
 function Properties() {
   return (
