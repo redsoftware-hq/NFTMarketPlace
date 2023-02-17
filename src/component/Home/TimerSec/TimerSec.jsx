@@ -5,7 +5,22 @@ import Shroomie from "../../../assets/timersec/s.png";
 import PurpleEye from "../../../assets/timersec/eye.png";
 
 const TimerSec = () => {
+  const item = {
+    id: 1,
+    image: Bg,
+    imgTitle: "Magic Mushrooms",
+    avatar: Shroomie,
+    avatarName: "Shroomie",
+    price: "1.63 ETH",
+    highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
+    isAvailabe: true,
+  };
   const navigate = useNavigate();
+  const handleClick = () =>
+    navigate("/details", {
+      state: { item },
+    });
   return (
     <>
       <section
@@ -38,7 +53,7 @@ const TimerSec = () => {
                       magic mushrooms
                     </h2>
                     <button
-                      onClick={() => navigate("details")}
+                      onClick={handleClick}
                       className="py-5 px-16 hidden md:flex items-center bg-[#ffff] hover:bg-[#3b3b3b] border-2 border-[#F15623] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3"
                     >
                       <img className="w-4 md:w-6" src={PurpleEye} alt="" /> See
@@ -74,7 +89,7 @@ const TimerSec = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => navigate("details")}
+                    onClick={handleClick}
                     className="py-5 px-24 md:hidden flex items-center mx-auto w-full bg-[#ffff] hover:bg-transparent border-2 border-[#A259FF] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3 mt-5"
                   >
                     <img className="w-5" src={PurpleEye} alt="" /> See NFT
