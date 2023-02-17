@@ -11,9 +11,8 @@ const Hero = () => {
 						<h1 className="text-white font-medium lg:text-7xl md:text-5xl text-2xl capitalize leading-8 md:leading-15 tracking-wide font-work-sans">
 							Discover digital art & Collect NFTs
 						</h1>
-						<p className="text-white capitalize text-md font-work-sans">
-							NFT marketplace UI created with Anima for Figma. Collect, buy and
-							sell art from more than 20k NFT artists.
+						<p className="capitalize text-2xl font-work-sans font-bold text-[#F15623]">
+							NFT Marketplace by Metajuice. Collect, Buy .....
 						</p>
 						<div>
 							<button className="py-3 px-10 bg-[#F15623] rounded-2xl flex items-center capitalize text-white text-xs md:text-lg gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300">
@@ -22,16 +21,22 @@ const Hero = () => {
 						</div>
 						<div className="flex justify-between text-white font-light capitalize font-work-sans text-lg pt-7">
 							<p className="">
-								<span className="text-2xl font-space-mono">240k+</span> <br />{" "}
-								Total Sale
+								<span className="text-2xl font-space-mono text-[#F15623]">
+									240k+
+								</span>{" "}
+								<br /> Total Sale
 							</p>
 							<p className="">
-								<span className="text-2xl font-space-mono">100k+</span> <br />{" "}
-								Auctions
+								<span className="text-2xl font-space-mono text-[#F15623]">
+									100k+
+								</span>{" "}
+								<br /> Auctions
 							</p>
 							<p className="">
-								<span className="text-2xl font-space-mono">240k+</span> <br />{" "}
-								Artists
+								<span className="text-2xl font-space-mono text-[#F15623]">
+									240k+
+								</span>{" "}
+								<br /> Artists
 							</p>
 						</div>
 					</div>

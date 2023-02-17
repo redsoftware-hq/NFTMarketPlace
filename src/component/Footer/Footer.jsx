@@ -13,13 +13,13 @@ const Footer = () => {
 						<div className="main-container flex flex-col lg:flex-row lg:justify-between gap-6">
 							<div className="conatiner-1 text-white">
 								<div className="img-title flex items-center gap-2 cursor-pointer">
-									<div className="w-auto h-[2rem]">
+									<div className="w-[213px] h-[2rem]">
 										<img className="w-full h-full" src={logo} alt="" />
 									</div>
 								</div>
 								<div className="social-div text-[#cccc] mt-5 space-y-3">
-									<p className="text-sm">
-										NFT marketplace UI created with Anima for Figma.
+									<p className="text-2xl font-bold text-[#F15623]">
+										NFT Marketplace.
 									</p>
 									<div className="space-y-2">
 										<p>Join our community</p>
