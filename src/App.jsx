@@ -1,29 +1,27 @@
-import Categories from "./component/Categories/Categories";
-import Discover from "./component/Discover/Discover";
-import Footer from "./component/Footer/Footer";
-import Hero from "./component/Hero/Hero";
-import Navbar from "./component/Navbar/Navbar";
-import NewsLetter from "./component/NewsLetterSec/NewsLetter";
-import TimerSec from "./component/TimerSec/TimerSec";
-import TopCreatersSec from "./component/TopCreators/TopCreatersSec";
-import TrendingSec from "./component/TrendingCollection/TrendingSec";
-import WorkingSec from "./component/WorkingSec/WorkingSec";
+import { createRoutesFromElements } from "react-router";
+import { RouterProvider, createBrowserRouter, Route } from "react-router-dom";
 
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import Marketplace from "./pages/Marketplace";
+import Rankings from "./pages/Rankings";
+import CreateAccount from "./pages/CreateAccount";
+import ConnectWallet from "./pages/ConnectWallet";
+import Details from "./pages/Details";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />
+      <Route path="marketplace" element={<Marketplace />} />
+      <Route path="rankings" element={<Rankings />} />
+      <Route path="create-account" element={<CreateAccount />} />
+      <Route path="details" element={<Details />} />
+    </Route>
+  )
+);
 function App() {
-	return (
-		<div className="App">
-			<Navbar />
-			<Hero />
-			<TrendingSec />
-			<Discover />
-			<TopCreatersSec />
-			<Categories />
-			<TimerSec />
-			<WorkingSec />
-			<NewsLetter />
-			<Footer />
-		</div>
-	);
+  return <RouterProvider router={router} />;
 }
 
 export default App;
