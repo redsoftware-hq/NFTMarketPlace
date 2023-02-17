@@ -7,6 +7,7 @@ import Marketplace from "./pages/Marketplace";
 import Rankings from "./pages/Rankings";
 import CreateAccount from "./pages/CreateAccount";
 import ConnectWallet from "./pages/ConnectWallet";
+import Details from "./pages/Details";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
       <Route path="marketplace" element={<Marketplace />} />
       <Route path="rankings" element={<Rankings />} />
       <Route path="create-account" element={<CreateAccount />} />
+      <Route path="details" element={<Details />} />
     </Route>
   )
 );
