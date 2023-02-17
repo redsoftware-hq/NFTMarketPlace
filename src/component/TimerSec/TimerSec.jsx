@@ -1,9 +1,17 @@
-import React from "react";
 import Bg from "../../assets/timersec/bg.png";
 import Shroomie from "../../assets/timersec/s.png";
 import PurpleEye from "../../assets/timersec/eye.png";
+import { useTimer } from "react-timer-hook";
 
 const TimerSec = () => {
+  const time = new Date();
+  time.setHours(time.getHours() + 1);
+
+  const { seconds, minutes, hours } = useTimer({
+    expiryTimestamp: time,
+    onExpire: () => console.warn("onExpire called"),
+  });
+
   return (
     <>
       <section
@@ -44,9 +52,10 @@ const TimerSec = () => {
                     <p>Auction ends in:</p>
                     <div className="timer-div flex gap-3 mt-6">
                       <p className="flex flex-col">
-                        <span className="text-5xl font-extrabold ">
+                        <span className="text-5xl font-extrabold">
                           <span className="flex flex-col gap-5">
-                            59 <span className="text-sm">Seconds</span>
+                            {hours < 10 ? "0" + hours : hours}{" "}
+                            <span className="text-sm">Hours</span>
                           </span>
                         </span>
                       </p>
@@ -54,7 +63,8 @@ const TimerSec = () => {
                         <span className="text-5xl font-extrabold flex gap-3">
                           <span>:</span>
                           <span className="flex flex-col gap-5">
-                            59 <span className="text-sm">Seconds</span>
+                            {minutes < 10 ? "0" + minutes : minutes}{" "}
+                            <span className="text-sm">Minutes</span>
                           </span>
                         </span>
                       </p>
@@ -62,7 +72,8 @@ const TimerSec = () => {
                         <span className="text-5xl font-extrabold flex gap-3">
                           <span>:</span>
                           <span className="flex flex-col gap-5">
-                            59 <span className="text-sm">Seconds</span>
+                            {seconds < 10 ? "0" + seconds : seconds}{" "}
+                            <span className="text-sm">Seconds</span>
                           </span>
                         </span>
                       </p>
