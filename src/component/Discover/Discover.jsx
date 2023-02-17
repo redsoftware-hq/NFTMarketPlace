@@ -1,7 +1,6 @@
-import React from "react";
-import PurpleEye from "../../assets/discoverSec/Eye.png";
-import { discoverData } from "../../utils/DiscoverData";
 import DiscoverCard from "../Cards/DiscoverCard";
+import { discoverData } from "../../utils/DiscoverData";
+import PurpleEye from "../../assets/discoverSec/Eye.png";
 
 const Discover = () => {
 	return (
