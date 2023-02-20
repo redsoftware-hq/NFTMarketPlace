@@ -1,11 +1,11 @@
-import DiscoverCard from "../Cards/DiscoverCard";
-import { discoverData } from "../../../utils/DiscoverData";
-import PurpleEye from "../../../assets/discoverSec/Eye.png";
+import DiscoverCard from "../Home/Cards/DiscoverCard";
+import { discoverData } from "../../utils/DiscoverData";
+import PurpleEye from "../../assets/discoverSec/Eye.png";
 
 const Discover = () => {
 	return (
 		<section className="container mx-auto">
-			<div className="py-12 px-8 md:px-12 lg:px-20">
+			<div className="px-7 md:px-10 lg:px-20 lg:py-10">
 				<div className="text-white flex items-center justify-between mt-10">
 					<div>
 						<h4 className="capitalize text-3xl md:text-4xl font-semibold tracking-wide">
@@ -21,7 +21,7 @@ const Discover = () => {
 				</div>
 
 				<div className="creators-container">
-					<div className="mt-10 creators-card grid grid-cols-4 gap-5 md:grid-cols-4 sm:grid-cols-2">
+					<div className="mt-10 creators-card grid content-center grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-5 md:gap-8">
 						{discoverData &&
 							discoverData.map((item, index) => {
 								return <DiscoverCard key={index} item={item} />;
