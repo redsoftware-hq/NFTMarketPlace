@@ -1,19 +1,9 @@
-import { useNavigate } from "react-router-dom";
-
 const DiscoverCard = ({ item }) => {
-  const navigate = useNavigate();
-  const handleClick = () =>
-    navigate("/details", {
-      state: { item },
-    });
   return (
     <>
-      <div
-        onClick={handleClick}
-        className="w-full hover:scale-105 duration-300 cursor-pointer"
-      >
-        <div>
-          <img className="w-full" src={item.image} alt="" />
+      <div className="w-full hover:scale-105 duration-300 cursor-pointer">
+        <div className="">
+          <img className="w-full rounded-t-2xl" src={item.image} alt="" />
         </div>
         <div className="bg-[#3b3b3b] rounded-b-2xl py-5 px-7 space-y-5">
           <div className="text-white">
