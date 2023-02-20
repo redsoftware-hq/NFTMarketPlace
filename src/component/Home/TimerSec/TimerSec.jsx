@@ -2,10 +2,11 @@ import { useTimer } from "react-timer-hook";
 import Bg from "../../../assets/timersec/bg.png";
 import Shroomie from "../../../assets/timersec/s.png";
 import PurpleEye from "../../../assets/timersec/eye.png";
+import { useNavigate } from "react-router-dom";
 
 const TimerSec = () => {
   const item = {
-    id: 1,
+    id: "higlighted-nft",
     image: Bg,
     imgTitle: "Magic Mushrooms",
     avatar: Shroomie,
@@ -23,10 +24,9 @@ const TimerSec = () => {
     onExpire: () => console.warn("onExpire called"),
   });
 
-  const handleClick = () =>
-    navigate("/details", {
-      state: { item },
-    });
+  const navigate = useNavigate();
+  const handleClick = () => navigate(`/details/${item.id}`);
+
   return (
     <>
       <section

@@ -2,11 +2,27 @@ import NFTCard from "./Cards/NFTCard";
 import MakeOffer from "./MakeOffer/MakeOffer";
 import Properties from "./Properties/Properties";
 import AvailableListings from "./AvailableListings/AvailableListings";
-import { useLocation } from "react-router-dom";
+import Bg from "../../assets/timersec/bg.png";
+import Shroomie from "../../assets/timersec/s.png";
+import { useParams } from "react-router-dom";
+import { discoverData } from "../../utils/DiscoverData";
 
 function Details() {
-  const location = useLocation();
-  const nft = location.state.item;
+  const urlParams = useParams();
+  const HIGHLIGHTED_NFT = {
+    id: "higlighted-nft",
+    image: Bg,
+    imgTitle: "Magic Mushrooms",
+    avatar: Shroomie,
+    avatarName: "Shroomie",
+    price: "1.63 ETH",
+    highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
+    isAvailabe: true,
+  };
+  let data = [...discoverData];
+  data.push(HIGHLIGHTED_NFT);
+  let nft = data.find((item) => item.id == urlParams.id);
   return (
     <>
       <section className="flex flex-col p-2 gap-4 md:flex-row lg:justify-between m-auto max-w-[1280px]">
