@@ -19,6 +19,7 @@ export let discoverData = [
     avatarName: "MoonDancer",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
 
   {
@@ -29,6 +30,7 @@ export let discoverData = [
     avatarName: "NebulaKid",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
 
   {
@@ -39,6 +41,7 @@ export let discoverData = [
     avatarName: "Spaceone",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
   {
     id: 4,
@@ -48,6 +51,7 @@ export let discoverData = [
     avatarName: "SphereArt",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
   {
     id: 5,
@@ -57,6 +61,7 @@ export let discoverData = [
     avatarName: "BlingBits",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
   {
     id: 6,
@@ -66,6 +71,7 @@ export let discoverData = [
     avatarName: "NovaAuroras",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
   {
     id: 7,
@@ -75,6 +81,7 @@ export let discoverData = [
     avatarName: "CryptoFelines",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
   {
     id: 8,
@@ -84,5 +91,6 @@ export let discoverData = [
     avatarName: "ArtfulAntlers",
     price: "1.63 ETH",
     highestBid: "0.33 wETH",
+    fiatPrice: "4.95",
   },
 ];

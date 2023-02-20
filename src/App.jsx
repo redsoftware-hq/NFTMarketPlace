@@ -13,8 +13,8 @@ const router = createBrowserRouter(
 			<Route index element={<Home />} />
 			<Route path="marketplace" element={<Marketplace />} />
 			<Route path="rankings" element={<Rankings />} />
-			<Route path="create-account" element={<SignUp />} />
-			<Route path="details" element={<Details />} />
+			<Route path="signup" element={<SignUp />} />
+			<Route path="details/:id" element={<Details />} />
 		</Route>
 	)
 );
