@@ -14,7 +14,7 @@ const router = createBrowserRouter(
       <Route path="marketplace" element={<Marketplace />} />
       <Route path="rankings" element={<Rankings />} />
       <Route path="create-account" element={<CreateAccount />} />
-      <Route path="details" element={<Details />} />
+      <Route path="details/:id" element={<Details />} />
     </Route>
   )
 );
