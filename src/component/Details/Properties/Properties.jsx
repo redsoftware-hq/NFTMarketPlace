@@ -1,11 +1,7 @@
 import Accordion from "./Accordion";
 
 function Properties() {
-  return (
-    <div>
-      <Accordion />
-    </div>
-  );
+	return <Accordion />;
 }
 
 export default Properties;
