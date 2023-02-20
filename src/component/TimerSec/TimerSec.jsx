@@ -1,20 +1,11 @@
+import Bg from "../../assets/timersec/bg.png";
+import { useNavigate } from "react-router-dom";
+import Shroomie from "../../assets/timersec/s.png";
+import PurpleEye from "../../assets/timersec/eye.png";
 import { useTimer } from "react-timer-hook";
-import Bg from "../../../assets/timersec/bg.png";
-import Shroomie from "../../../assets/timersec/s.png";
-import PurpleEye from "../../../assets/timersec/eye.png";
 
 const TimerSec = () => {
-  const item = {
-    id: 1,
-    image: Bg,
-    imgTitle: "Magic Mushrooms",
-    avatar: Shroomie,
-    avatarName: "Shroomie",
-    price: "1.63 ETH",
-    highestBid: "0.33 wETH",
-    fiatPrice: "4.95",
-    isAvailabe: true,
-  };
+  const navigate = useNavigate();
   let time = new Date();
   time.setHours(time.getHours() + 12);
 
@@ -23,10 +14,6 @@ const TimerSec = () => {
     onExpire: () => console.warn("onExpire called"),
   });
 
-  const handleClick = () =>
-    navigate("/details", {
-      state: { item },
-    });
   return (
     <>
       <section
@@ -43,7 +30,7 @@ const TimerSec = () => {
           }}
         >
           <div className="container mx-auto">
-            <div className="py-12 px-8 md:px-12 lg:px-20">
+            <div className="py-10 px-7 md:px-10 lg:px-20">
               <div className="container-div mt-24 md:mt-[20rem]">
                 <div className="container-1">
                   <div className="w-[151px] flex text-white items-center bg-[#3B3B3B] rounded-2xl px-5 py-2 gap-2">
@@ -59,7 +46,7 @@ const TimerSec = () => {
                       magic mushrooms
                     </h2>
                     <button
-                      onClick={handleClick}
+                      onClick={() => navigate("details")}
                       className="py-5 px-16 hidden md:flex items-center bg-[#ffff] hover:bg-[#3b3b3b] border-2 border-[#F15623] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3"
                     >
                       <img className="w-4 md:w-6" src={PurpleEye} alt="" /> See
@@ -81,7 +68,7 @@ const TimerSec = () => {
                         <span className="text-5xl font-extrabold flex gap-3">
                           <span>:</span>
                           <span className="flex flex-col gap-5">
-                            {minutes < 10 ? "0" + minutes : minutes}{" "}
+                            {minutes < 10 ? "0" + minutes : minutes}
                             <span className="text-sm">Minutes</span>
                           </span>
                         </span>
@@ -90,7 +77,7 @@ const TimerSec = () => {
                         <span className="text-5xl font-extrabold flex gap-3">
                           <span>:</span>
                           <span className="flex flex-col gap-5">
-                            {seconds < 10 ? "0" + seconds : seconds}{" "}
+                            {seconds < 10 ? "0" + seconds : seconds}
                             <span className="text-sm">Seconds</span>
                           </span>
                         </span>
@@ -98,7 +85,7 @@ const TimerSec = () => {
                     </div>
                   </div>
                   <button
-                    onClick={handleClick}
+                    onClick={() => navigate("details")}
                     className="py-5 px-24 md:hidden flex items-center mx-auto w-full bg-[#ffff] hover:bg-transparent border-2 border-[#A259FF] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3 mt-5"
                   >
                     <img className="w-5" src={PurpleEye} alt="" /> See NFT
