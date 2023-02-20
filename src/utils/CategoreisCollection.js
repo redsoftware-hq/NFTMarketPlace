@@ -28,14 +28,14 @@ export const categoriesData = [
 		image: c5,
 		name: "Video",
 	},
-	// {
-	// 	id: 5,
-	// 	image: c6,
-	// 	name: "Utility",
-	// },
-	// {
-	// 	id: 6,
-	// 	image: c8,
-	// 	name: "Virtual Worlds",
-	// },
+	{
+		id: 5,
+		image: c6,
+		name: "Utility",
+	},
+	{
+		id: 6,
+		image: c8,
+		name: "Virtual Worlds",
+	},
 ];

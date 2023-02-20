@@ -7,7 +7,7 @@ const TopCreatersSec = () => {
 	return (
 		<>
 			<section className="container mx-auto">
-				<div className="px-7 md:px-10 lg:px-20 lg:py-10 mt-14 lg:mt-5">
+				<div className="py-12 px-8 md:px-12 lg:px-20">
 					<div className="text-white flex items-center justify-between">
 						<div>
 							<h4 className="capitalize text-3xl lg:text-4xl font-semibold tracking-wide">

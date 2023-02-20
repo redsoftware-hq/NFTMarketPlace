@@ -28,7 +28,7 @@ const TimerSec = () => {
 					}}
 				>
 					<div className="container mx-auto">
-						<div className="py-10 px-7 md:px-10 lg:px-20">
+						<div className="py-12 px-8 md:px-12 lg:px-20">
 							<div className="container-div mt-24 md:mt-[20rem]">
 								<div className="container-1">
 									<div className="w-[151px] flex text-white items-center bg-[#3B3B3B] rounded-2xl px-5 py-2 gap-2">
