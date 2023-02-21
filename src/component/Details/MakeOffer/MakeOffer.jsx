@@ -2,8 +2,8 @@ import PrimaryButton from "../../common/Buttons/PrimaryButton";
 
 function MakeOffer({ nft }) {
 	return (
-		<div className="p-2 flex flex-col gap-3 w-full">
-			<div className="bg-[#3B3B3B] p-3 flex gap-2 justify-evenly rounded-2xl max-w-fit">
+		<div className="flex flex-col gap-3 w-full">
+			<div className="bg-[#3B3B3B] flex gap-2 justify-evenly rounded-2xl max-w-fit">
 				{nft.avatar ? (
 					<img className="max-w-[24px]" src={nft.avatar} alt="" />
 				) : (

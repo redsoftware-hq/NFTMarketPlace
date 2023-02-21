@@ -66,7 +66,7 @@ const Navbar = () => {
 
 	return (
 		<nav className="py-5 md:py-8 md:px-10 px-5">
-			<div className="flex justify-between items-center">
+			<div className="flex flex-1 justify-between items-center">
 				<div className="navLogo flex items-center gap-2 cursor-pointer">
 					<div className="w-auto h-[2rem]" onClick={() => navigate("/")}>
 						<img className="w-full h-full" src={logo} alt="" />
