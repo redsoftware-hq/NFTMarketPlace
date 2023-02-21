@@ -12,7 +12,7 @@ const CollectionCard = ({ item }) => {
 					<img className="w-full" src={item?.thumbnailTwo} alt="" />
 				</div>
 				<div className="w-full bg-[#F15623] text-white rounded-2xl flex items-center justify-center font-space-mono font-bold text-lg">
-					1025+
+					{item.collectionSize}
 				</div>
 			</div>
 			<div className="artist-info text-white">

@@ -20,6 +20,7 @@ export let collection = [
 		design: "DSGN Animals",
 		artistName: "MrFox",
 		avatar: art1,
+		collectionSize: "143+",
 	},
 
 	{
@@ -30,6 +31,7 @@ export let collection = [
 		design: "Magic Mushrooms",
 		artistName: "Shroomie",
 		avatar: art2,
+		collectionSize: "235+",
 	},
 
 	{
@@ -40,5 +42,6 @@ export let collection = [
 		design: "Disco Machines",
 		artistName: "BeKind2Robots",
 		avatar: art3,
+		collectionSize: "62+",
 	},
 ];

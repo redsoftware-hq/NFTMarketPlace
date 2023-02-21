@@ -17,9 +17,7 @@ const Footer = () => {
 								</div>
 							</div>
 							<div className="social-div text-[#cccc] mt-5 space-y-3">
-								<p className="text-2xl font-bold text-[#F15623]">
-									NFT Marketplace.
-								</p>
+								<p className="text-lg font-bold">NFT Marketplace.</p>
 								<div className="space-y-2">
 									<p>Join our community</p>
 									<div className="flex items-center gap-2">

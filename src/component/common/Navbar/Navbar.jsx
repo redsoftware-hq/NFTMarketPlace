@@ -2,12 +2,13 @@ import { ethers } from "ethers";
 import { CgMenuLeft } from "react-icons/cg";
 import User from "../../../assets/icons/User.png";
 import React, { useState, useReducer } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../../assets/icons/logo-metajuice.png";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineClose, AiOutlineInfoCircle } from "react-icons/ai";
 import { mintWalletNew, updateBalanceAsync } from "../../../apis/cryptoApi";
 
 const Navbar = () => {
+	const location = useLocation();
 	const navigate = useNavigate();
 	const [nav, setNav] = useState(false);
 	const [viewNft, setViewNft] = useState(false);
@@ -23,8 +24,25 @@ const Navbar = () => {
 			walletAddress: null,
 		}
 	);
+	const [connected, toggleConnect] = useState(false);
+	const [currAddress, updateAddress] = useState("0x");
+
+	async function getAddress() {
+		const ethers = require("ethers");
+		const provider = new ethers.providers.Web3Provider(window.ethereum);
+		const signer = provider.getSigner();
+		const addr = await signer.getAddress();
+		updateAddress(addr);
+	}
 
 	const handleConnect = async () => {
+		const chainId = await window.ethereum.request({ method: "eth_chainId" });
+		if (chainId !== "0x5") {
+			await window.ethereum.request({
+				method: "wallet_switchEthereumChain",
+				params: [{ chainId: "0x5" }],
+			});
+		}
 		const provider = new ethers.providers.Web3Provider(
 			window?.ethereum,
 			"goerli"
@@ -63,6 +81,18 @@ const Navbar = () => {
 	function handleNav() {
 		setNav(!nav);
 	}
+
+	React.useEffect(() => {
+		let val = window.ethereum.isConnected();
+		if (val) {
+			getAddress();
+			toggleConnect(val);
+		}
+
+		window.ethereum.on("accountsChanged", function (accounts) {
+			window.location.replace(location.pathname);
+		});
+	});
 
 	return (
 		<nav className="py-5 md:py-8 md:px-10 px-5">
