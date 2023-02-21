@@ -21,7 +21,7 @@ const Discover = () => {
         </div>
 
         <div className="creators-container">
-          <div className="mt-10 creators-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 creators-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {discoverData &&
               discoverData.map((item, index) => {
                 return <DiscoverCard key={index} item={item} />;
