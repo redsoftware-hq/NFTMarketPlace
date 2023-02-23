@@ -1,4 +1,5 @@
 import React from 'react';
+
 const Modal = ({ isOpen, onClose, children, showCloseButton, heading }) => {
   const overlayClass = isOpen
     ? 'fixed inset-0 bg-black opacity-50 z-50 transition-opacity duration-300 ease-in-out'

@@ -1,8 +1,9 @@
+import React from 'react';
 import { useTimer } from 'react-timer-hook';
+import { useNavigate } from 'react-router-dom';
 import Bg from '../../../assets/timersec/bg.png';
 import Shroomie from '../../../assets/timersec/s.png';
 import PurpleEye from '../../../assets/timersec/eye.png';
-import { useNavigate } from 'react-router-dom';
 
 const TimerSec = () => {
   const item = {

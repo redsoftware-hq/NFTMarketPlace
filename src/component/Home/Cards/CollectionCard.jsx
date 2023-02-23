@@ -1,3 +1,5 @@
+import React from 'react';
+
 const CollectionCard = ({ item }) => {
   return (
     <div className="card-1 grid grid-flow-row w-full h-full gap-2 hover:brightness-90 hover:scale-105 duration-300 cursor-pointer">

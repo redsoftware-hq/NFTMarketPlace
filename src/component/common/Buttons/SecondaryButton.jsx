@@ -1,8 +1,9 @@
+import React from 'react';
+
 function SecondaryButton({ btnName, className }) {
   return (
     <button
-      className={`${className} py-3 px-10 bg-[#2b2b2b] border-2 border-[#F15623] hover:text-[#F15623] ease-in-out duration-300 rounded-2xl capitalize text-white text-base font-medium`}
-    >
+      className={`${className} py-3 px-10 bg-[#2b2b2b] border-2 border-[#F15623] hover:text-[#F15623] ease-in-out duration-300 rounded-2xl capitalize text-white text-base font-medium`}>
       {btnName}
     </button>
   );

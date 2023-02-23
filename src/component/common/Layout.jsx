@@ -1,5 +1,4 @@
 import React from 'react';
-import Toast from './Toast';
 import Modal from './Modal';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -19,21 +18,17 @@ function Layout() {
     checkMetamaskInstalled();
   }, []);
 
-  const handleClose = () => {
+  function handleClose() {
     setOpen(false);
-  };
+  }
 
   return (
     <>
-      {/* {!metamaskInstalled && (
-				<Toast message="Metamask is not installed" type="error" />
-			)} */}
       <Modal
         isOpen={isOpen}
         onClose={handleClose}
         showCloseButton={isOpen}
-        heading={'Metamask is not installed on your browser.'}
-      >
+        heading={'Metamask is not installed on your browser.'}>
         <div>
           <p className="mb-4">
             Please install Metamask from{' '}
@@ -41,8 +36,7 @@ function Layout() {
               className="text-blue-500 hover:text-blue-700 underline"
               href="https://metamask.io/"
               target="_blank"
-              rel="noreferrer"
-            >
+              rel="noreferrer">
               Metamask.io
             </a>{' '}
             to use this feature.

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const listings = [
   {
     listedBy: '0x183e7b...d3b6',
@@ -31,8 +33,7 @@ function AvailableListings() {
             return (
               <div
                 key={index}
-                className="bg-[#3b3b3b] rounded-2xl p-4 gap-3 flex items-center flex-wrap  justify-between w-full"
-              >
+                className="bg-[#3b3b3b] rounded-2xl p-4 gap-3 flex items-center flex-wrap  justify-between w-full">
                 <div className="text-[#858584] font-work-sans text-sm lg:basis-3/5">
                   Listed by
                   <span className="text-white px-2 font-space-mono text-base">

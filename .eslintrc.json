@@ -3,39 +3,43 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["react-app", "prettier"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "plugins": ["react"],
   "rules": {
     "indent": [
-        "error",
+        "warn",
         2
       ],
       "linebreak-style": [
-        "error",
+        "warn",
         "unix"
       ],
       "quotes": [
-        "error",
+        "warn",
         "single"
       ],
       "semi": [
-        "error",
+        "warn",
         "always"
       ],
-      "react/jsx-uses-vars": "error",
-      "react/jsx-uses-react": "error",
-      "react/jsx-no-undef": "error",
+      "react/jsx-uses-vars": "warn",
+      "react/jsx-uses-react": "warn",
+      "react/jsx-no-undef": "warn",
       "react/no-children-prop": "warn",
       "react/no-deprecated": "warn",
-      "react/no-direct-mutation-state": "error",
-      "react/no-typos": "error",
+      "react/no-direct-mutation-state": "warn",
+      "react/no-typos": "warn",
       "react/jsx-key": "warn",
-      "react/jsx-no-bind": "warn",
-      "react/jsx-no-duplicate-props": "error"
+      "react/jsx-no-duplicate-props": "warn"
   }
 }

@@ -1,4 +1,6 @@
+import React from 'react';
 import { HEADER } from '../../../utils/collectionPageData';
+
 function Header() {
   return (
     <div className="h-80 md:h-fit">

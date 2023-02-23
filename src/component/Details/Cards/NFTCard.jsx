@@ -1,3 +1,5 @@
+import React from 'react';
+
 function NFTCard({ image, isAvailable }) {
   const availabilty = isAvailable ? 'Available' : 'Not Available';
   return (

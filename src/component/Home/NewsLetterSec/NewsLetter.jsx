@@ -1,3 +1,4 @@
+import React from 'react';
 import n1 from '../../../assets/newsletterSec/n1.png';
 import Envelope from '../../../assets/newsletterSec/EnvelopeSimple.png';
 
@@ -32,8 +33,7 @@ const NewsLetter = () => {
                     <div className="lg:absolute right-0">
                       <button
                         type="submit"
-                        className="flex w-full lg:text-base items-center justify-center gap-2 rounded-2xl bg-[#F15623] px-14 2xl:px-24 py-2 lg:py-5"
-                      >
+                        className="flex w-full lg:text-base items-center justify-center gap-2 rounded-2xl bg-[#F15623] px-14 2xl:px-24 py-2 lg:py-5">
                         <img src={Envelope} alt="" />
                         Subscribe
                       </button>

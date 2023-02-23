@@ -1,11 +1,12 @@
+import React from 'react';
 import NFTCard from './Cards/NFTCard';
-import MakeOffer from './MakeOffer/MakeOffer';
-import Properties from './Properties/Properties';
-import AvailableListings from './AvailableListings/AvailableListings';
-import Bg from '../../assets/timersec/bg.png';
-import Shroomie from '../../assets/timersec/s.png';
 import { useParams } from 'react-router-dom';
+import MakeOffer from './MakeOffer/MakeOffer';
+import Bg from '../../assets/timersec/bg.png';
+import Properties from './Properties/Properties';
+import Shroomie from '../../assets/timersec/s.png';
 import { discoverData } from '../../utils/DiscoverData';
+import AvailableListings from './AvailableListings/AvailableListings';
 
 function Details() {
   const urlParams = useParams();

@@ -1,6 +1,7 @@
-import { COLLECTION, ARTIST } from '../../../utils/collectionPageData';
-import { FiGlobe } from 'react-icons/fi';
+import React from 'react';
 import Timer from '../Timer/Timer';
+import { FiGlobe } from 'react-icons/fi';
+import { COLLECTION, ARTIST } from '../../../utils/collectionPageData';
 
 function Hero() {
   const links = ['Etherscan', 'Original'];

@@ -1,3 +1,4 @@
+import React from 'react';
 import DiscoverCard from '../Cards/DiscoverCard';
 import { discoverData } from '../../../utils/DiscoverData';
 import PurpleEye from '../../../assets/discoverSec/Eye.png';

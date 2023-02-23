@@ -1,5 +1,7 @@
+import React from 'react';
 import { useTimer } from 'react-timer-hook';
 import PrimaryButton from '../../common/Buttons/PrimaryButton';
+
 function Timer() {
   let time = new Date();
 

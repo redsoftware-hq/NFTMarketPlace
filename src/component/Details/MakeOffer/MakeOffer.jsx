@@ -1,3 +1,4 @@
+import React from 'react';
 import PrimaryButton from '../../common/Buttons/PrimaryButton';
 
 function MakeOffer({ nft }) {

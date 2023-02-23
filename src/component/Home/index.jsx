@@ -1,3 +1,4 @@
+import React from 'react';
 import Hero from './Hero/Hero';
 import TimerSec from './TimerSec/TimerSec';
 import Discover from './Discover/Discover';

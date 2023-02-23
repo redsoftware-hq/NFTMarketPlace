@@ -1,6 +1,8 @@
-import SecondaryButton from '../../common/Buttons/SecondaryButton';
-import { artistWorks } from '../../../utils/collectionPageData';
+import React from 'react';
 import DiscoverCard from '../../Home/Cards/DiscoverCard';
+import { artistWorks } from '../../../utils/collectionPageData';
+import SecondaryButton from '../../common/Buttons/SecondaryButton';
+
 export default function MoreFromArtist() {
   return (
     <section className="container mx-auto">
