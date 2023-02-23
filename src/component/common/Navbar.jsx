@@ -1,3 +1,4 @@
+import Modal from "./Modal";
 import { ethers } from "ethers";
 import { CgMenuLeft } from "react-icons/cg";
 import User from "../../assets/icons/User.png";
@@ -26,6 +27,8 @@ const Navbar = () => {
 	);
 	const [connected, toggleConnect] = useState(false);
 	const [currAddress, updateAddress] = useState("0x");
+	const [isOpen, setOpen] = React.useState(false);
+	const [metamaskInstalled, setMetamaskInstalled] = useState(false);
 
 	async function getAddress() {
 		const ethers = require("ethers");
@@ -34,48 +37,56 @@ const Navbar = () => {
 		const addr = await signer.getAddress();
 		updateAddress(addr);
 	}
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	const handleConnect = async () => {
-		const chainId = await window.ethereum.request({ method: "eth_chainId" });
-		if (chainId !== "0x5") {
-			await window.ethereum.request({
-				method: "wallet_switchEthereumChain",
-				params: [{ chainId: "0x5" }],
-			});
+		if (!window.ethereum) {
+			setOpen(true);
+			setMetamaskInstalled(false);
+		} else {
+			const chainId = await window.ethereum.request({ method: "eth_chainId" });
+			if (chainId !== "0x5") {
+				await window.ethereum.request({
+					method: "wallet_switchEthereumChain",
+					params: [{ chainId: "0x5" }],
+				});
+			}
+			const provider = new ethers.providers.Web3Provider(
+				window?.ethereum,
+				"goerli"
+			);
+			const requestAccounts = await provider.send("eth_requestAccounts", []);
+			const network = await provider.getNetwork();
+			const account = requestAccounts[0];
+			const signer = provider.getSigner();
+			const balance = await signer.getBalance();
+			const signedString = await signer.signMessage(
+				"Only sign this request if you’ve initiated an action with Immutable X."
+			);
+			const signedKeyLinking = await signer.signMessage(
+				"Only sign this key linking request from Immutable X."
+			);
+			try {
+				const signedWallet = await mintWalletNew({
+					walletAddress: account,
+					blockchain: "Ethereum_" + network.name,
+					signedKeyLinking,
+					signedString,
+				});
+				const balance = await updateBalanceAsync(signedWallet);
+				localStorage.setItem("wallet", JSON.stringify(signedWallet));
+				localStorage.setItem("balance", JSON.stringify(balance[0]));
+			} catch (e) {
+				console.log(e);
+			}
+			setWalletData({ provider });
+			setWalletData({ signer });
+			setWalletData({ network });
+			setWalletData({ walletAddress: account });
+			setWalletData({ balance: ethers.utils.formatEther(balance) });
 		}
-		const provider = new ethers.providers.Web3Provider(
-			window?.ethereum,
-			"goerli"
-		);
-		const requestAccounts = await provider.send("eth_requestAccounts", []);
-		const network = await provider.getNetwork();
-		const account = requestAccounts[0];
-		const signer = provider.getSigner();
-		const balance = await signer.getBalance();
-		const signedString = await signer.signMessage(
-			"Only sign this request if you’ve initiated an action with Immutable X."
-		);
-		const signedKeyLinking = await signer.signMessage(
-			"Only sign this key linking request from Immutable X."
-		);
-		try {
-			const signedWallet = await mintWalletNew({
-				walletAddress: account,
-				blockchain: "Ethereum_" + network.name,
-				signedKeyLinking,
-				signedString,
-			});
-			const balance = await updateBalanceAsync(signedWallet);
-			localStorage.setItem("wallet", JSON.stringify(signedWallet));
-			localStorage.setItem("balance", JSON.stringify(balance[0]));
-		} catch (e) {
-			console.log(e);
-		}
-		setWalletData({ provider });
-		setWalletData({ signer });
-		setWalletData({ network });
-		setWalletData({ walletAddress: account });
-		setWalletData({ balance: ethers.utils.formatEther(balance) });
 	};
 
 	function handleNav() {
@@ -130,6 +141,7 @@ const Navbar = () => {
 										: "Connect Wallet"}
 								</button>
 							</div>
+
 							{walletData.walletAddress && walletData.network && (
 								<div className="relative group cursor-pointer">
 									<AiOutlineInfoCircle />
@@ -212,6 +224,27 @@ const Navbar = () => {
 					</div>
 				</div>
 			</div>
+			<Modal
+				isOpen={isOpen}
+				onClose={handleClose}
+				showCloseButton={isOpen}
+				heading={"Metamask is not installed on your browser."}
+			>
+				<div>
+					<p className="mb-4">
+						Please install Metamask from{" "}
+						<a
+							className="text-blue-500 hover:text-blue-700 underline"
+							href="https://metamask.io/"
+							target="_blank"
+							rel="noreferrer"
+						>
+							Metamask.io
+						</a>{" "}
+						to use this feature.
+					</p>
+				</div>
+			</Modal>
 		</nav>
 	);
 };

@@ -28,10 +28,15 @@ function Layout() {
 			{/* {!metamaskInstalled && (
 				<Toast message="Metamask is not installed" type="error" />
 			)} */}
-			<Modal isOpen={isOpen} onClose={handleClose} showCloseButton={isOpen}>
+			<Modal
+				isOpen={isOpen}
+				onClose={handleClose}
+				showCloseButton={isOpen}
+				heading={"Metamask is not installed on your browser."}
+			>
 				<div>
 					<p className="mb-4">
-						Metamask is not installed on your browser. Please install it from{" "}
+						Please install Metamask from{" "}
 						<a
 							className="text-blue-500 hover:text-blue-700 underline"
 							href="https://metamask.io/"
