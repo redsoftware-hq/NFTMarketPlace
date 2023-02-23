@@ -1,14 +1,11 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const DiscoverCard = ({ item }) => {
   const navigate = useNavigate();
   const handleClick = () => navigate(`/details/${item.id}`);
   return (
     <>
-      <div
-        onClick={handleClick}
-        className="w-full hover:scale-105 duration-300 cursor-pointer"
-      >
+      <div onClick={handleClick} className="w-full hover:scale-105 duration-300 cursor-pointer">
         <div className="">
           <img className="w-full rounded-t-2xl" src={item.image} alt="" />
         </div>
@@ -29,9 +26,7 @@ const DiscoverCard = ({ item }) => {
               <p className="text-white">{item.price}</p>
             </div>
             <div className="bid-div">
-              <span className="capitalize text-[#858584] text-xs">
-                highest bid
-              </span>
+              <span className="capitalize text-[#858584] text-xs">highest bid</span>
               <p className="text-white">{item.highestBid}</p>
             </div>
           </div>
