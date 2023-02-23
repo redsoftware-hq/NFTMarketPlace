@@ -1,11 +1,11 @@
 import { ethers } from "ethers";
 import { CgMenuLeft } from "react-icons/cg";
-import User from "../../../assets/icons/User.png";
+import User from "../../assets/icons/User.png";
 import React, { useState, useReducer } from "react";
-import logo from "../../../assets/icons/logo-metajuice.png";
+import logo from "../../assets/icons/logo-metajuice.png";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineClose, AiOutlineInfoCircle } from "react-icons/ai";
-import { mintWalletNew, updateBalanceAsync } from "../../../apis/cryptoApi";
+import { mintWalletNew, updateBalanceAsync } from "../../apis/cryptoApi";
 
 const Navbar = () => {
 	const location = useLocation();
@@ -83,15 +83,17 @@ const Navbar = () => {
 	}
 
 	React.useEffect(() => {
-		let val = window.ethereum.isConnected();
-		if (val) {
-			getAddress();
-			toggleConnect(val);
-		}
+		if (window.ethereum) {
+			let val = window.ethereum.isConnected();
+			if (val) {
+				getAddress();
+				toggleConnect(val);
+			}
 
-		window.ethereum.on("accountsChanged", function (accounts) {
-			window.location.replace(location.pathname);
-		});
+			window.ethereum.on("accountsChanged", function (accounts) {
+				window.location.replace(location.pathname);
+			});
+		}
 	});
 
 	return (

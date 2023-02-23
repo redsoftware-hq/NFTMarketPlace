@@ -1,8 +1,8 @@
-import Yt from "../../../assets/FooterSec/yt.png";
-import logo from "../../../assets/icons/logo-metajuice.png";
-import Discord from "../../../assets/FooterSec/discord.png";
-import Twitter from "../../../assets/FooterSec/twitter.png";
-import Instagram from "../../../assets/FooterSec/instagram.png";
+import Yt from "../../assets/FooterSec/yt.png";
+import logo from "../../assets/icons/logo-metajuice.png";
+import Discord from "../../assets/FooterSec/discord.png";
+import Twitter from "../../assets/FooterSec/twitter.png";
+import Instagram from "../../assets/FooterSec/instagram.png";
 
 const Footer = () => {
 	return (
