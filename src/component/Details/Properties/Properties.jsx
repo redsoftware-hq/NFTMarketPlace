@@ -1,7 +1,7 @@
-import Accordion from "./Accordion";
+import Accordion from './Accordion';
 
 function Properties() {
-	return <Accordion />;
+  return <Accordion />;
 }
 
 export default Properties;

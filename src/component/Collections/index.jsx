@@ -1,7 +1,8 @@
-import Header from "./Header/Header";
-import Hero from "./Hero/Hero";
-import MoreFromArtist from "./MoreFromArtist/MoreFromArtist";
-import Timer from "./Timer/Timer";
+import React from 'react';
+import Hero from './Hero/Hero';
+import Timer from './Timer/Timer';
+import Header from './Header/Header';
+import MoreFromArtist from './MoreFromArtist/MoreFromArtist';
 
 function Collections() {
   return (
