@@ -1,6 +1,8 @@
-import SecondaryButton from "../../common/Buttons/SecondaryButton";
-import { artistWorks } from "../../../utils/collectionPageData";
-import DiscoverCard from "../../Home/Cards/DiscoverCard";
+import React from 'react';
+import DiscoverCard from '../../Home/Cards/DiscoverCard';
+import { artistWorks } from '../../../utils/collectionPageData';
+import SecondaryButton from '../../common/Buttons/SecondaryButton';
+
 export default function MoreFromArtist() {
   return (
     <section className="container mx-auto">
@@ -9,10 +11,7 @@ export default function MoreFromArtist() {
           <h2 className="capitalize text-white text-2xl font-semibold font-work-sans">
             More From This Artist
           </h2>
-          <SecondaryButton
-            className="hidden md:flex"
-            btnName="Go to artist page"
-          />
+          <SecondaryButton className="hidden md:flex" btnName="Go to artist page" />
         </div>
         <div className="mt-10 creators-card grid content-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8">
           {artistWorks &&
@@ -21,10 +20,7 @@ export default function MoreFromArtist() {
             })}
         </div>
         <div className="px-1 py-8">
-          <SecondaryButton
-            className="w-full md:hidden lg:hidden"
-            btnName="Go to artist page"
-          />
+          <SecondaryButton className="w-full md:hidden lg:hidden" btnName="Go to artist page" />
         </div>
       </div>
     </section>

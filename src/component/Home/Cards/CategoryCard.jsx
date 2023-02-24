@@ -1,3 +1,5 @@
+import React from 'react';
+
 const CategoryCard = ({ item }) => {
   return (
     <div className="w-full h-full hover:scale-105 duration-300 cursor-pointer">

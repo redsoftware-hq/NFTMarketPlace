@@ -1,5 +1,7 @@
-import { useTimer } from "react-timer-hook";
-import PrimaryButton from "../../common/Buttons/PrimaryButton";
+import React from 'react';
+import { useTimer } from 'react-timer-hook';
+import PrimaryButton from '../../common/Buttons/PrimaryButton';
+
 function Timer() {
   let time = new Date();
 
@@ -7,7 +9,7 @@ function Timer() {
 
   const { seconds, minutes, hours } = useTimer({
     expiryTimestamp: time,
-    onExpire: () => console.warn("onExpire called"),
+    onExpire: () => console.warn('onExpire called')
   });
 
   return (
@@ -18,8 +20,7 @@ function Timer() {
           <p className="flex flex-col">
             <span className="text-5xl font-extrabold">
               <span className="flex flex-col gap-5">
-                {hours < 10 ? "0" + hours : hours}{" "}
-                <span className="text-sm">Hours</span>
+                {hours < 10 ? '0' + hours : hours} <span className="text-sm">Hours</span>
               </span>
             </span>
           </p>
@@ -27,8 +28,7 @@ function Timer() {
             <span className="text-5xl font-extrabold flex gap-3">
               <span>:</span>
               <span className="flex flex-col gap-5">
-                {minutes < 10 ? "0" + minutes : minutes}{" "}
-                <span className="text-sm">Minutes</span>
+                {minutes < 10 ? '0' + minutes : minutes} <span className="text-sm">Minutes</span>
               </span>
             </span>
           </p>
@@ -36,8 +36,7 @@ function Timer() {
             <span className="text-5xl font-extrabold flex gap-3">
               <span>:</span>
               <span className="flex flex-col gap-5">
-                {seconds < 10 ? "0" + seconds : seconds}{" "}
-                <span className="text-sm">Seconds</span>
+                {seconds < 10 ? '0' + seconds : seconds} <span className="text-sm">Seconds</span>
               </span>
             </span>
           </p>
