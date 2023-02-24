@@ -40,6 +40,8 @@ export async function mintWalletNew({ walletAddress, blockchain, signedString, s
     }
   ];
 
+  console.log('params', params);
+
   try {
     await metaJuiceClient('mint_wallet', params);
     // Return wallet with signed strings
@@ -48,6 +50,25 @@ export async function mintWalletNew({ walletAddress, blockchain, signedString, s
     console.error(e);
     throw e;
   }
+}
+
+export function extractFullReturnError(error) {
+  if (error === null || typeof error === 'undefined') {
+    return '';
+  }
+
+  // Return error might or might not have a data field
+  if (typeof error === 'object' && error?.message) {
+    let retVal = error.message;
+    if (error?.data) {
+      retVal += ' ' + error.data;
+      retVal = error.data;
+    }
+
+    return retVal;
+  }
+
+  return JSON.stringify(error);
 }
 
 function metaJuiceClient(method, params) {
@@ -64,7 +85,6 @@ function metaJuiceClient(method, params) {
       if (response.status === 200) {
         return response.json().then((jsonRPCResponse) => {
           if ('error' in jsonRPCResponse) {
-            openNotificationWithIcon('error', JSON.parse(jsonRPCResponse.error.data).message);
             return Promise.reject(new Error(extractFullReturnError(jsonRPCResponse.error)));
           }
           return client.receive(jsonRPCResponse);

@@ -61,7 +61,7 @@ const Navbar = () => {
         'Only sign this request if you’ve initiated an action with Immutable X.'
       );
       const signedKeyLinking = await signer.signMessage(
-        'Only sign this key linking request from Immutable X.'
+        'Only sign this key linking request from Immutable X'
       );
       try {
         const signedWallet = await mintWalletNew({

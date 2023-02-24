@@ -1,4 +1,6 @@
+import React from 'react';
 import AccordionLayout from './AccordionLayout';
+
 function Accordion() {
   return (
     <div className="my-2 flex flex-1 w-full flex-col items-center justify-between">

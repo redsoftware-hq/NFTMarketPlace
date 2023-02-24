@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { FiArrowDown } from 'react-icons/fi';
 
@@ -8,8 +9,7 @@ export default function AccordionLayout({ title, children }) {
     <>
       <div
         className="flex flex-1 w-full item-center gap-4 justify-between my-2"
-        onClick={handleToggle}
-      >
+        onClick={handleToggle}>
         <div className="text-white text-lg">{title}</div>
         <div className="text-white cursor-pointer">
           <FiArrowDown
