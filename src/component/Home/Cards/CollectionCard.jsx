@@ -1,3 +1,5 @@
+import React from 'react';
+
 const CollectionCard = ({ item }) => {
   return (
     <div className="card-1 grid grid-flow-row w-full h-full gap-2 hover:brightness-90 hover:scale-105 duration-300 cursor-pointer">
@@ -12,7 +14,7 @@ const CollectionCard = ({ item }) => {
           <img className="w-full" src={item?.thumbnailTwo} alt="" />
         </div>
         <div className="w-full bg-[#F15623] text-white rounded-2xl flex items-center justify-center font-space-mono font-bold text-lg">
-          1025+
+          {item.collectionSize}
         </div>
       </div>
       <div className="artist-info text-white">

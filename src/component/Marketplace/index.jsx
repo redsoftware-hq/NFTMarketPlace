@@ -1,9 +1,10 @@
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import SearchIcon from "../../assets/icons/MagnifyingGlass.png";
-import { discoverData } from "../../utils/DiscoverData";
-import { collection } from "../../utils/TrendingCollections";
-import CollectionCard from "../Home/Cards/CollectionCard";
-import DiscoverCard from "../Home/Cards/DiscoverCard";
+import React from 'react';
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import SearchIcon from '../../assets/icons/MagnifyingGlass.png';
+import { discoverData } from '../../utils/DiscoverData';
+import { collection } from '../../utils/TrendingCollections';
+import CollectionCard from '../Home/Cards/CollectionCard';
+import DiscoverCard from '../Home/Cards/DiscoverCard';
 
 function Marketplace() {
   return (
@@ -32,13 +33,13 @@ function Marketplace() {
         <Tabs className="mt-16">
           <TabList className="w-full flex justify-between font-normal text-lg border-y border-[#3b3b3b] py-5">
             <Tab className="mx-auto cursor-pointer outline-none text-[#858584] hover:text-white duration-200  focus:text-white">
-              NFTs{" "}
+              NFTs{' '}
               <span className="font-space-mono bg-[#3b3b3b] text-base py-1 px-2 rounded-2xl focus:bg-[#858584] text-white">
                 382
               </span>
             </Tab>
             <Tab className="mx-auto cursor-pointer outline-none text-[#858584] hover:text-white duration-200  focus:text-white">
-              Collections{" "}
+              Collections{' '}
               <span className="font-space-mono bg-[#3b3b3b] focus:bg-[#858584] text-base py-1 px-2 rounded-2xl text-white">
                 67
               </span>
