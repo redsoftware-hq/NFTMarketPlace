@@ -3,12 +3,12 @@ import React from 'react';
 const Toast = ({ message, type }) => {
   const toastClass = () => {
     switch (type) {
-    case 'success':
-      return 'bg-green-500';
-    case 'error':
-      return 'bg-red-500';
-    default:
-      return 'bg-gray-500';
+      case 'success':
+        return 'bg-green-500';
+      case 'error':
+        return 'bg-red-500';
+      default:
+        return 'bg-gray-500';
     }
   };
 

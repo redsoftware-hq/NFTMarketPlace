@@ -28,7 +28,8 @@ function Layout() {
         isOpen={isOpen}
         onClose={handleClose}
         showCloseButton={isOpen}
-        heading={'Metamask is not installed on your browser.'}>
+        heading={'Metamask is not installed on your browser.'}
+      >
         <div>
           <p className="mb-4">
             Please install Metamask from{' '}
@@ -36,7 +37,8 @@ function Layout() {
               className="text-blue-500 hover:text-blue-700 underline"
               href="https://metamask.io/"
               target="_blank"
-              rel="noreferrer">
+              rel="noreferrer"
+            >
               Metamask.io
             </a>{' '}
             to use this feature.

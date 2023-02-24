@@ -1,18 +1,18 @@
-import { Controller, useForm } from "react-hook-form";
-import PrimaryButton from "../../common/Buttons/PrimaryButton";
-import Input from "../../common/Form/Input";
-import TextArea from "../../common/Form/TextArea";
-import { BiImageAdd } from "react-icons/bi";
+import { Controller, useForm } from 'react-hook-form';
+import PrimaryButton from '../../common/Buttons/PrimaryButton';
+import Input from '../../common/Form/Input';
+import TextArea from '../../common/Form/TextArea';
+import { BiImageAdd } from 'react-icons/bi';
 function CollectionForm() {
   const { register, handleSubmit, control } = useForm();
 
   const labels = {
-    name: "name",
-    upload: "upload",
-    address: "address",
-    creator: "creator",
-    mail: "mail",
-    description: "description",
+    name: 'name',
+    upload: 'upload',
+    address: 'address',
+    creator: 'creator',
+    mail: 'mail',
+    description: 'description'
   };
 
   return (
@@ -25,9 +25,8 @@ function CollectionForm() {
           Upload Image *
         </label>
         <span className="px-2 text-[#858584]">
-          This image will be used for featuring your collection on the homepage,
-          category pages, or other promotional areas of Metajuice. 600 x 400
-          recommended.
+          This image will be used for featuring your collection on the homepage, category pages, or
+          other promotional areas of Metajuice. 600 x 400 recommended.
         </span>
         <div className="m-auto sm:m-0 flex flex-col justify-center items-center w-64 h-64 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-2xl bg-[#3b3b3b] cursor-pointer">
           <label
@@ -39,14 +38,7 @@ function CollectionForm() {
               control={control}
               name={labels.upload}
               render={({ field }) => {
-                return (
-                  <input
-                    id={labels.upload}
-                    type="file"
-                    className="opacity-0"
-                    {...field}
-                  />
-                );
+                return <input id={labels.upload} type="file" className="opacity-0" {...field} />;
               }}
             />
           </label>
@@ -66,21 +58,13 @@ function CollectionForm() {
       </div>
 
       <div className="description p-1 inline-grid gap-1">
-        <label
-          htmlFor={labels.description}
-          className="px-2 capitalize text-white"
-        >
+        <label htmlFor={labels.description} className="px-2 capitalize text-white">
           description
         </label>
         <span className="px-2 text-[#858584] font-space-mono">
           Make your items more discoverable on Metajuice by adding a description
         </span>
-        <TextArea
-          id={labels.description}
-          name={labels.description}
-          register={register}
-          rows="4"
-        />
+        <TextArea id={labels.description} name={labels.description} register={register} rows="4" />
       </div>
 
       <div className="creator-name inline-grid p-1 gap-3">
