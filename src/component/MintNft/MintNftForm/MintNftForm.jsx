@@ -61,11 +61,14 @@ export default function MintNftForm() {
         {fields.map((item, index) => (
           <li className="flex flex-col md:flex-row items-center gap-3" key={item.id}>
             <div className="md:basis-1/5">
-              <label className="px-2 text-white">Metadata Key *</label>
+              <label className="px-2  text-white">Metadata Key *</label>
               <input
                 placeholder="Key"
                 className="p-3 rounded-2xl w-full caret-[#f15623] focus:accent-[#f15623]"
-                {...register(`${DYNAMIC_FIELD.name}.${index}.${DYNAMIC_FIELD.key}`)}
+                {...register(`${DYNAMIC_FIELD.name}.${index}.${DYNAMIC_FIELD.key}`, {
+                  required: 'This field is required',
+                  validate: (value) => value !== ''
+                })}
               />
             </div>
             <div>
@@ -80,6 +83,7 @@ export default function MintNftForm() {
                 )}
                 name={`${DYNAMIC_FIELD.name}.${index}.${DYNAMIC_FIELD.value}`}
                 control={control}
+                rules={{ required: 'This field is required', validate: (value) => value !== '' }}
               />
             </div>
             <div className="mr-auto md:mt-auto">
