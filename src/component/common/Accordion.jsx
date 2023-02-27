@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { MdKeyboardArrowUp } from 'react-icons/md';
+import { RiBarChartHorizontalFill } from 'react-icons/ri';
 
 function Accordion({ title, content }) {
   const [expanded, setExpanded] = useState(false);
@@ -11,7 +12,12 @@ function Accordion({ title, content }) {
       className="mt-5 my-2 sm:my-4 md:my-6 cursor-pointer bg-[#3b3b3b] rounded-2xl"
       onClick={toggleExpanded}>
       <div className="px-6 text-left items-center h-20 select-none flex justify-between flex-row">
-        <h5 className="flex-1 text-white text-base">{title}</h5>
+        <h5 className="flex-1 text-white text-base flex items-center gap-1">
+          <span>
+            <RiBarChartHorizontalFill />
+          </span>
+          {title}
+        </h5>
         <div className="flex-none pl-2">
           {expanded ? (
             <MdKeyboardArrowUp
