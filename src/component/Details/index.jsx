@@ -6,7 +6,7 @@ import Bg from '../../assets/timersec/bg.png';
 import Properties from './Properties/Properties';
 import Shroomie from '../../assets/timersec/s.png';
 import { discoverData } from '../../utils/DiscoverData';
-import AvailableListings from './AvailableListings/AvailableListings';
+import AvaliableListings from './AvailableListings/AvaliableListings';
 
 function Details() {
   const urlParams = useParams();
@@ -30,8 +30,8 @@ function Details() {
         <NFTCard image={nft.image} isAvailable={nft.isAvailable} />
         <div className="md:w-3/6 mt-1">
           <MakeOffer nft={nft} />
-          <AvailableListings />
           <Properties />
+          <AvaliableListings />
         </div>
       </section>
     </>
