@@ -1,19 +1,21 @@
-import { Controller, useForm } from 'react-hook-form';
+import React from 'react';
+
+import { useForm } from 'react-hook-form';
 import PrimaryButton from '../../common/Buttons/PrimaryButton';
 import Input from '../../common/Form/Input';
 import TextArea from '../../common/Form/TextArea';
 import { BiImageAdd } from 'react-icons/bi';
 
 const emailPattern =
-  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 function CollectionForm() {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors }
   } = useForm();
+
   const labels = {
     name: 'name',
     upload: 'upload',
