@@ -19,7 +19,7 @@ export default function UploadImage({ register }) {
           className="w-full h-full cursor-pointer flex flex-col justify-center items-center"
           htmlFor={upload}>
           <BiImageAdd className="text-white w-2/4 h-2/4" />
-          <Input id={upload} name={upload} type="file" register={register} show={false} />
+          <Input name={upload} type="file" register={register} show={false} />
         </label>
       </div>
     </div>

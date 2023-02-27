@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import PrimaryButton from '../../common/Buttons/PrimaryButton';
+import ErrorMessage from '../../common/Form/ErrorMessage';
 import Input from '../../common/Form/Input';
 import TextArea from '../../common/Form/TextArea';
 import UploadImage from '../../common/Form/UploadImage';
@@ -35,7 +36,6 @@ function CollectionForm() {
         </label>
         <Input
           name={labels.name}
-          id={labels.name}
           type="text"
           options={{
             required: 'This is required.'
@@ -55,7 +55,7 @@ function CollectionForm() {
         <span className="px-2 text-[#858584] font-work-sans">
           Make your items more discoverable on Metajuice by adding a description
         </span>
-        <TextArea id={labels.description} name={labels.description} register={register} rows="4" />
+        <TextArea name={labels.description} register={register} rows="4" />
       </div>
 
       <div className="creator-name inline-grid p-1 gap-2">
@@ -67,18 +67,13 @@ function CollectionForm() {
             Contact the collection owner to change the collection earnings percentage or the payout address.`}
         </span>
         <Input
-          id={labels.address}
           name={labels.address}
           type="text"
           register={register}
           options={{ required: 'This is required' }}
           placeholder="Please enter an address, e.g. 0x1ed3... or destination.eth, destination"
         />
-        {errors.address && (
-          <p className="px-2 text-red-500 font-space-mono font-semibold">
-            {errors.address?.message}
-          </p>
-        )}
+        {errors.address && <ErrorMessage message={errors.address?.message} />}
       </div>
 
       <div className="creator-name inline-grid p-1 gap-1">
@@ -86,18 +81,13 @@ function CollectionForm() {
           Creator Name *
         </label>
         <Input
-          id={labels.creator}
           name={labels.creator}
           type="text"
           register={register}
           options={{ required: 'This is required' }}
           placeholder="Example: Jon Doe"
         />
-        {errors.creator && (
-          <p className="px-2 text-red-500 font-space-mono font-semibold">
-            {errors.creator?.message}
-          </p>
-        )}
+        {errors.creator && <ErrorMessage message={errors.creator?.message} />}
       </div>
 
       <div className="creator-email inline-grid p-1 gap-1">
@@ -105,7 +95,6 @@ function CollectionForm() {
           Creator Email *
         </label>
         <Input
-          id={labels.mail}
           name={labels.mail}
           type="text"
           register={register}
@@ -118,9 +107,7 @@ function CollectionForm() {
           }}
           placeholder="Enter Your Mail"
         />
-        {errors.mail && (
-          <p className="px-2 text-red-500 font-space-mono font-semibold">{errors.mail?.message}</p>
-        )}
+        {errors.mail && <ErrorMessage message={errors.mail?.message} />}
       </div>
 
       <div className="btn-container">
