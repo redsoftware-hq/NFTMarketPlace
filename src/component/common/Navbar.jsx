@@ -179,7 +179,7 @@ const Navbar = () => {
         <div
           className={
             nav
-              ? 'fixed flex flex-col left-0 top-0 w-[60%] h-full border-r border-r-gray-900 text-white pt-6 ease-in-out duration-500 bg-[#2b2b2b]'
+              ? 'fixed flex flex-col left-0 top-0 w-[60%] h-full border-r border-r-gray-900 text-white pt-6 ease-in-out duration-500 bg-[#2b2b2b] z-50'
               : 'fixed left-[-100%]'
           }>
           <div className="flex flex-col mt-8 text-center">
