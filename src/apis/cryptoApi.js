@@ -130,7 +130,7 @@ export const updateBalanceAsync = async ({ walletAddress, blockchain }) => {
   }
 };
 
-export const mintNft = async ({ walletAddress, blockchain, fileData, metadata, nftId }) => {
+export const mintNft = async ({ walletAddress, blockchain, fileData, textData, nftId }) => {
   const params = [
     {
       wallet: {
@@ -149,14 +149,7 @@ export const mintNft = async ({ walletAddress, blockchain, fileData, metadata, n
     {
       text: {
         name: nftId,
-        data: JSON.stringify({
-          name: metadata.name,
-          description: metadata.description,
-          Background: 'Soft Pink',
-          Head: 'Head5',
-          'Head-Upper': 'winter cap',
-          Shirt: 'Shirt1'
-        })
+        data: JSON.stringify(textData)
       }
     }
   ];

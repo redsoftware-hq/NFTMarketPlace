@@ -3,7 +3,7 @@ import React from 'react';
 import Input from '../../common/Form/Input';
 import { BiImageAdd } from 'react-icons/bi';
 
-export default function UploadImage({ register }) {
+export default function UploadImage({ register, options = {} }) {
   const upload = 'upload';
   return (
     <div className="upload inline-grid p-1 gap-3">
@@ -17,10 +17,9 @@ export default function UploadImage({ register }) {
       <div className="m-auto sm:m-0 flex flex-col justify-center items-center w-64 h-64 sm:w-72 sm:h-72 md:w-96 md:h-96 rounded-2xl bg-[#3b3b3b] cursor-pointer">
         <label
           className="w-full h-full cursor-pointer flex flex-col justify-center items-center"
-          htmlFor={upload}
-        >
+          htmlFor={upload}>
           <BiImageAdd className="text-white w-2/4 h-2/4" />
-          <Input name={upload} type="file" register={register} show={false} />
+          <Input name={upload} type="file" register={register} show={false} options={options} />
         </label>
       </div>
     </div>

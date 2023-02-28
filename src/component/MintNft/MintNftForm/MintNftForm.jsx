@@ -7,6 +7,7 @@ import PrimaryButton from '../../common/Buttons/PrimaryButton';
 import ErrorMessage from '../../common/Form/ErrorMessage';
 import TextArea from '../../common/Form/TextArea';
 import SecondaryButton from '../../common/Buttons/SecondaryButton';
+import { mintNft } from '../../../apis/cryptoApi';
 
 const labels = { name: 'name', description: 'description' };
 
@@ -15,13 +16,16 @@ const options = {
   metadata: {
     required: 'Field cannot be empty',
     validate: (value) => value !== ''
+  },
+  upload: {
+    required: 'Please Upload'
   }
 };
 
 const DYNAMIC_FIELD = { name: 'metadata', key: 'key', value: 'value' };
 const METADATA_OBJ = { key: '', value: '' };
 
-export default function MintNftForm() {
+export default function MintNftForm({ setToast, setMessage }) {
   const [wallet, setWallet] = useState({ walletAddress: '', blockchain: '' });
   const {
     register,
@@ -100,7 +104,10 @@ export default function MintNftForm() {
           data: fileData
         }
       };
-      console.log(payload);
+      mintNft(payload).then((response) => {
+        setToast(response);
+        setMessage(`Token Id: ${response[1].text.data}`);
+      });
     } catch (error) {
       console.log(error);
     }
@@ -108,8 +115,12 @@ export default function MintNftForm() {
 
   return (
     <form className="px-1 flex flex-col gap-3 font-work-sans" onSubmit={handleSubmit(onSubmit)}>
-      <UploadImage register={register} />
-
+      <UploadImage register={register} options={options.upload} />
+      {errors.upload && (
+        <div>
+          <ErrorMessage message={errors.upload?.message} />
+        </div>
+      )}
       <div className="nft-name inline-grid p-1 gap-1">
         <label className="px-2 text-white" htmlFor={labels.name}>
           Name *
