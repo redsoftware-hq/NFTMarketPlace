@@ -57,10 +57,28 @@ export default function MintNftForm() {
     }
   }, []);
 
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+
+  async function convert(file) {
+    const dataURI = await toBase64(file);
+    return dataURI;
+  }
+
   const onSubmit = async (data) => {
     try {
       console.log(data);
-      const { name, description, metadata } = data;
+
+      const { name, description, metadata, upload } = data;
+
+      const fileName = upload[0].name;
+      const fileData = await convert(upload[0]);
+
       const textData = {
         name: name,
         description: description
@@ -68,17 +86,19 @@ export default function MintNftForm() {
 
       if (metadata.length !== 0) {
         metadata.forEach((ele) => {
-          console.log(ele);
           textData[ele.key] = ele.value;
         });
       }
-      console.log(textData);
 
       const payload = {
         walletAddress: wallet.walletAddress,
         blockchain: wallet.blockchain,
         nftID: textData.name,
-        textData: textData
+        textData: textData,
+        fileData: {
+          name: fileName,
+          data: fileData
+        }
       };
       console.log(payload);
     } catch (error) {
@@ -115,11 +135,13 @@ export default function MintNftForm() {
         <TextArea id={labels.description} name={labels.description} register={register} rows="4" />
       </div>
 
-      <ul>
+      <div>
         {fields.map((item, index) => (
-          <li className="flex flex-col md:flex-row items-center gap-3" key={item.id}>
-            <div className="md:basis-1/5">
-              <label className="px-2  text-white">Metadata Key *</label>
+          <div
+            className="flex flex-col justify-center items-center gap-4 md:flex-row"
+            key={item.id}>
+            <div className="md:basis-1/4">
+              <label className="px-2 py-1 text-white">Metadata Key *</label>
               <input
                 placeholder="Key"
                 className="p-3 rounded-2xl w-full caret-[#f15623] focus:accent-[#f15623]"
@@ -135,8 +157,8 @@ export default function MintNftForm() {
                 />
               )}
             </div>
-            <div>
-              <label className="px-2 text-white">Metadata Value *</label>
+            <div className="">
+              <label className="px-2 py-1 text-white">Metadata Value *</label>
               <Controller
                 render={({ field }) => (
                   <input
@@ -156,12 +178,12 @@ export default function MintNftForm() {
                 />
               )}
             </div>
-            <div className="mr-auto">
+            <div className={errors.metadata ? 'm-auto' : 'mt-auto'}>
               <SecondaryButton btnName="Remove" type="button" handleClick={() => remove(index)} />
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
 
       <div>
         <SecondaryButton btnName="Add" type="button" handleClick={() => append(METADATA_OBJ)} />
