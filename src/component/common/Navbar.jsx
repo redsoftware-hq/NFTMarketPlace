@@ -35,6 +35,7 @@ const Navbar = () => {
     const addr = await signer.getAddress();
     updateAddress(addr);
   }
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -88,19 +89,19 @@ const Navbar = () => {
     setNav(!nav);
   }
 
-  React.useEffect(() => {
-    if (window.ethereum) {
-      let val = window.ethereum.isConnected();
-      if (val) {
-        getAddress();
-        toggleConnect(val);
-      }
+  // FIXME: Need to check the behaviour to autoconnect wallet
+  // React.useEffect(() => {
+  //   if (window.ethereum) {
+  //     let val = window.ethereum.isConnected();
+  //     if (val) {
+  //       handleConnect();
+  //     }
 
-      window.ethereum.on('accountsChanged', function (accounts) {
-        window.location.replace(location.pathname);
-      });
-    }
-  });
+  //     window.ethereum.on('accountsChanged', function (accounts) {
+  //       window.location.replace(location.pathname);
+  //     });
+  //   }
+  // }, []);
 
   return (
     <nav className="py-5 md:py-8 md:px-10 px-5">
