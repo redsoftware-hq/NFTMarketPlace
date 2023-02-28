@@ -14,8 +14,7 @@ const Toast = ({ message, type }) => {
 
   return (
     <div
-      className={`fixed bottom-10 left-1/2 transform -translate-x-1/2 w-64 px-4 py-2 rounded-md text-white ${toastClass()} transition ease-in duration-500 z-50`}
-    >
+      className={`fixed bottom-10 left-1/2 transform -translate-x-1/2 w-64 px-4 py-2 rounded-md text-white ${toastClass()} transition ease-in duration-500 z-50`}>
       <p className="text-center font-medium">{message}</p>
     </div>
   );
