@@ -87,7 +87,7 @@ export async function mintWalletNew({ walletAddress, blockchain, signedString, s
 
   try {
     await metaJuiceClient('mint_wallet', params);
-    
+
     // Return wallet with signed strings
     return { walletAddress, blockchain, signedString, signedKeyLinking };
   } catch (error) {
@@ -96,7 +96,7 @@ export async function mintWalletNew({ walletAddress, blockchain, signedString, s
   }
 }
 
-export const updateBalanceAsync = async ({walletAddress, blockchain}) => {
+export const updateBalanceAsync = async ({ walletAddress, blockchain }) => {
   const params = [
     {
       wallet: {
@@ -130,22 +130,21 @@ export const updateBalanceAsync = async ({walletAddress, blockchain}) => {
   }
 };
 
-
-export const mintNft = async ({walletAddress, blockchain, fileData, metadata, nftId}) => {
+export const mintNft = async ({ walletAddress, blockchain, fileData, metadata, nftId }) => {
   const params = [
     {
       wallet: {
         walletAddress: walletAddress,
         blockchain: {
-          name: blockchain,
-        },
-      },
+          name: blockchain
+        }
+      }
     },
     {
       image: {
         name: fileData.name,
-        data: fileData.data,
-      },
+        data: fileData.data
+      }
     },
     {
       text: {
@@ -153,20 +152,20 @@ export const mintNft = async ({walletAddress, blockchain, fileData, metadata, nf
         data: JSON.stringify({
           name: metadata.name,
           description: metadata.description,
-          'Background': 'Soft Pink',
-          'Head': 'Head5',
+          Background: 'Soft Pink',
+          Head: 'Head5',
           'Head-Upper': 'winter cap',
-          'Shirt': 'Shirt1',
-        }),
-      },
-    },
+          Shirt: 'Shirt1'
+        })
+      }
+    }
   ];
 
   try {
     const response = await metaJuiceClient('upload_mint_transfer', params);
-  
+
     return response;
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     throw error;
   }
