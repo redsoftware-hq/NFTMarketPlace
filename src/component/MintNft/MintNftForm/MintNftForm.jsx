@@ -9,7 +9,11 @@ import SecondaryButton from '../../common/Buttons/SecondaryButton';
 
 const labels = { name: 'name', description: 'description' };
 const options = {
-  name: { required: 'This is required' }
+  name: { required: 'This is required' },
+  metadata: {
+    required: { value: true, message: 'This is required' },
+    validate: (value) => value === '' || 'Cannot be empty'
+  }
 };
 
 const DYNAMIC_FIELD = { name: 'metadata', key: 'key', value: 'value' };
@@ -26,11 +30,11 @@ export default function MintNftForm() {
     control,
     name: DYNAMIC_FIELD.name
   });
+  console.log(errors);
   return (
     <form
       className="px-1 flex flex-col gap-3 font-work-sans"
-      onSubmit={handleSubmit((data) => console.log(data))}
-    >
+      onSubmit={handleSubmit((data) => console.log(data))}>
       <UploadImage register={register} />
 
       <div className="nft-name inline-grid p-1 gap-1">
@@ -66,11 +70,17 @@ export default function MintNftForm() {
               <input
                 placeholder="Key"
                 className="p-3 rounded-2xl w-full caret-[#f15623] focus:accent-[#f15623]"
-                {...register(`${DYNAMIC_FIELD.name}.${index}.${DYNAMIC_FIELD.key}`, {
-                  required: 'This field is required',
-                  validate: (value) => value !== ''
-                })}
+                {...register(
+                  `${DYNAMIC_FIELD.name}.${index}.${DYNAMIC_FIELD.key}`,
+                  options.metadata
+                )}
               />
+              {errors.metadata && (
+                <ErrorMessage
+                  className="py-1 text-xs"
+                  message={errors.metadata[index].key?.message}
+                />
+              )}
             </div>
             <div>
               <label className="px-2 text-white">Metadata Value *</label>
@@ -84,10 +94,16 @@ export default function MintNftForm() {
                 )}
                 name={`${DYNAMIC_FIELD.name}.${index}.${DYNAMIC_FIELD.value}`}
                 control={control}
-                rules={{ required: 'This field is required', validate: (value) => value !== '' }}
+                rules={options.metadata}
               />
+              {errors.metadata && (
+                <ErrorMessage
+                  className="py-1 text-xs"
+                  message={errors.metadata[index].value?.message}
+                />
+              )}
             </div>
-            <div className="mr-auto md:mt-auto">
+            <div className="mr-auto">
               <SecondaryButton btnName="Remove" type="button" handleClick={() => remove(index)} />
             </div>
           </li>
