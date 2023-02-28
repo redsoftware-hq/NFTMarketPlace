@@ -28,7 +28,8 @@ function CollectionForm() {
   return (
     <form
       className="px-1 flex flex-col gap-3 font-work-sans"
-      onSubmit={handleSubmit((data) => console.log(data))}>
+      onSubmit={handleSubmit((data) => console.log(data))}
+    >
       <UploadImage register={register} />
       <div className="collection-name inline-grid p-1 gap-1">
         <label className="px-2 text-white" htmlFor={labels.name}>

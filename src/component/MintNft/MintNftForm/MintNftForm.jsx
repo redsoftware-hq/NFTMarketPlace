@@ -29,7 +29,8 @@ export default function MintNftForm() {
   return (
     <form
       className="px-1 flex flex-col gap-3 font-work-sans"
-      onSubmit={handleSubmit((data) => console.log(data))}>
+      onSubmit={handleSubmit((data) => console.log(data))}
+    >
       <UploadImage register={register} />
 
       <div className="nft-name inline-grid p-1 gap-1">
