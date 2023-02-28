@@ -7,10 +7,12 @@ import logo from '../../../assets/icons/logo-metajuice.png';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineInfoCircle } from 'react-icons/ai';
 import { mintWalletNew, updateBalanceAsync } from '../../../apis/cryptoApi';
+import Toast from '../Toast';
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [error, setError] = useState();
   const [nav, setNav] = useState(false);
   const [walletData, setWalletData] = useReducer(
     (prev, next) => {
@@ -69,19 +71,20 @@ const Navbar = () => {
           walletAddress: account,
           blockchain: 'Ethereum_' + network.name,
           signedKeyLinking,
-          signedString
+          // signedString
         });
         const balance = await updateBalanceAsync(signedWallet);
         localStorage.setItem('wallet', JSON.stringify(signedWallet));
         localStorage.setItem('balance', JSON.stringify(balance[0]));
+
+        setWalletData({ provider });
+        setWalletData({ signer });
+        setWalletData({ network });
+        setWalletData({ walletAddress: account });
+        setWalletData({ balance: ethers.utils.formatEther(balance) });
       } catch (e) {
-        console.log(e);
+        setError(e);
       }
-      setWalletData({ provider });
-      setWalletData({ signer });
-      setWalletData({ network });
-      setWalletData({ walletAddress: account });
-      setWalletData({ balance: ethers.utils.formatEther(balance) });
     }
   };
 
@@ -127,7 +130,11 @@ const Navbar = () => {
                 </button>
               </div>
 
-              {walletData.walletAddress && walletData.network && (
+              {error && (
+                <Toast message={'Couldn\'t connect wallet'} type={'error'}/>
+              )}
+
+              {!error && walletData.walletAddress && walletData.network && (
                 <div className="relative group cursor-pointer">
                   <AiOutlineInfoCircle />
                   <div className="absolute z-10 py-3 px-5 hidden w-[200px] text-sm text-white bg-[#3b3b3b] rounded-lg shadow-md top-8 right-0 group-hover:block space-y-3">
