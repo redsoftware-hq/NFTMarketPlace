@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { ethers } from 'ethers';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import UploadImage from '../../common/Form/UploadImage';
 import Input from '../../common/Form/Input';
@@ -8,11 +9,12 @@ import TextArea from '../../common/Form/TextArea';
 import SecondaryButton from '../../common/Buttons/SecondaryButton';
 
 const labels = { name: 'name', description: 'description' };
+
 const options = {
   name: { required: 'This is required' },
   metadata: {
-    required: { value: true, message: 'This is required' },
-    validate: (value) => value === '' || 'Cannot be empty'
+    required: 'Field cannot be empty',
+    validate: (value) => value !== ''
   }
 };
 
@@ -20,21 +22,72 @@ const DYNAMIC_FIELD = { name: 'metadata', key: 'key', value: 'value' };
 const METADATA_OBJ = { key: '', value: '' };
 
 export default function MintNftForm() {
+  const [wallet, setWallet] = useState({ walletAddress: '', blockchain: '' });
   const {
     register,
     handleSubmit,
     control,
     formState: { errors }
   } = useForm();
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: DYNAMIC_FIELD.name
   });
-  console.log(errors);
+
+  useEffect(() => {
+    try {
+      const getWallet = async () => {
+        const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+        const requestAccounts = await provider.send('eth_requestAccounts', []);
+        const network = await provider.getNetwork();
+        const walletAddress = requestAccounts[0];
+        const blockchain = 'Ethereum_' + network.name;
+        return {
+          walletAddress,
+          blockchain
+        };
+      };
+      (async function () {
+        const walletObj = await getWallet();
+        setWallet(walletObj);
+      })();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  const onSubmit = async (data) => {
+    try {
+      console.log(data);
+      const { name, description, metadata } = data;
+      const textData = {
+        name: name,
+        description: description
+      };
+
+      if (metadata.length !== 0) {
+        metadata.forEach((ele) => {
+          console.log(ele);
+          textData[ele.key] = ele.value;
+        });
+      }
+      console.log(textData);
+
+      const payload = {
+        walletAddress: wallet.walletAddress,
+        blockchain: wallet.blockchain,
+        nftID: textData.name,
+        textData: textData
+      };
+      console.log(payload);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <form
-      className="px-1 flex flex-col gap-3 font-work-sans"
-      onSubmit={handleSubmit((data) => console.log(data))}>
+    <form className="px-1 flex flex-col gap-3 font-work-sans" onSubmit={handleSubmit(onSubmit)}>
       <UploadImage register={register} />
 
       <div className="nft-name inline-grid p-1 gap-1">
