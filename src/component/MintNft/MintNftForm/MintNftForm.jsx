@@ -178,7 +178,7 @@ export default function MintNftForm() {
                 />
               )}
             </div>
-            <div className={errors.metadata ? 'm-auto' : 'mt-auto'}>
+            <div className={errors.metadata ? 'mr-auto md:m-auto' : 'mr-auto md:mt-auto'}>
               <SecondaryButton btnName="Remove" type="button" handleClick={() => remove(index)} />
             </div>
           </div>
