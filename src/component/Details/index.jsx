@@ -30,7 +30,7 @@ function Details() {
 
   React.useEffect(() => {
     try {
-      const mintNft = async () => {
+      const mintNftRpcInvoke = async () => {
         const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
         const requestAccounts = await provider.send('eth_requestAccounts', []);
         const network = await provider.getNetwork();
@@ -41,7 +41,7 @@ function Details() {
           blockchain: 'Ethereum_' + network.name,
         });
       };
-      mintNft();
+      mintNftRpcInvoke();
     } catch (e) {
       console.log(e);
     }
