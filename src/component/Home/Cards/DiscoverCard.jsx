@@ -6,7 +6,7 @@ const DiscoverCard = ({ item }) => {
   const handleClick = () => navigate(`/details/${item.id}`);
   return (
     <>
-      <div onClick={handleClick} className="w-full hover:scale-105 duration-300 cursor-pointer">
+      <div onClick={handleClick} className="w-full hover:scale-[1.03] duration-300 cursor-pointer">
         <div className="">
           <img className="w-full rounded-t-2xl" src={item.image} alt="" />
         </div>

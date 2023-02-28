@@ -72,7 +72,9 @@ const Navbar = () => {
 
         <div className="hidden lg:flex">
           <div className="text-white flex items-center gap-5 font-medium font-work-sans space-x-5">
-            <NavLink to="marketplace" className="hover:text-[#F15623] duration-300">
+            <NavLink
+              to="marketplace"
+              className={({ isActive }) => (isActive ? 'text-green-500' : 'text-orange-500')}>
               Marketplace
             </NavLink>
             <NavLink to="rankings" className="hover:text-[#F15623] duration-300">

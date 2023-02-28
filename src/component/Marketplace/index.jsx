@@ -48,7 +48,7 @@ function Marketplace() {
 
           <TabPanel>
             <div className="creators-container">
-              <div className="mt-10 creators-card grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="mt-10 creators-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {discoverData &&
                   discoverData.map((item, index) => {
                     return <DiscoverCard key={index} item={item} />;
@@ -58,7 +58,7 @@ function Marketplace() {
           </TabPanel>
           <TabPanel>
             <div className="card-container">
-              <div className="py-14 main-card grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <div className="py-14 main-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {collection &&
                   collection.map((item, index) => {
                     return <CollectionCard key={index} item={item} />;
