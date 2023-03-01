@@ -7,10 +7,12 @@ import logo from '../../../assets/icons/logo-metajuice.png';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineInfoCircle } from 'react-icons/ai';
 import { mintWalletNew, updateBalanceAsync } from '../../../apis/cryptoApi';
+import Toast from '../Toast';
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
   const [nav, setNav] = useState(false);
   const [walletData, setWalletData] = useReducer(
     (prev, next) => {
@@ -71,17 +73,21 @@ const Navbar = () => {
           signedKeyLinking,
           signedString
         });
-        const balance = await updateBalanceAsync(signedWallet);
+        const balanceImxWallet = await updateBalanceAsync(signedWallet);
         localStorage.setItem('wallet', JSON.stringify(signedWallet));
-        localStorage.setItem('balance', JSON.stringify(balance[0]));
+        localStorage.setItem('balance', JSON.stringify(balanceImxWallet[0]));
+
+        setWalletData({
+          provider,
+          signer,
+          network,
+          walletAddress: account,
+          balance: ethers.utils.formatEther(balance)
+        });
       } catch (e) {
+        setError(true);
         console.log(e);
       }
-      setWalletData({ provider });
-      setWalletData({ signer });
-      setWalletData({ network });
-      setWalletData({ walletAddress: account });
-      setWalletData({ balance: ethers.utils.formatEther(balance) });
     }
   };
 
@@ -114,10 +120,18 @@ const Navbar = () => {
 
         <div className="hidden lg:flex">
           <div className="text-white flex items-center gap-5 font-medium font-work-sans space-x-5">
-            <NavLink to="marketplace" className="hover:text-[#F15623] duration-300">
+            <NavLink
+              to="marketplace"
+              className={({ isActive }) =>
+                isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
+              }>
               Marketplace
             </NavLink>
-            <NavLink to="rankings" className="hover:text-[#F15623] duration-300">
+            <NavLink
+              to="rankings"
+              className={({ isActive }) =>
+                isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
+              }>
               Rankings
             </NavLink>
             <div className="flex justify-between items-center gap-2">
@@ -127,31 +141,37 @@ const Navbar = () => {
                 </button>
               </div>
 
-              {walletData.walletAddress && walletData.network && (
-                <div className="relative group cursor-pointer">
-                  <AiOutlineInfoCircle />
-                  <div className="absolute z-10 py-3 px-5 hidden w-[200px] text-sm text-white bg-[#3b3b3b] rounded-lg shadow-md top-8 right-0 group-hover:block space-y-3">
-                    <div className="flex flex-col mt-1">
-                      <span className="font-normal">Address:</span>
-                      <span className="font-light">{`${walletData.walletAddress.substring(
-                        0,
-                        9
-                      )}....${walletData.walletAddress.substring(
-                        walletData.walletAddress.length - 9
-                      )}`}</span>
+              {error ? (
+                <Toast message={"Couldn't connect wallet"} type={'error'} />
+              ) : (
+                <>
+                  {walletData.walletAddress && walletData.network && (
+                    <div className="relative group cursor-pointer">
+                      <AiOutlineInfoCircle />
+                      <div className="absolute z-10 py-3 px-5 hidden w-[200px] text-sm text-white bg-[#3b3b3b] rounded-lg shadow-md top-8 right-0 group-hover:block space-y-3">
+                        <div className="flex flex-col mt-1">
+                          <span className="font-normal">Address:</span>
+                          <span className="font-light">{`${walletData.walletAddress.substring(
+                            0,
+                            9
+                          )}....${walletData.walletAddress.substring(
+                            walletData.walletAddress.length - 9
+                          )}`}</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-normal">Connected To:</span>
+                          <span className="font-light">{walletData.network.name}</span>
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="font-normal">Wallet Balance:</span>
+                          <span className="font-light">
+                            {`${Number(walletData.balance).toFixed(2)} eth`}
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex flex-col">
-                      <span className="font-normal">Connected To:</span>
-                      <span className="font-light">{walletData.network.name}</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="font-normal">Wallet Balance:</span>
-                      <span className="font-light">
-                        {`${Number(walletData.balance).toFixed(2)} eth`}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                  )}
+                </>
               )}
             </div>
             <button
