@@ -192,3 +192,98 @@ export const fetchNftForWallet = async ({walletAddress, blockchain}) => {
     throw error;
   }
 };
+
+export const listNftForSaleNonce = async ({walletAddress, blockchain, contractAddress, tokenId}) => {
+  const params =  [
+    {
+      'wallet': {
+        'walletAddress': walletAddress,
+        'blockchain': {
+          'name': blockchain
+        }
+      }
+    },
+    {
+      'nonfungibletoken': {
+        'contractAddress': contractAddress,
+        'tokenId': tokenId,
+        'blockchain': {
+          'name': blockchain
+        }
+      }
+    },
+    {
+      'fungibletoken': {
+        'tokenType': 'ETH',
+        'amount': '0.0001',
+        'blockchain': {
+          'name': blockchain
+        }
+      }
+    },
+    {
+      'fee': {
+        'feePercentage': '5.2',
+        'feeRecipient': '0x37a2794cE23d09932eC73D92B751828397D71CAF'
+      }
+    }
+  ];
+
+  try {
+    const response = await metaJuiceClient('listNftForSaleNonce', params);
+  
+    return response;
+  } catch(error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const listNftForSale = async ({walletAddress, blockchain, contractAddress, tokenId, nonce, signedString}) => {
+  const params =  [
+    {
+      'nonfungibletoken': {
+        'contractAddress': contractAddress,
+        'tokenId': tokenId,
+        'blockchain': {
+          'name': blockchain
+        }
+      }
+    },
+    {
+      'fungibletoken': {
+        'tokenType': 'ETH',
+        'amount': '0.0001',
+        'blockchain': {
+          'name': blockchain
+        }
+      }
+    },
+    {
+      'wallet': {
+        'walletAddress': walletAddress,
+        'blockchain': {
+          'name': blockchain
+        }
+      }
+    },
+    {
+      'text': {
+        'name': 'SignedString',
+        'data': signedString
+      }
+    },
+    {
+      'nonce':  nonce
+    }
+  ];
+
+  try {
+    const response = await metaJuiceClient('listNftForSale', params);
+  
+    return response;
+  } catch(error) {
+    console.log(error);
+    throw error;
+  }
+};
