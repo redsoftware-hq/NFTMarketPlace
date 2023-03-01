@@ -1,57 +1,6 @@
 import { ethers } from 'ethers';
 import { JSONRPCClient } from 'json-rpc-2.0';
 
-export async function mintWalletNew({ walletAddress, blockchain, signedString, signedKeyLinking }) {
-  const params = [
-    {
-      customer: {
-        customerId: '321385513',
-        metaverse: {
-          metaverseName: 'IMVU',
-          metaverseId: 'IMVU_Production'
-        }
-      }
-    },
-    {
-      wallet: {
-        walletAddress: walletAddress,
-        blockchain: {
-          name: blockchain
-        }
-      }
-    },
-    {
-      text: {
-        name: 'SignedString',
-        data: signedString
-      }
-    },
-    {
-      text: {
-        name: 'SignedKeyLinking',
-        data: signedKeyLinking
-      }
-    },
-    {
-      text: {
-        name: 'TypeOfWallet',
-        data: 'L2WalletOnImmutableX'
-      }
-    }
-  ];
-
-  console.log('params', params);
-
-  try {
-    await metaJuiceClient('mint_wallet', params);
-    // Return wallet with signed strings
-    return { walletAddress, blockchain, signedString, signedKeyLinking };
-  } catch (e) {
-    console.error(e);
-    throw e;
-  }
-}
-
 export function extractFullReturnError(error) {
   if (error === null || typeof error === 'undefined') {
     return '';
@@ -97,23 +46,57 @@ function metaJuiceClient(method, params) {
   return client.request(method, params);
 }
 
-export const updateBalanceAsync = async (wallet) => {
+export async function mintWalletNew({ walletAddress, blockchain, signedString, signedKeyLinking }) {
+  const params = [
+    {
+      customer: {
+        customerId: '321385513',
+        metaverse: {
+          metaverseName: 'IMVU',
+          metaverseId: 'IMVU_Production'
+        }
+      }
+    },
+    {
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain
+        }
+      }
+    },
+    {
+      text: {
+        name: 'SignedString',
+        data: signedString
+      }
+    },
+    {
+      text: {
+        name: 'SignedKeyLinking',
+        data: signedKeyLinking
+      }
+    },
+    {
+      text: {
+        name: 'TypeOfWallet',
+        data: 'L2WalletOnImmutableX'
+      }
+    }
+  ];
+
   try {
-    const response = await fetchFungibleForWallet(wallet);
-    const sanitizedResults = response.map(({ fungibletoken: { tokenType, amount } }) => ({
-      tokenType,
-      amount,
-      lastUpdate: new Date().toJSON()
-    }));
-
-    // The value we return becomes the `fulfilled` action payload
-    return sanitizedResults;
+    await metaJuiceClient('registerWallet', params);
+    
+    // Return wallet with signed strings
+    return { walletAddress, blockchain, signedString, signedKeyLinking };
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    throw error;
   }
-};
+}
 
-export async function fetchFungibleForWallet({ walletAddress, blockchain }) {
+export const updateBalanceAsync = async ({walletAddress, blockchain}) => {
   const params = [
     {
       wallet: {
@@ -131,133 +114,81 @@ export async function fetchFungibleForWallet({ walletAddress, blockchain }) {
     }
   ];
 
-  return await metaJuiceClient('fetch_fungibleForWallet', params);
-}
+  try {
+    const response = await metaJuiceClient('fetch_fungibleForWallet', params);
+    const sanitizedResults = response.map(({ fungibletoken: { tokenType, amount } }) => ({
+      tokenType,
+      amount,
+      lastUpdate: new Date().toJSON()
+    }));
 
-export async function nftAuthSignature(
-  { contractAddress, tokenId },
-  contractOwner,
-  destinationWallet,
-  onChainMetadata,
-  royalties
-) {
-  const { walletAddress, walletSecret, blockchain } = contractOwner;
-
-  if (royalties && (!royalties.percentage || !royalties.recipient)) {
-    throw new Error('You must include both royalties percentage and royalties recipient');
+    // The value we return becomes the `fulfilled` action payload
+    return sanitizedResults;
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
+};
 
-  // ether_key is the wallet that the NFT will be minted into, which doesn't have to be the same as the wallet that deployed the smart contract
-
-  const chosenNetwork = blockchain?.split('_')[1].toLowerCase();
-
-  let mintBodyPayload = {};
-
-  if (royalties) {
-    mintBodyPayload = {
-      contract_address: contractAddress.toLowerCase(),
-      royalties: [
-        {
-          recipient: royalties.recipient,
-          percentage: royalties.percentage
-        }
-      ],
-      users: [
-        {
-          ether_key: destinationWallet.toLowerCase(),
-          tokens: [
-            {
-              id: tokenId,
-              blueprint: onChainMetadata
-            }
-          ]
-        }
-      ],
-      auth_signature: ''
-    };
-  } else {
-    mintBodyPayload = {
-      contract_address: contractAddress.toLowerCase(),
-      users: [
-        {
-          ether_key: destinationWallet.toLowerCase(),
-          tokens: [
-            {
-              id: tokenId,
-              blueprint: onChainMetadata
-            }
-          ]
-        }
-      ],
-      auth_signature: ''
-    };
-  }
-
-  const hash = ethers.utils.keccak256(ethers.utils.toUtf8Bytes(JSON.stringify(mintBodyPayload)));
-
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-  const signer = await provider.getSigner();
-  let signed_message = await signer.signMessage(hash);
-
-  return signed_message;
-}
-
-export async function mint_nftToWallet(
-  { contractAddress, tokenId },
-  wallet,
-  ipfsContentHash,
-  destinationWalletAddress,
-  onChainMetadata,
-  tokenUrl,
-  baseUrl,
-  royalties
-) {
-  const { walletAddress, blockchain } = wallet;
-  const authSignature = await nftAuthSignature(
-    { contractAddress, tokenId },
-    wallet,
-    destinationWalletAddress,
-    onChainMetadata,
-    royalties
-  );
+export const mintNft = async ({walletAddress, blockchain, fileData, metadata, nftId}) => {
   const params = [
     {
-      nonfungibletoken: {
-        contractAddress: contractAddress,
-        tokenId: tokenId,
-        metadata: {
-          onChain: onChainMetadata,
-          baseUrl: baseUrl,
-          tokenUrl: tokenUrl,
-          tokenId: tokenId
-        }
-      }
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
     },
     {
+      image: {
+        name: fileData.name,
+        data: fileData.data,
+      },
+    },
+    {
+      text: {
+        name: nftId,
+        data: JSON.stringify({
+          name: metadata.name,
+          description: metadata.description,
+          'Background': 'Soft Pink',
+          'Head': 'Head5',
+          'Head-Upper': 'winter cap',
+          'Shirt': 'Shirt1',
+        }),
+      },
+    },
+  ];
+
+  try {
+    const response = await metaJuiceClient('upload_mint_transfer', params);
+  
+    return response;
+  } catch(error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const fetchNftForWallet = async ({walletAddress, blockchain}) => {
+  const params =  [
+    {
       wallet: {
-        walletAddress: destinationWalletAddress,
+        walletAddress: walletAddress,
         blockchain: {
           name: blockchain
         }
       }
-    },
-    {
-      text: {
-        name: 'AuthSignature',
-        data: authSignature
-      }
     }
   ];
 
-  if (royalties) {
-    params.push({
-      royalty: {
-        royaltyPercentage: royalties.percentage,
-        royaltyRecipient: royalties.recipient
-      }
-    });
+  try {
+    const response = await metaJuiceClient('fetch_nftsForWallet', params);
+  
+    return response;
+  } catch(error) {
+    console.log(error);
+    throw error;
   }
-
-  return await metaJuiceClient('mint_nftToWallet', params);
-}
+};

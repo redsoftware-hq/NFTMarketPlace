@@ -8,7 +8,7 @@ function NFTCard({ image, isAvailable }) {
         <img className="w-full h-full object-cover rounded-t-2xl" src={image} />
       </div>
       <div className="h-1/6 text-white font-space-mono font-semibold text-base flex justify-end items-center w-full p-3">
-        {availabilty}
+        <div className="m-5">{availabilty}</div>
       </div>
     </div>
   );

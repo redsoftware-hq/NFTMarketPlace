@@ -17,21 +17,21 @@ function Marketplace() {
           <p className="text-base md:text-lg tracking-wider">
             Browse through more than 50k NFTs on the NFT Marketplace.
           </p>
-          <div className="relative z-0">
+          <div className="relative z-0 h-18">
             <input
               type="text"
-              className="w-full mt-3 py-2 px-5 placeholder:text-sm placeholder:text-[#858584] rounded-2xl bg-transparent border border-[#3b3b3b]"
+              className="w-full h-full mt-3 py-3 px-5 placeholder:text-sm placeholder:text-[#858584] rounded-2xl bg-transparent border border-[#3b3b3b]"
               placeholder="Search your favourite NFTs"
             />
 
-            <button className="absolute w-5 right-5 top-[1.35rem]">
+            <button className="absolute w-5 right-5 top-7">
               <img src={SearchIcon} alt="" />
             </button>
           </div>
         </div>
 
         <Tabs className="mt-16">
-          <TabList className="w-full flex justify-between font-normal text-lg border-y border-[#3b3b3b] py-5">
+          <TabList className="w-full flex justify-between font-normal text-lg border border-[#3b3b3b] py-5">
             <Tab className="mx-auto cursor-pointer outline-none text-[#858584] hover:text-white duration-200  focus:text-white">
               NFTs{' '}
               <span className="font-space-mono bg-[#3b3b3b] text-base py-1 px-2 rounded-2xl focus:bg-[#858584] text-white">

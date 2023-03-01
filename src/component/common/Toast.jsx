@@ -1,6 +1,7 @@
 import React from 'react';
 
-const Toast = ({ message, type }) => {
+const Toast = ({ message, type, duration = 3000 }) => {
+  const [show, setShow] = React.useState(false);
   const toastClass = () => {
     switch (type) {
     case 'success':
@@ -12,11 +13,21 @@ const Toast = ({ message, type }) => {
     }
   };
 
+  React.useEffect(() => {
+    setShow(true);
+    const timeout = setTimeout(() => setShow(false), duration);
+    return () => clearTimeout(timeout);
+  }, [duration]);
+
   return (
-    <div
-      className={`fixed bottom-10 left-1/2 transform -translate-x-1/2 w-64 px-4 py-2 rounded-md text-white ${toastClass()} transition ease-in duration-500 z-50`}>
-      <p className="text-center font-medium">{message}</p>
-    </div>
+    <>
+      {show && (
+        <div
+          className={`fixed top-1 left-1/2 transform -translate-x-1/2 w-64 p-4 rounded-md text-white ${toastClass()} transition ease-in duration-500 z-50`}>
+          <p className="text-center font-medium">{message}</p>
+        </div>
+      )}
+    </>
   );
 };
 export default Toast;

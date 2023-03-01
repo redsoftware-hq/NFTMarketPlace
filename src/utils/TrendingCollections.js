@@ -43,15 +43,5 @@ export let collection = [
     artistName: 'BeKind2Robots',
     avatar: art3,
     collectionSize: '62+'
-  },
-  {
-    id: 2,
-    url: Mushroom_1,
-    thumbnailOne: Mushroom_2,
-    thumbnailTwo: Mushroom_3,
-    design: 'Magic Mushrooms',
-    artistName: 'Shroomie',
-    avatar: art2,
-    collectionSize: '235+'
   }
 ];
