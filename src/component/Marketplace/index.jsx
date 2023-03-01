@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import SearchIcon from '../../assets/icons/MagnifyingGlass.png';
 import { discoverData } from '../../utils/DiscoverData';
@@ -7,6 +7,8 @@ import CollectionCard from '../Home/Cards/CollectionCard';
 import DiscoverCard from '../Home/Cards/DiscoverCard';
 
 function Marketplace() {
+  const [search, setSearch] = useState('');
+
   return (
     <section className="container mx-auto">
       <div className="py-12 px-8 md:px-12 lg:px-20">
@@ -21,6 +23,9 @@ function Marketplace() {
             <input
               type="text"
               className="w-full h-full mt-3 py-3 px-5 placeholder:text-sm placeholder:text-[#858584] rounded-2xl bg-transparent border border-[#3b3b3b]"
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
               placeholder="Search your favourite NFTs"
             />
 
@@ -32,17 +37,21 @@ function Marketplace() {
 
         <Tabs className="mt-16">
           <TabList className="w-full flex justify-between font-normal text-lg border border-[#3b3b3b] py-5">
-            <Tab className="mx-auto cursor-pointer outline-none text-[#858584] hover:text-white duration-200  focus:text-white">
-              NFTs{' '}
-              <span className="font-space-mono bg-[#3b3b3b] text-base py-1 px-2 rounded-2xl focus:bg-[#858584] text-white">
-                382
-              </span>
+            <Tab className="mx-auto cursor-pointer text-[#858584] hover:text-white duration-200 focus:text-white">
+              <div className="outline-none">
+                NFTs{' '}
+                <span className="font-space-mono bg-[#3b3b3b] text-base py-1 px-2 rounded-2xl focus:bg-[#858584] text-white">
+                  382
+                </span>
+              </div>
             </Tab>
-            <Tab className="mx-auto cursor-pointer outline-none text-[#858584] hover:text-white duration-200  focus:text-white">
-              Collections{' '}
-              <span className="font-space-mono bg-[#3b3b3b] focus:bg-[#858584] text-base py-1 px-2 rounded-2xl text-white">
-                67
-              </span>
+            <Tab className="mx-auto cursor-pointer text-[#858584] hover:text-white duration-200 focus:text-white ">
+              <div className="outline-none">
+                Collections{' '}
+                <span className="font-space-mono bg-[#3b3b3b] focus:bg-[#858584] text-base py-1 px-2 rounded-2xl text-white">
+                  67
+                </span>
+              </div>
             </Tab>
           </TabList>
 
@@ -50,9 +59,15 @@ function Marketplace() {
             <div className="creators-container">
               <div className="mt-10 creators-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {discoverData &&
-                  discoverData.map((item, index) => {
-                    return <DiscoverCard key={index} item={item} />;
-                  })}
+                  discoverData
+                    .filter((item) => {
+                      return search.toLowerCase() === ''
+                        ? item
+                        : item.imgTitle.toLowerCase().includes(search);
+                    })
+                    .map((item, index) => {
+                      return <DiscoverCard key={index} item={item} />;
+                    })}
               </div>
             </div>
           </TabPanel>
@@ -60,9 +75,15 @@ function Marketplace() {
             <div className="card-container">
               <div className="py-14 main-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {collection &&
-                  collection.map((item, index) => {
-                    return <CollectionCard key={index} item={item} />;
-                  })}
+                  collection
+                    .filter((item) => {
+                      return search.toLowerCase() === ''
+                        ? item
+                        : item.design.toLowerCase().includes(search);
+                    })
+                    .map((item, index) => {
+                      return <CollectionCard key={index} item={item} />;
+                    })}
               </div>
             </div>
           </TabPanel>
