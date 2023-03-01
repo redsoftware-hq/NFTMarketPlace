@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const Toast = ({ message, type, duration = 3000 }) => {
+const Toast = ({
+  message,
+  type,
+  duration = 3000,
+  shouldRedirect = { value: false, where: '' }
+}) => {
   const [show, setShow] = React.useState(false);
+  const navigate = useNavigate();
   const toastClass = () => {
     switch (type) {
       case 'success':
@@ -15,7 +22,14 @@ const Toast = ({ message, type, duration = 3000 }) => {
 
   React.useEffect(() => {
     setShow(true);
-    const timeout = setTimeout(() => setShow(false), duration);
+
+    const timeout = setTimeout(() => {
+      setShow(false);
+    }, duration);
+
+    if (shouldRedirect.value) {
+      setTimeout(() => navigate(shouldRedirect.where), duration);
+    }
     return () => clearTimeout(timeout);
   }, [duration]);
 

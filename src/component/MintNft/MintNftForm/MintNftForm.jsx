@@ -104,6 +104,7 @@ export default function MintNftForm({ setMessage }) {
           data: fileData
         }
       };
+
       mintNft(payload).then((response) => {
         setMessage(`Token Id: ${response[1].text.data}`);
       });

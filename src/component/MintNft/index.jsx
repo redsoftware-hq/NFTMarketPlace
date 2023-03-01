@@ -5,11 +5,15 @@ import { useState } from 'react';
 import Toast from '../common/Toast';
 export default function MintNft() {
   const [message, setMessage] = useState('');
+  const shouldRedirect = {
+    value: true,
+    where: '/'
+  };
   return (
     <section className="px-1 grid justify-center gap-2 md:m-auto md:max-w-[768px]">
       <FormHeader title="Create a NFT" />
       <MintNftForm setMessage={setMessage} />
-      {message !== '' && <Toast type="success" message={message} />}
+      {message !== '' && <Toast type="success" message={message} shouldRedirect={shouldRedirect} />}
     </section>
   );
 }
