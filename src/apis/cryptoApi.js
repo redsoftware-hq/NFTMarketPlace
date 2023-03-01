@@ -132,7 +132,7 @@ export const updateBalanceAsync = async ({ walletAddress, blockchain }) => {
   }
 };
 
-export const mintNft = async ({ walletAddress, blockchain, fileData, metadata, nftId }) => {
+export const mintNft = async ({ walletAddress, blockchain, fileData, textData, nftId }) => {
   const params = [
     {
       wallet: {
