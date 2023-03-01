@@ -25,7 +25,7 @@ const options = {
 const DYNAMIC_FIELD = { name: 'metadata', key: 'key', value: 'value' };
 const METADATA_OBJ = { key: '', value: '' };
 
-export default function MintNftForm({ setToast, setMessage }) {
+export default function MintNftForm({ setMessage }) {
   const [wallet, setWallet] = useState({ walletAddress: '', blockchain: '' });
   const {
     register,
@@ -105,10 +105,10 @@ export default function MintNftForm({ setToast, setMessage }) {
         }
       };
       mintNft(payload).then((response) => {
-        setToast(response);
         setMessage(`Token Id: ${response[1].text.data}`);
       });
     } catch (error) {
+      setMessage('Cannot Mint nft');
       console.log(error);
     }
   };
