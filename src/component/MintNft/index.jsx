@@ -1,19 +1,21 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import FormHeader from '../common/Form/FormHeader';
-import MintNftForm from './MintNftForm/MintNftForm';
-import { useState } from 'react';
 import Toast from '../common/Toast';
+import MintNftForm from './MintNftForm/MintNftForm';
 export default function MintNft() {
-  const [message, setMessage] = useState('');
-  const shouldRedirect = {
-    value: true,
-    where: '/'
+  const [toastMessage, setToastMessage] = React.useState('');
+  const navigate = useNavigate();
+  const redirectCallback = () => {
+    navigate('/');
   };
   return (
     <section className="px-1 grid justify-center gap-2 md:m-auto md:max-w-[768px]">
       <FormHeader title="Create a NFT" />
-      <MintNftForm setMessage={setMessage} />
-      {message !== '' && <Toast type="success" message={message} shouldRedirect={shouldRedirect} />}
+      <MintNftForm setToastMessage={setToastMessage} />
+      {toastMessage !== '' && (
+        <Toast type="success" message={toastMessage} callback={redirectCallback} />
+      )}
     </section>
   );
 }

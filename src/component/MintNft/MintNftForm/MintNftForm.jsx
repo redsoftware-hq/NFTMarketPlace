@@ -26,7 +26,7 @@ const options = {
 const DYNAMIC_FIELD = { name: 'metadata', key: 'key', value: 'value' };
 const METADATA_OBJ = { key: '', value: '' };
 
-export default function MintNftForm({ setMessage }) {
+export default function MintNftForm({ setToastMessage }) {
   const [wallet, setWallet] = useState({ walletAddress: '', blockchain: '' });
   const {
     register,
@@ -107,10 +107,10 @@ export default function MintNftForm({ setMessage }) {
       };
 
       mintNft(payload).then((response) => {
-        setMessage(`Token Id: ${response[1].text.data}`);
+        setToastMessage(`Token Id: ${response[1].text.data}`);
       });
     } catch (error) {
-      setMessage('Cannot Mint nft');
+      setToastMessage('Cannot Mint nft');
       console.log(error);
     }
   };
@@ -119,6 +119,7 @@ export default function MintNftForm({ setMessage }) {
     <form className="px-1 flex flex-col gap-3 font-work-sans" onSubmit={handleSubmit(onSubmit)}>
       <UploadImage register={register} options={options.upload} />
       {errors.upload && <ErrorMessage message={errors.upload?.message} />}
+
       <div className="nft-name inline-grid p-1 gap-1">
         <label className="px-2 text-white" htmlFor={labels.name}>
           Name *
