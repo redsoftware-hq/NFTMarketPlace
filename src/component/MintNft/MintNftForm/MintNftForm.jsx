@@ -13,6 +13,7 @@ const labels = { name: 'name', description: 'description' };
 
 const options = {
   name: { required: 'This is required' },
+  description: { required: 'Please provide a description' },
   metadata: {
     required: 'Field cannot be empty',
     validate: (value) => value !== ''
@@ -117,11 +118,7 @@ export default function MintNftForm({ setMessage }) {
   return (
     <form className="px-1 flex flex-col gap-3 font-work-sans" onSubmit={handleSubmit(onSubmit)}>
       <UploadImage register={register} options={options.upload} />
-      {errors.upload && (
-        <div>
-          <ErrorMessage message={errors.upload?.message} />
-        </div>
-      )}
+      {errors.upload && <ErrorMessage message={errors.upload?.message} />}
       <div className="nft-name inline-grid p-1 gap-1">
         <label className="px-2 text-white" htmlFor={labels.name}>
           Name *
@@ -144,7 +141,14 @@ export default function MintNftForm({ setMessage }) {
         <span className="px-2 text-[#858584] font-work-sans">
           Make your items more discoverable on Metajuice by adding a description
         </span>
-        <TextArea id={labels.description} name={labels.description} register={register} rows="4" />
+        <TextArea
+          id={labels.description}
+          name={labels.description}
+          register={register}
+          options={options.description}
+          rows="4"
+        />
+        {errors.description && <ErrorMessage message={errors.description?.message} />}
       </div>
 
       <div>
