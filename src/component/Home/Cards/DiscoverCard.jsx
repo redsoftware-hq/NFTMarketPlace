@@ -8,10 +8,10 @@ const DiscoverCard = ({ item }) => {
   const handleClick = () => navigate(`/details/${item.id}`);
   const [dropdown, setDropdown] = useState(false);
   return (
-    <>
+    <div>
       <div className="w-full hover:scale-[1.03] duration-300 cursor-pointer">
         <div className="relative">
-          <img className="w-full rounded-t-2xl" src={item.image} alt="" />
+          <img onClick={handleClick} className="w-full rounded-t-2xl" src={item.image} alt="" />
           <BsThreeDotsVertical
             size={25}
             className="absolute top-5 right-5 text-white bg-[#3b3b3b] rounded-full p-1 hover:bg-[#575757]"
@@ -42,7 +42,7 @@ const DiscoverCard = ({ item }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
