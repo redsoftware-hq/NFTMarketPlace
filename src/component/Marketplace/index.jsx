@@ -75,9 +75,9 @@ function Marketplace() {
           </div>
         </div>
 
-        <Tabs className="mt-16">
+        <Tabs defaultFocus className="mt-16">
           <TabList className="w-full flex justify-between font-normal text-lg border border-[#3b3b3b]">
-            <Tab className="w-full h-full flex items-center justify-center cursor-pointer text-[#858584] hover:text-white duration-200 focus:text-white focus:bg-[#575757]">
+            <Tab className="nft-tab w-full h-full flex items-center justify-center cursor-pointer text-[#858584] hover:text-white duration-200 focus:text-white focus:bg-[#575757] focus:outline-none">
               <div className="outline-none py-5">
                 NFTs{' '}
                 <span className="font-space-mono bg-[#3b3b3b] text-base py-1 px-2 rounded-2xl focus:bg-[#858584] text-white">
@@ -85,7 +85,7 @@ function Marketplace() {
                 </span>
               </div>
             </Tab>
-            <Tab className="w-full h-full flex items-center justify-center cursor-pointer text-[#858584] hover:text-white duration-200 focus:text-white focus:bg-[#575757]">
+            <Tab className="w-full h-full flex items-center justify-center cursor-pointer text-[#858584] hover:text-white duration-200 focus:text-white focus:bg-[#575757] focus:outline-none">
               <div className="outline-none py-5">
                 Collections{' '}
                 <span className="font-space-mono bg-[#3b3b3b] focus:bg-[#858584] text-base py-1 px-2 rounded-2xl text-white">
