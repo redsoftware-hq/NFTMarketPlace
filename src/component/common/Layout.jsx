@@ -3,7 +3,7 @@ import Footer from './Footer';
 import { ethers } from 'ethers';
 import Navbar from './Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-import { listNftForSaleNonce, listNftForSale } from '../../apis/cryptoApi';
+import { fetchNftForWallet, listNftForSaleNonce, listNftForSale } from '../../apis/cryptoApi';
 
 function Layout() {
   // React.useEffect(() => {
@@ -48,6 +48,25 @@ function Layout() {
   //     });
 
   //     console.log('listNftForSaleResponse', listNftForSaleNonceResponse[0].nonce);
+  //   };
+
+  //   apiCall();
+  // }, []);
+
+  // React.useEffect(() => {
+  //   let nftData;
+  //   const apiCall = async () => {
+  //     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+  //     const requestAccounts = await provider.send('eth_requestAccounts', []);
+  //     const network = await provider.getNetwork();
+  //     const account = requestAccounts[0];
+
+  //     nftData = await fetchNftForWallet({
+  //       walletAddress: account,
+  //       blockchain: 'IMXStarkEx_' + network.name,
+  //     });
+
+  //     console.log('nftData', nftData);
   //   };
 
   //   apiCall();

@@ -294,3 +294,95 @@ export const listNftForSale = async ({
     throw error;
   }
 };
+
+export const delistNftNonce = async ({
+  walletAddress,
+  blockchain,
+  contractAddress,
+  tokenId,
+  signedString
+}) => {
+  const params = [
+    {
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+        blockchain: {
+          name: blockchain,
+          layerType: 'layer1',
+        },
+      },
+    },
+    {
+      text: {
+        name: 'SignedString',
+        data: signedString,
+      },
+    },
+  ];
+
+  try {
+    const response = await metaJuiceClient('delistNftNonce', params);
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const delistNft = async ({
+  walletAddress,
+  blockchain,
+  contractAddress,
+  tokenId,
+  nonce,
+  signedString
+}) => {
+  const params = [
+    {
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+        blockchain: {
+          name: blockchain,
+          layerType: 'layer1',
+        },
+      },
+    },
+    {
+      text: {
+        name: 'SignedString',
+        data: signedString,
+      },
+    },
+    {
+      nonce: nonce
+    }
+  ];
+
+  try {
+    const response = await metaJuiceClient('delistNft', params);
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

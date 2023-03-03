@@ -58,7 +58,7 @@ export default function MintNftForm({ setToastMessage }) {
         setWallet(walletObj);
       })();
     } catch (error) {
-      setToastMessage('Cannot get Wallet Details');
+      setToastMessage('Cannot get wallet details');
       console.log(error);
     }
   }, []);
