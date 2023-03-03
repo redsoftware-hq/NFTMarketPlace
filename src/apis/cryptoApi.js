@@ -195,6 +195,8 @@ export const listNftForSaleNonce = async ({
   tokenId
 }) => {
   const params = [
+export const listNftForSaleNonce = async ({walletAddress, blockchain, contractAddress, tokenId, signedString}) => {
+  const params =  [
     {
       wallet: {
         walletAddress: walletAddress,
@@ -202,6 +204,12 @@ export const listNftForSaleNonce = async ({
           name: blockchain
         }
       }
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
     },
     {
       nonfungibletoken: {
@@ -211,6 +219,13 @@ export const listNftForSaleNonce = async ({
           name: blockchain
         }
       }
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+        blockchain: {
+          name: blockchain,
+        },
+      },
     },
     {
       fungibletoken: {
@@ -227,6 +242,11 @@ export const listNftForSaleNonce = async ({
         feeRecipient: '0x37a2794cE23d09932eC73D92B751828397D71CAF'
       }
     }
+      text: {
+        name: 'SignedString',
+        data: signedString,
+      },
+    },
   ];
 
   try {

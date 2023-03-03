@@ -2,8 +2,13 @@ import React from 'react';
 import ArtistCard from '../Cards/ArtistCard';
 import { artistsData } from '../../../utils/ArtistsCollection';
 import RocketPurple from '../../../assets/icons/RocketLaunchPurple.png';
+import { useNavigate } from 'react-router';
 
 const TopCreatersSec = () => {
+  const navigate = useNavigate();
+  const handleClick = (e) => {
+    navigate('/rankings');
+  };
   return (
     <>
       <section className="container mx-auto">
@@ -20,7 +25,9 @@ const TopCreatersSec = () => {
                 Checkout Top Rated Creators on the NFT <br /> Marketplace
               </p>
             </div>
-            <button className="py-3 px-10 hidden md:flex bg-[#2b2b2b] border-2 border-[#F15623] hover:text-[#F15623] ease-in-out duration-300 rounded-2xl items-center capitalize text-white text-xs md:text-sm font-medium gap-2">
+            <button
+              onClick={handleClick}
+              className="py-3 px-10 hidden md:flex bg-[#2b2b2b] border-2 border-[#F15623] hover:text-[#F15623] ease-in-out duration-300 rounded-2xl items-center capitalize text-white text-xs md:text-sm font-medium gap-2">
               <img className="w-4 md:w-5" src={RocketPurple} alt="" /> view rankings
             </button>
           </div>
@@ -33,7 +40,9 @@ const TopCreatersSec = () => {
                 })}
             </div>
             <div>
-              <button className="w-full mt-8 py-5 px-10 flex items-center justify-center md:hidden lg:hidden bg-[#2b2b2b] border-2 border-[#F15623] hover:text-[#F15623] ease-in-out duration-300 rounded-2xl capitalize text-white text-sm font-semibold gap-2 lg:mr-8">
+              <button
+                onClick={handleClick}
+                className="w-full mt-8 py-5 px-10 flex items-center justify-center md:hidden lg:hidden bg-[#2b2b2b] border-2 border-[#F15623] hover:text-[#F15623] ease-in-out duration-300 rounded-2xl capitalize text-white text-sm font-semibold gap-2 lg:mr-8">
                 <img className="w-4 md:w-5" src={RocketPurple} alt="" /> view rankings
               </button>
             </div>

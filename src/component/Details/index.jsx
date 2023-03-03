@@ -38,7 +38,7 @@ function Details() {
 
         const mintedNft = await mintNft({
           walletAddress: account,
-          blockchain: 'Ethereum_' + network.name
+          blockchain: 'IMXStarkEx_' + network.name
         });
       };
       mintNftRpcInvoke();
