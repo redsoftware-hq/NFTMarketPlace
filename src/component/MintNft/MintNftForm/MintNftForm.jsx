@@ -137,7 +137,7 @@ export default function MintNftForm({ setToastMessage }) {
 
       <div className="description p-1 inline-grid gap-1">
         <label htmlFor={labels.description} className=" text-white">
-          Description *
+          Add Description *
         </label>
         <span className=" text-[#858584] font-work-sans">
           Make your items more discoverable on Metajuice by adding a description
@@ -210,7 +210,11 @@ export default function MintNftForm({ setToastMessage }) {
       </div>
 
       <div>
-        <SecondaryButton btnName="Add" type="button" handleClick={() => append(METADATA_OBJ)} />
+        <SecondaryButton
+          btnName="Add Metadata"
+          type="button"
+          handleClick={() => append(METADATA_OBJ)}
+        />
       </div>
 
       <div className="btn-container">
