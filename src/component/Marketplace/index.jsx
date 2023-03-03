@@ -11,9 +11,9 @@ function Marketplace() {
   const [nftData, setNftData] = useState(discoverData);
   const [collectionData, setCollectionData] = useState(collection);
 
-  function filterNftData() {
+  function filterNftData(e) {
     const value = inputRef.current.value.toLowerCase();
-    // console.log(value);
+
     const filterNft = nftData.filter((item) => {
       return item.imgTitle.toLowerCase().includes(value);
     });
@@ -25,31 +25,12 @@ function Marketplace() {
     if (value === '') {
       setNftData(discoverData);
       setCollectionData(collection);
-    } else {
+    } else if (e.code === 'Enter') {
       setNftData(filterNft);
       setCollectionData(filterCollection);
     }
   }
 
-  function getResult(e) {
-    const value = inputRef.current.value.toLowerCase();
-    // console.log(value);
-    const filterNft = nftData.filter((item) => {
-      return item.imgTitle.toLowerCase().includes(value);
-    });
-
-    const filterCollection = collectionData.filter((item) => {
-      return item.design.toLowerCase().includes(value);
-    });
-
-    if (value === '') {
-      setNftData(discoverData);
-      setCollectionData(collection);
-    } else if (e.key === 'Enter') {
-      setNftData(filterNft);
-      setCollectionData(filterCollection);
-    }
-  }
   return (
     <section className="container mx-auto">
       <div className="py-12 px-8 md:px-12 lg:px-20">
@@ -66,7 +47,7 @@ function Marketplace() {
               className="w-full h-full mt-3 py-3 px-5 placeholder:text-sm placeholder:text-[#858584] rounded-2xl bg-transparent border border-[#3b3b3b]"
               placeholder="Search your favourite NFTs"
               ref={inputRef}
-              onKeyPress={getResult}
+              onKeyUp={filterNftData}
             />
 
             <button className="absolute w-5 right-5 top-6" onClick={filterNftData}>
