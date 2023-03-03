@@ -120,25 +120,26 @@ export default function MintNftForm({ setToastMessage }) {
       {errors.upload && <ErrorMessage message={errors.upload?.message} />}
 
       <div className="nft-name inline-grid p-1 gap-1">
-        <label className="px-2 text-white" htmlFor={labels.name}>
+        <label className=" text-white" htmlFor={labels.name}>
           Name *
         </label>
+        <span className=" text-[#858584] font-work-sans">Add a name for your NFT</span>
         <Input
           name={labels.name}
           id={labels.name}
           type="text"
           options={options.name}
           register={register}
-          placeholder="Example: Treasure of Sea"
+          placeholder="Example: Treasure of sea"
         />
         {errors.name && <ErrorMessage message={errors.name?.message} />}
       </div>
 
       <div className="description p-1 inline-grid gap-1">
-        <label htmlFor={labels.description} className="px-2 capitalize text-white">
-          description
+        <label htmlFor={labels.description} className=" text-white">
+          Description *
         </label>
-        <span className="px-2 text-[#858584] font-work-sans">
+        <span className=" text-[#858584] font-work-sans">
           Make your items more discoverable on Metajuice by adding a description
         </span>
         <TextArea
@@ -147,17 +148,24 @@ export default function MintNftForm({ setToastMessage }) {
           register={register}
           options={options.description}
           rows="4"
+          placeholder="Example: Pearls, jewels, gold and ornaments inside Pandora's box"
         />
         {errors.description && <ErrorMessage message={errors.description?.message} />}
       </div>
 
       <div>
+        <div className="flex flex-col">
+          <label htmlFor={labels.description} className=" text-white">
+            Metadata
+          </label>
+          <span className="mt-1 text-[#858584] font-work-sans">Add attributes for your NFT</span>
+        </div>
         {fields.map((item, index) => (
           <div
             className="flex flex-col justify-center items-center gap-4 md:flex-row"
             key={item.id}>
             <div className="md:basis-1/4">
-              <label className="px-2 py-1 text-white">Metadata Key *</label>
+              {/* <label className="py-1 text-white">Metadata Key *</label> */}
               <input
                 placeholder="Key"
                 className="p-3 rounded-2xl w-full caret-[#f15623] focus:accent-[#f15623]"
@@ -173,8 +181,8 @@ export default function MintNftForm({ setToastMessage }) {
                 />
               )}
             </div>
-            <div className="">
-              <label className="px-2 py-1 text-white">Metadata Value *</label>
+            <div className="my-2">
+              {/* <label className=" py-1 text-white">Metadata Value *</label> */}
               <Controller
                 render={({ field }) => (
                   <input

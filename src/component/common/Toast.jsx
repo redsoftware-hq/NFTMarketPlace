@@ -29,7 +29,8 @@ const Toast = ({ message, type, callback, duration = 3000 }) => {
     <>
       {show && (
         <div
-          className={`fixed top-1 left-1/2 transform -translate-x-1/2 w-64 p-4 rounded-md text-white ${toastClass()} transition ease-in duration-500 z-50`}>
+          className={`fixed top-1 left-1/2 transform -translate-x-1/2 w-64 p-4 rounded-md text-white ${toastClass()} transition ease-in duration-500 z-50`}
+        >
           <p className="text-center font-medium">{message}</p>
         </div>
       )}
