@@ -69,7 +69,7 @@ const Navbar = () => {
       try {
         const signedWallet = await mintWalletNew({
           walletAddress: account,
-          blockchain: 'Ethereum_' + network.name,
+          blockchain: 'IMXStarkEx_' + network.name,
           signedKeyLinking,
           signedString
         });
@@ -142,7 +142,7 @@ const Navbar = () => {
               </div>
 
               {error ? (
-                <Toast message={"Couldn't connect wallet"} type={'error'} />
+                <Toast message={'Couldn\'t connect wallet'} type={'error'} />
               ) : (
                 <>
                   {walletData.walletAddress && walletData.network && (

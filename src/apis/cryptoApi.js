@@ -193,40 +193,40 @@ export const fetchNftForWallet = async ({walletAddress, blockchain}) => {
   }
 };
 
-export const listNftForSaleNonce = async ({walletAddress, blockchain, contractAddress, tokenId}) => {
+export const listNftForSaleNonce = async ({walletAddress, blockchain, contractAddress, tokenId, signedString}) => {
   const params =  [
     {
-      'wallet': {
-        'walletAddress': walletAddress,
-        'blockchain': {
-          'name': blockchain
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      fungibletoken: {
+        tokenType: 'ETH',
+        amount: '0.0001',
+        blockchain: {
+          name: blockchain
         }
       }
     },
     {
-      'nonfungibletoken': {
-        'contractAddress': contractAddress,
-        'tokenId': tokenId,
-        'blockchain': {
-          'name': blockchain
-        }
-      }
+      text: {
+        name: 'SignedString',
+        data: signedString,
+      },
     },
-    {
-      'fungibletoken': {
-        'tokenType': 'ETH',
-        'amount': '0.0001',
-        'blockchain': {
-          'name': blockchain
-        }
-      }
-    },
-    {
-      'fee': {
-        'feePercentage': '5.2',
-        'feeRecipient': '0x37a2794cE23d09932eC73D92B751828397D71CAF'
-      }
-    }
   ];
 
   try {
@@ -242,39 +242,39 @@ export const listNftForSaleNonce = async ({walletAddress, blockchain, contractAd
 export const listNftForSale = async ({walletAddress, blockchain, contractAddress, tokenId, nonce, signedString}) => {
   const params =  [
     {
-      'nonfungibletoken': {
-        'contractAddress': contractAddress,
-        'tokenId': tokenId,
-        'blockchain': {
-          'name': blockchain
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      fungibletoken: {
+        tokenType: 'ETH',
+        amount: '0.0001',
+        blockchain: {
+          name: blockchain
         }
       }
     },
     {
-      'fungibletoken': {
-        'tokenType': 'ETH',
-        'amount': '0.0001',
-        'blockchain': {
-          'name': blockchain
-        }
-      }
+      text: {
+        name: 'SignedString',
+        data: signedString,
+      },
     },
     {
-      'wallet': {
-        'walletAddress': walletAddress,
-        'blockchain': {
-          'name': blockchain
-        }
-      }
-    },
-    {
-      'text': {
-        'name': 'SignedString',
-        'data': signedString
-      }
-    },
-    {
-      'nonce':  nonce
+      nonce: nonce
     }
   ];
 
