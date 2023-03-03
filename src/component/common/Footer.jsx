@@ -68,7 +68,8 @@ const Footer = () => {
                     <div className="md:absolute right-0">
                       <button
                         type="submit"
-                        className="flex w-full lg:text-base items-center justify-center gap-2 rounded-2xl bg-[#F15623] px-14 py-2 md:py-3 md:px-14">
+                        className="flex w-full lg:text-base items-center justify-center gap-2 rounded-2xl bg-[#F15623] px-14 py-2 md:py-3 md:px-14"
+                      >
                         Subscribe
                       </button>
                     </div>

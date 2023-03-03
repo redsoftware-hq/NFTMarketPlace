@@ -29,7 +29,7 @@ function Layout() {
   //     });
 
   //     console.log('listNftForSaleNonceResponse', listNftForSaleNonceResponse);
-      
+
   //     const signedNonce = await signer.signMessage(
   //       listNftForSaleNonceResponse[0]?.nonce.nonce
   //     );

@@ -1,23 +1,29 @@
 import React from 'react';
 
-const Toast = ({ message, type, duration = 3000 }) => {
-  const [show, setShow] = React.useState(false);
+const Toast = ({ message, type, callback, duration = 3000 }) => {
+  const [show, setShow] = React.useState(true);
+
   const toastClass = () => {
     switch (type) {
-    case 'success':
-      return 'bg-green-500';
-    case 'error':
-      return 'bg-red-500';
-    default:
-      return 'bg-gray-500';
+      case 'success':
+        return 'bg-green-500';
+      case 'error':
+        return 'bg-red-500';
+      default:
+        return 'bg-gray-500';
     }
   };
 
   React.useEffect(() => {
-    setShow(true);
-    const timeout = setTimeout(() => setShow(false), duration);
-    return () => clearTimeout(timeout);
-  }, [duration]);
+    const timeout = setTimeout(() => {
+      setShow(false);
+    }, duration);
+
+    return () => {
+      clearTimeout(timeout);
+      callback();
+    };
+  }, [show]);
 
   return (
     <>
