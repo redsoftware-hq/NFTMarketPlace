@@ -11,6 +11,19 @@ import { mintNft } from '../../../apis/cryptoApi';
 
 const labels = { name: 'name', description: 'description' };
 
+const toBase64 = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
+async function convert(file) {
+  const dataURI = await toBase64(file);
+  return dataURI;
+}
+
 const options = {
   name: { required: 'Please provide a name' },
   description: { required: 'Please provide a description' },
@@ -62,19 +75,6 @@ export default function MintNftForm({ setToastMessage }) {
       console.log(error);
     }
   }, []);
-
-  const toBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
-
-  async function convert(file) {
-    const dataURI = await toBase64(file);
-    return dataURI;
-  }
 
   const onSubmit = async (data) => {
     try {
