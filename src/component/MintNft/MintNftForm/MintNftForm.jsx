@@ -12,14 +12,14 @@ import { mintNft } from '../../../apis/cryptoApi';
 const labels = { name: 'name', description: 'description' };
 
 const options = {
-  name: { required: 'This is required' },
+  name: { required: 'Please provide a name' },
   description: { required: 'Please provide a description' },
   metadata: {
     required: 'Field cannot be empty',
     validate: (value) => value !== ''
   },
   upload: {
-    required: 'Please Upload'
+    required: 'Please Upload a Image'
   }
 };
 
@@ -58,6 +58,7 @@ export default function MintNftForm({ setToastMessage }) {
         setWallet(walletObj);
       })();
     } catch (error) {
+      setToastMessage('Cannot get Wallet Details');
       console.log(error);
     }
   }, []);
@@ -77,8 +78,6 @@ export default function MintNftForm({ setToastMessage }) {
 
   const onSubmit = async (data) => {
     try {
-      console.log(data);
-
       const { name, description, metadata, upload } = data;
 
       const fileName = upload[0].name;
