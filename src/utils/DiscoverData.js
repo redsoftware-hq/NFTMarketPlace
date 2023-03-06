@@ -1,3 +1,4 @@
+import React from 'react';
 import d1 from '../assets/discoverSec/d1.png';
 import d2 from '../assets/discoverSec/d2.png';
 import d3 from '../assets/discoverSec/d3.png';
@@ -9,6 +10,7 @@ import d8 from '../assets/discoverSec/room4.jpg';
 import av1 from '../assets/discoverSec/av1.png';
 import av2 from '../assets/discoverSec/av2.png';
 import av3 from '../assets/discoverSec/av3.png';
+import DropdownMenu from '../component/common/DropdownMenu';
 
 export let discoverData = [
   {
@@ -20,6 +22,7 @@ export let discoverData = [
     price: '1.63 ETH',
     highestBid: '0.33 wETH',
     fiatPrice: '4.95'
+    // properties: <DropdownMenu />
   },
 
   {
@@ -31,6 +34,7 @@ export let discoverData = [
     price: '1.63 ETH',
     highestBid: '0.33 wETH',
     fiatPrice: '4.95'
+    // properties: <DropdownMenu />
   },
 
   {
@@ -42,6 +46,7 @@ export let discoverData = [
     price: '1.63 ETH',
     highestBid: '0.33 wETH',
     fiatPrice: '4.95'
+    // properties: <DropdownMenu />
   },
   {
     id: 4,
@@ -52,6 +57,7 @@ export let discoverData = [
     price: '1.63 ETH',
     highestBid: '0.33 wETH',
     fiatPrice: '4.95'
+    // properties: <DropdownMenu />
   },
   {
     id: 5,
@@ -62,6 +68,7 @@ export let discoverData = [
     price: '1.63 ETH',
     highestBid: '0.33 wETH',
     fiatPrice: '4.95'
+    // properties: <DropdownMenu />
   },
   {
     id: 6,
@@ -72,6 +79,7 @@ export let discoverData = [
     price: '1.63 ETH',
     highestBid: '0.33 wETH',
     fiatPrice: '4.95'
+    // properties: <DropdownMenu />
   },
   {
     id: 7,
@@ -82,6 +90,7 @@ export let discoverData = [
     price: '1.63 ETH',
     highestBid: '0.33 wETH',
     fiatPrice: '4.95'
+    // properties: <DropdownMenu />
   },
   {
     id: 8,
@@ -92,5 +101,6 @@ export let discoverData = [
     price: '1.63 ETH',
     highestBid: '0.33 wETH',
     fiatPrice: '4.95'
+    // properties: <DropdownMenu />
   }
 ];
