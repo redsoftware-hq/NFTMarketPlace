@@ -2,23 +2,7 @@ import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import MetaMask from '../../assets/icons/metamask.png';
 
-const stepperData = [
-  {
-    title: 'Step 1',
-    description: 'You must register an ethereal wall to use the Metajuice Mango UI.'
-  },
-  {
-    title: 'Step 2',
-    description: 'Initiate an action request with immutable X.'
-  },
-  {
-    title: 'Step 3',
-    description: 'Sign the key linking request from Imchangeable X.'
-  }
-];
-
 const Stepper = ({ setStepper, handleConnect, signedStr, signedKeyLink, stepsDone }) => {
-  // console.log(walletData);
   return (
     <div>
       <div className="mt-5 text-black flex items-center gap-2 pb-5">
