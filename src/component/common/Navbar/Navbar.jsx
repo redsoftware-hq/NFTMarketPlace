@@ -49,7 +49,6 @@ const Navbar = () => {
   };
 
   async function getSignedString() {
-    //step 2
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
     const signer = provider.getSigner();
     const signedString = await signer.signMessage(
@@ -57,11 +56,9 @@ const Navbar = () => {
     );
     setSignedStr(true);
     return signedString;
-    // console.log(signedString);
   }
 
   async function getSignedKeyLinking() {
-    //step 3
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
     const signer = provider.getSigner();
     const signedKeyLinking = await signer.signMessage(
@@ -69,12 +66,9 @@ const Navbar = () => {
     );
     setSignedKeyLink(true);
     return signedKeyLinking;
-    // console.log(signedStr);
   }
 
   async function tryCatchData(param1, param2) {
-    console.log(param1, param2);
-    console.log(walletData.account);
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
     const requestAccounts = await provider.send('eth_requestAccounts', []);
     const signedWallet = await mintWalletNew({
@@ -87,30 +81,9 @@ const Navbar = () => {
     localStorage.setItem('wallet', JSON.stringify(signedWallet));
     localStorage.setItem('balance', JSON.stringify(balanceImxWallet[0]));
     setStepsDone(true);
-    console.log(stepsDone);
-    // try {
-    //   console.log(signedStr, signedKeyLink);
-    //   const signedWallet = await mintWalletNew({
-    //     walletAddress: walletData.account,
-    //     blockchain: 'Ethereum_' + walletData.network.name,
-    //     signedStr,
-    //     signedKeyLink
-    //   });
-    //   const balanceImxWallet = await updateBalanceAsync(signedWallet);
-    //   localStorage.setItem('wallet', JSON.stringify(signedWallet));
-    //   localStorage.setItem('balance', JSON.stringify(balanceImxWallet[0]));
-    //   setStepsDone(true);
-    //   console.log(stepsDone);
-    // } catch (e) {
-    //   setError(true);
-    //   setStepsDone(false);
-    //   console.log(stepsDone);
-    //   console.log(e);
-    // }
   }
 
   const handleConnect = async () => {
-    //step 1
     if (!window.ethereum) {
       setOpen(true);
       setMetamaskInstalled(false);
