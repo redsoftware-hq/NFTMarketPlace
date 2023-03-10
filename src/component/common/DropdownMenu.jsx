@@ -5,7 +5,8 @@ import { listNftForSaleNonce, listNftForSale } from '../../apis/cryptoApi';
 const DropdownMenu = () => {
   let listNftForSaleNonceResponse;
 
-  const apiCall = async () => {
+  const apiCall = async (e) => {
+    e.stopPropagation();
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
     const requestAccounts = await provider.send('eth_requestAccounts', []);
     const network = await provider.getNetwork();
