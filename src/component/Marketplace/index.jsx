@@ -43,10 +43,6 @@ function Marketplace() {
       setNftData(discoverData);
       setCollectionData(collection);
     }
-    // else if (e.code === 'Enter') {
-    //   setNftData(filterNft);
-    //   setCollectionData(filterCollection);
-    // }
   }
 
   return (
