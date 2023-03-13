@@ -144,7 +144,7 @@ const Navbar = () => {
               </div>
 
               {error ? (
-                <Toast message={"Couldn't connect wallet"} type={'error'} />
+                <Toast message={'Couldn\'t connect wallet'} type={'error'} />
               ) : (
                 <>
                   {walletData.walletAddress && walletData.network && (
