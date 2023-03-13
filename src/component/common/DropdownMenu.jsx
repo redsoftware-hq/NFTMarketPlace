@@ -1,6 +1,5 @@
 import React from 'react';
 import { ethers } from 'ethers';
-// import { listNftForSaleNonce, listNftForSale } from '../../apis/cryptoApi';
 
 const DropdownMenu = () => {
   // let listNftForSaleResponse;
