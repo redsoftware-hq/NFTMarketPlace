@@ -86,8 +86,10 @@ export async function mintWalletNew({ walletAddress, blockchain, signedString, s
   ];
 
   try {
+    await metaJuiceClient('mint_wallet', params);
+
     await metaJuiceClient('registerWallet', params);
-    
+
     // Return wallet with signed strings
     return { walletAddress, blockchain, signedString, signedKeyLinking };
   } catch (error) {
@@ -96,7 +98,7 @@ export async function mintWalletNew({ walletAddress, blockchain, signedString, s
   }
 }
 
-export const updateBalanceAsync = async ({walletAddress, blockchain}) => {
+export const updateBalanceAsync = async ({ walletAddress, blockchain }) => {
   const params = [
     {
       wallet: {
@@ -130,49 +132,42 @@ export const updateBalanceAsync = async ({walletAddress, blockchain}) => {
   }
 };
 
-export const mintNft = async ({walletAddress, blockchain, fileData, metadata, nftId}) => {
+export const mintNft = async ({ walletAddress, blockchain, fileData, textData, nftId }) => {
   const params = [
     {
       wallet: {
         walletAddress: walletAddress,
         blockchain: {
-          name: blockchain,
-        },
-      },
+          name: blockchain
+        }
+      }
     },
     {
       image: {
         name: fileData.name,
-        data: fileData.data,
-      },
+        data: fileData.data
+      }
     },
     {
       text: {
         name: nftId,
-        data: JSON.stringify({
-          name: metadata.name,
-          description: metadata.description,
-          'Background': 'Soft Pink',
-          'Head': 'Head5',
-          'Head-Upper': 'winter cap',
-          'Shirt': 'Shirt1',
-        }),
-      },
-    },
+        data: JSON.stringify(textData)
+      }
+    }
   ];
 
   try {
     const response = await metaJuiceClient('upload_mint_transfer', params);
-  
+
     return response;
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     throw error;
   }
 };
 
-export const fetchNftForWallet = async ({walletAddress, blockchain}) => {
-  const params =  [
+export const fetchNftForWallet = async ({ walletAddress, blockchain }) => {
+  const params = [
     {
       wallet: {
         walletAddress: walletAddress,
@@ -185,104 +180,208 @@ export const fetchNftForWallet = async ({walletAddress, blockchain}) => {
 
   try {
     const response = await metaJuiceClient('fetch_nftsForWallet', params);
-  
+
     return response;
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     throw error;
   }
 };
 
-export const listNftForSaleNonce = async ({walletAddress, blockchain, contractAddress, tokenId}) => {
-  const params =  [
+export const listNftForSaleNonce = async ({
+  walletAddress,
+  blockchain,
+  contractAddress,
+  tokenId
+}) => {
+  const params = [
     {
-      'wallet': {
-        'walletAddress': walletAddress,
-        'blockchain': {
-          'name': blockchain
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain
         }
       }
     },
     {
-      'nonfungibletoken': {
-        'contractAddress': contractAddress,
-        'tokenId': tokenId,
-        'blockchain': {
-          'name': blockchain
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+        blockchain: {
+          name: blockchain
         }
       }
     },
     {
-      'fungibletoken': {
-        'tokenType': 'ETH',
-        'amount': '0.0001',
-        'blockchain': {
-          'name': blockchain
+      fungibletoken: {
+        tokenType: 'ETH',
+        amount: '0.0001',
+        blockchain: {
+          name: blockchain
         }
       }
     },
     {
-      'fee': {
-        'feePercentage': '5.2',
-        'feeRecipient': '0x37a2794cE23d09932eC73D92B751828397D71CAF'
+      fee: {
+        feePercentage: '5.2',
+        feeRecipient: '0x37a2794cE23d09932eC73D92B751828397D71CAF'
       }
     }
   ];
 
   try {
     const response = await metaJuiceClient('listNftForSaleNonce', params);
-  
+
     return response;
-  } catch(error) {
+  } catch (error) {
     console.log(error);
     throw error;
   }
 };
 
-export const listNftForSale = async ({walletAddress, blockchain, contractAddress, tokenId, nonce, signedString}) => {
-  const params =  [
+export const listNftForSale = async ({
+  walletAddress,
+  blockchain,
+  contractAddress,
+  tokenId,
+  nonce,
+  signedString
+}) => {
+  const params = [
     {
-      'nonfungibletoken': {
-        'contractAddress': contractAddress,
-        'tokenId': tokenId,
-        'blockchain': {
-          'name': blockchain
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+        blockchain: {
+          name: blockchain
         }
       }
     },
     {
-      'fungibletoken': {
-        'tokenType': 'ETH',
-        'amount': '0.0001',
-        'blockchain': {
-          'name': blockchain
+      fungibletoken: {
+        tokenType: 'ETH',
+        amount: '0.0001',
+        blockchain: {
+          name: blockchain
         }
       }
     },
     {
-      'wallet': {
-        'walletAddress': walletAddress,
-        'blockchain': {
-          'name': blockchain
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain
         }
       }
     },
     {
-      'text': {
-        'name': 'SignedString',
-        'data': signedString
+      text: {
+        name: 'SignedString',
+        data: signedString
       }
     },
     {
-      'nonce':  nonce
+      nonce: nonce
     }
   ];
 
   try {
     const response = await metaJuiceClient('listNftForSale', params);
-  
+
     return response;
-  } catch(error) {
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const delistNftNonce = async ({
+  walletAddress,
+  blockchain,
+  contractAddress,
+  tokenId,
+  signedString
+}) => {
+  const params = [
+    {
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+        blockchain: {
+          name: blockchain,
+          layerType: 'layer1',
+        },
+      },
+    },
+    {
+      text: {
+        name: 'SignedString',
+        data: signedString,
+      },
+    },
+  ];
+
+  try {
+    const response = await metaJuiceClient('delistNftNonce', params);
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const delistNft = async ({
+  walletAddress,
+  blockchain,
+  contractAddress,
+  tokenId,
+  nonce,
+  signedString
+}) => {
+  const params = [
+    {
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+        blockchain: {
+          name: blockchain,
+          layerType: 'layer1',
+        },
+      },
+    },
+    {
+      text: {
+        name: 'SignedString',
+        data: signedString,
+      },
+    },
+    {
+      nonce: nonce
+    }
+  ];
+
+  try {
+    const response = await metaJuiceClient('delistNft', params);
+
+    return response;
+  } catch (error) {
     console.log(error);
     throw error;
   }

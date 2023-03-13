@@ -28,25 +28,6 @@ function Details() {
   data.push(HIGHLIGHTED_NFT);
   let nft = data.find((item) => item.id == urlParams.id);
 
-  React.useEffect(() => {
-    try {
-      const mintNftRpcInvoke = async () => {
-        const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
-        const requestAccounts = await provider.send('eth_requestAccounts', []);
-        const network = await provider.getNetwork();
-        const account = requestAccounts[0];
-
-        const mintedNft = await mintNft({
-          walletAddress: account,
-          blockchain: 'Ethereum_' + network.name,
-        });
-      };
-      mintNftRpcInvoke();
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-
   return (
     <section className="flex flex-col p-2 gap-4 md:flex-row lg:justify-between m-auto max-w-[1280px]">
       <NFTCard image={nft.image} isAvailable={nft.isAvailable} />
@@ -56,7 +37,6 @@ function Details() {
         <AvaliableListings />
       </div>
     </section>
-    
   );
 }
 

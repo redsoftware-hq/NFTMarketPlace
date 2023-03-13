@@ -69,7 +69,7 @@ const Navbar = () => {
       try {
         const signedWallet = await mintWalletNew({
           walletAddress: account,
-          blockchain: 'Ethereum_' + network.name,
+          blockchain: 'IMXStarkEx_' + network.name,
           signedKeyLinking,
           signedString
         });
@@ -124,14 +124,16 @@ const Navbar = () => {
               to="marketplace"
               className={({ isActive }) =>
                 isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
-              }>
+              }
+            >
               Marketplace
             </NavLink>
             <NavLink
               to="rankings"
               className={({ isActive }) =>
                 isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
-              }>
+              }
+            >
               Rankings
             </NavLink>
             <div className="flex justify-between items-center gap-2">
@@ -175,7 +177,8 @@ const Navbar = () => {
             </div>
             <button
               onClick={() => navigate('/create-account')}
-              className="bg-[#F15623] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300">
+              className="bg-[#F15623] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300"
+            >
               <img className="w-5" src={User} alt="" /> Sign Up
             </button>
           </div>
@@ -193,16 +196,19 @@ const Navbar = () => {
             nav
               ? 'fixed flex flex-col left-0 top-0 w-[60%] h-full border-r border-r-gray-900 text-white pt-6 ease-in-out duration-500 bg-[#2b2b2b]'
               : 'fixed left-[-100%]'
-          }>
+          }
+        >
           <div className="flex flex-col mt-8 text-center">
             <NavLink
               to="marketplace"
-              className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300">
+              className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300"
+            >
               Marketplace
             </NavLink>
             <NavLink
               to="rankings"
-              className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300">
+              className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300"
+            >
               Rankings
             </NavLink>
             <a className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300" href="#">
@@ -212,7 +218,8 @@ const Navbar = () => {
           <div className="flex justify-center mt-3 text-center">
             <button
               onClick={() => navigate('/create-account')}
-              className="bg-[#F15623] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300">
+              className="bg-[#F15623] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300"
+            >
               <img className="w-5" src={User} alt="" /> Sign Up
             </button>
           </div>
@@ -222,7 +229,8 @@ const Navbar = () => {
         isOpen={isOpen}
         onClose={handleClose}
         showCloseButton={isOpen}
-        heading={'Metamask is not installed on your browser.'}>
+        heading={'Metamask is not installed on your browser.'}
+      >
         <div>
           <p className="mb-4">
             Please install Metamask from{' '}
@@ -230,7 +238,8 @@ const Navbar = () => {
               className="text-blue-500 hover:text-blue-700 underline"
               href="https://metamask.io/"
               target="_blank"
-              rel="noreferrer">
+              rel="noreferrer"
+            >
               Metamask.io
             </a>{' '}
             to use this feature.
