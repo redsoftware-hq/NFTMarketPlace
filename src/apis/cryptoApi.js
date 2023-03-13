@@ -386,3 +386,87 @@ export const delistNft = async ({
     throw error;
   }
 };
+
+export const burnNft = async ({
+  walletAddress,
+  blockchain,
+  contractAddress,
+  tokenId,
+  nonce,
+  signedString
+}) => {
+  const params = [
+    {
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+      },
+    },
+    {
+      text: {
+        name: 'SignedString',
+        data: signedString,
+      },
+    },
+    {
+      nonce: nonce
+    }
+  ];
+
+  try {
+    const response = await metaJuiceClient('burnNft', params);
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const burnNftNonce = async ({
+  walletAddress,
+  blockchain,
+  contractAddress,
+  tokenId,
+  signedString
+}) => {
+  const params = [
+    {
+      wallet: {
+        walletAddress: walletAddress,
+        blockchain: {
+          name: blockchain,
+        },
+      },
+    },
+    {
+      nonfungibletoken: {
+        contractAddress: contractAddress,
+        tokenId: tokenId,
+      },
+    },
+    {
+      text: {
+        name: 'SignedString',
+        data: signedString,
+      },
+    },
+  ];
+
+  try {
+    const response = await metaJuiceClient('burnNftNonce', params);
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
