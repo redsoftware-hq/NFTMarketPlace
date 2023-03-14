@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import SearchIcon from '../../assets/icons/MagnifyingGlass.png';
 import { discoverData } from '../../utils/DiscoverData';
@@ -78,7 +78,7 @@ function Marketplace() {
               <div className="outline-none py-5">
                 NFTs{' '}
                 <span className="font-space-mono bg-[#3b3b3b] text-base py-1 px-2 rounded-2xl focus:bg-[#858584] text-white">
-                  382
+                  {discoverData.length}
                 </span>
               </div>
             </Tab>
@@ -88,7 +88,7 @@ function Marketplace() {
               <div className="outline-none py-5">
                 Collections{' '}
                 <span className="font-space-mono bg-[#3b3b3b] focus:bg-[#858584] text-base py-1 px-2 rounded-2xl text-white">
-                  67
+                  {collectionData.length}
                 </span>
               </div>
             </Tab>
