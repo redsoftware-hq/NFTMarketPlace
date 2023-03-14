@@ -1,11 +1,8 @@
 import React from 'react';
-import axios from 'axios';
-import { ethers } from 'ethers';
 import NFTCard from './Cards/NFTCard';
 import { useParams } from 'react-router-dom';
 import MakeOffer from './MakeOffer/MakeOffer';
 import Bg from '../../assets/timersec/bg.png';
-import { mintNft } from '../../apis/cryptoApi';
 import Properties from './Properties/Properties';
 import Shroomie from '../../assets/timersec/s.png';
 import { discoverData } from '../../utils/DiscoverData';
@@ -26,7 +23,7 @@ function Details() {
   };
   let data = [...discoverData];
   data.push(HIGHLIGHTED_NFT);
-  let nft = data.find((item) => item.id == urlParams.id);
+  let nft = data.find((item) => item.imgTitle.toLowerCase().replace(/\s+/g, '-') == urlParams.id);
 
   return (
     <section className="flex flex-col p-2 gap-4 md:flex-row lg:justify-between m-auto max-w-[1280px]">

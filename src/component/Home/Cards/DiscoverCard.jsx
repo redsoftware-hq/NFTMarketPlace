@@ -5,7 +5,9 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 
 const DiscoverCard = ({ item }) => {
   const navigate = useNavigate();
-  const handleClick = () => navigate(`/details/${item.id}`);
+  let urlTitle = item.imgTitle;
+  urlTitle = urlTitle.toLowerCase().replace(/\s+/g, '-');
+  const handleClick = () => navigate(`/marketplace/${urlTitle}`);
   const [dropdown, setDropdown] = useState(false);
   const location = useLocation();
 
