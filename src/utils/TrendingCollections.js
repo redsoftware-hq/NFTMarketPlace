@@ -45,3 +45,56 @@ export let collection = [
     collectionSize: '62+'
   }
 ];
+
+// export const collectionNft = [
+//   {
+//     id: 9,
+//     image: [ Puppy, Mouse,: Bear ],
+//     imgTitle: 'DSGN Animals',
+//     avatar: art1,
+//     avatarName: 'Mr Fox',
+//     price: '1.63 ETH',
+//     highestBid: '0.33 wETH',
+//     fiatPrice: '4.95',
+//     collectionSize: '143+'
+//   }
+// ];
+
+export const collectionList = [
+  {
+    id: 1,
+    imgTitle: 'DSGN Animals',
+    avatarName: 'MrFox',
+    avatar: art1,
+    collectionSize: '143+',
+    nftList: [
+      { id: 1, image: Puppy },
+      { id: 2, image: Mouse },
+      { id: 3, image: Bear }
+    ]
+  },
+  {
+    id: 2,
+    imgTitle: 'Magic Mushrooms',
+    avatarName: 'Shroomie',
+    avatar: art2,
+    collectionSize: '235+',
+    nftList: [
+      { id: 4, image: Mushroom_1 },
+      { id: 5, image: Mushroom_2 },
+      { id: 6, image: Mushroom_3 }
+    ]
+  },
+  {
+    id: 3,
+    imgTitle: 'Disco Machines',
+    avatarName: 'BeKind2Robots',
+    avatar: art3,
+    collectionSize: '62+',
+    nftList: [
+      { id: 7, image: Robot_1 },
+      { id: 8, image: Robot_2 },
+      { id: 9, image: Robot_3 }
+    ]
+  }
+];

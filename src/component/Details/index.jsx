@@ -21,6 +21,7 @@ function Details() {
     fiatPrice: '4.95',
     isAvailabe: true
   };
+
   let data = [...discoverData];
   data.push(HIGHLIGHTED_NFT);
   let nft = data.find((item) => item.id == urlParams.id);
