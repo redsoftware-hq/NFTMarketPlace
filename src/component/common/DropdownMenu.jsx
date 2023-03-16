@@ -25,7 +25,7 @@ const DropdownMenu = () => {
 
     listNftForSaleNonceResponse = await listNftForSaleNonce({
       walletAddress: account,
-      blockchain: 'IMXStarkEx_' + network.name,
+      blockchain: 'Ethereum_' + network.name,
       contractAddress: '0xa4de988522a68a4f07aba97043e5266e8465b622',
       tokenId: '445504650',
       signedString: signedString
@@ -37,7 +37,7 @@ const DropdownMenu = () => {
 
     listNftForSaleNonceResponse = await listNftForSale({
       walletAddress: account,
-      blockchain: 'IMXStarkEx_' + network.name,
+      blockchain: 'Ethereum_' + network.name,
       contractAddress: '0xa4de988522a68a4f07aba97043e5266e8465b622',
       tokenId: '445504650',
       nonce: {
@@ -65,7 +65,7 @@ const DropdownMenu = () => {
 
     burnNftNonceResponse = await burnNftNonce({
       walletAddress: account,
-      blockchain: 'IMXStarkEx_' + network.name,
+      blockchain: 'Ethereum_' + network.name,
       contractAddress: '0xa4de988522a68a4f07aba97043e5266e8465b622',
       tokenId: '602617024',
       signedString: signedString
@@ -75,7 +75,7 @@ const DropdownMenu = () => {
 
     burnNftNonceResponse = await burnNft({
       walletAddress: account,
-      blockchain: 'IMXStarkEx_' + network.name,
+      blockchain: 'Ethereum_' + network.name,
       contractAddress: '0xa4de988522a68a4f07aba97043e5266e8465b622',
       tokenId: '602617024',
       nonce: {
@@ -101,7 +101,7 @@ const DropdownMenu = () => {
 
     delistNftNonceResponse = await delistNftNonce({
       walletAddress: account,
-      blockchain: 'IMXStarkEx_' + network.name,
+      blockchain: 'Ethereum_' + network.name,
       contractAddress: '0xa4de988522a68a4f07aba97043e5266e8465b622',
       tokenId: '47528588',
       signedString: signedString
@@ -111,7 +111,7 @@ const DropdownMenu = () => {
 
     delistNftNonceResponse = await delistNft({
       walletAddress: account,
-      blockchain: 'IMXStarkEx_' + network.name,
+      blockchain: 'Ethereum_' + network.name,
       contractAddress: '0xa4de988522a68a4f07aba97043e5266e8465b622',
       tokenId: '47528588',
       nonce: {

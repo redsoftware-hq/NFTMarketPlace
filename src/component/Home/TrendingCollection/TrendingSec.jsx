@@ -1,6 +1,6 @@
 import React from 'react';
 import CollectionCard from '../Cards/CollectionCard';
-import { collection } from '../../../utils/TrendingCollections';
+import { collectionList } from '../../../utils/TrendingCollections';
 
 const TrendingSec = () => {
   return (
@@ -16,8 +16,8 @@ const TrendingSec = () => {
 
           <div className="card-container">
             <div className="py-14 main-card grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {collection &&
-                collection.map((item, index) => {
+              {collectionList &&
+                collectionList.map((item, index) => {
                   return <CollectionCard key={index} item={item} />;
                 })}
             </div>
