@@ -1,10 +1,9 @@
 import React from 'react';
-import { HEADER } from '../../../utils/collectionPageData';
 
-function Header() {
+function Header({ image }) {
   return (
-    <div className="h-80 md:h-fit">
-      <img className="w-full h-full object-cover" src={HEADER} />
+    <div className="md:h-fit">
+      <img className="w-full h-80 object-cover" src={image} />
     </div>
   );
 }
