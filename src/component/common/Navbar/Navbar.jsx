@@ -37,20 +37,11 @@ const Navbar = () => {
   const [signedKeyLink, setSignedKeyLink] = useState(false);
   const [stepsDone, setStepsDone] = useState(false);
 
-  async function getAddress() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const addr = await signer.getAddress();
-    updateAddress(addr);
-  }
-
   const handleClose = () => {
     setOpen(false);
   };
 
-  async function getSignedString() {
-    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
-    const signer = provider.getSigner();
+  async function getSignedString(signer) {
     const signedString = await signer.signMessage(
       'Only sign this request if you’ve initiated an action with Immutable X.'
     );
@@ -58,9 +49,7 @@ const Navbar = () => {
     return signedString;
   }
 
-  async function getSignedKeyLinking() {
-    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
-    const signer = provider.getSigner();
+  async function getSignedKeyLinking(signer) {
     const signedKeyLinking = await signer.signMessage(
       'Only sign this key linking request from Immutable X'
     );
@@ -71,12 +60,15 @@ const Navbar = () => {
   async function tryCatchData(param1, param2) {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
     const requestAccounts = await provider.send('eth_requestAccounts', []);
-    const signedWallet = await mintWalletNew({
+    
+    const mintWalletData = {
       walletAddress: requestAccounts[0],
       blockchain: 'Ethereum_' + 'goerli',
-      signedStr: param1,
-      signedKeyLink: param2
-    });
+      signedString: param1,
+      signedKeyLinking: param2
+    };
+    
+    const signedWallet = await mintWalletNew(mintWalletData);
     const balanceImxWallet = await updateBalanceAsync(signedWallet);
     localStorage.setItem('wallet', JSON.stringify(signedWallet));
     localStorage.setItem('balance', JSON.stringify(balanceImxWallet[0]));
@@ -101,7 +93,6 @@ const Navbar = () => {
       const account = requestAccounts[0];
       const signer = provider.getSigner();
       const balance = await signer.getBalance();
-      console.log(account);
       setWalletData({
         provider,
         signer,
@@ -109,15 +100,16 @@ const Navbar = () => {
         walletAddress: account,
         balance: ethers.utils.formatEther(balance)
       });
-      const ab = await getSignedString();
-      const cd = await getSignedKeyLinking();
-      await tryCatchData(ab, cd);
+      const signedString = await getSignedString(signer);
+      const signedKeyLinking = await getSignedKeyLinking(signer);
+      await tryCatchData(signedString, signedKeyLinking);
     }
   };
 
   function handleNav() {
     setNav(!nav);
   }
+
   function handleStepper() {
     setStepper(!stepper);
   }
@@ -190,13 +182,13 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={"Couldn't connect wallet"} type={'error'} />
+                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
                       <div className="relative group cursor-pointer">
                         <AiOutlineInfoCircle />
-                        <div className="absolute z-10 py-3 px-5 hidden w-[200px] text-sm text-white bg-[#3b3b3b] rounded-lg shadow-md top-8 right-0 group-hover:block space-y-3">
+                        <div className="absolute z-10 py-3 px-5 hidden w-[195px] text-sm text-white bg-[#3b3b3b] rounded-lg shadow-md top-8 right-0 group-hover:block space-y-3">
                           <div className="flex flex-col mt-1">
                             <span className="font-normal">Address:</span>
                             <span className="font-light">{`${walletData.walletAddress.substring(
