@@ -1,9 +1,13 @@
 import React from 'react';
 import DiscoverCard from '../../Home/Cards/DiscoverCard';
-import { artistWorks } from '../../../utils/collectionPageData';
 import SecondaryButton from '../../common/Buttons/SecondaryButton';
 
-export default function MoreFromArtist() {
+export default function MoreFromArtist({ moreNft }) {
+  const nftList = moreNft.flatMap((collection) => {
+    const { nftList, ...rest } = collection;
+    return nftList.map((nft) => ({ ...rest, ...nft }));
+  });
+
   return (
     <section className="container mx-auto">
       <div className="px-7 md:px-10 lg:px-20 lg:py-10">
@@ -14,8 +18,8 @@ export default function MoreFromArtist() {
           <SecondaryButton className="hidden md:flex" btnName="Go to artist page" />
         </div>
         <div className="mt-10 creators-card grid content-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-8">
-          {artistWorks &&
-            artistWorks.map((item, index) => {
+          {nftList &&
+            nftList.map((item, index) => {
               return <DiscoverCard key={index} item={item} />;
             })}
         </div>

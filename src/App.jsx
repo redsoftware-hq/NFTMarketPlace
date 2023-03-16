@@ -19,7 +19,7 @@ const router = createBrowserRouter(
       <Route path="rankings" element={<Rankings />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="marketplace/:id" element={<Details />} />
-      <Route path="collections" element={<Collections />} />
+      <Route path="collections/:id" element={<Collections />} />
       <Route path="collections/create-collection" element={<CreateCollection />} />
       <Route path="collections/create-nft" element={<MintNft />} />
     </Route>

@@ -7,8 +7,10 @@ import Properties from './Properties/Properties';
 import Shroomie from '../../assets/timersec/s.png';
 import { discoverData } from '../../utils/DiscoverData';
 import AvaliableListings from './AvailableListings/AvaliableListings';
+import { collectionList } from '../../utils/TrendingCollections';
 
 function Details() {
+  window.scrollTo(0, 0);
   const urlParams = useParams();
   const HIGHLIGHTED_NFT = {
     id: 'higlighted-nft',
@@ -22,8 +24,25 @@ function Details() {
     isAvailabe: true
   };
 
+  const allCollectionNFTs = collectionList.reduce((acc, item) => {
+    return acc.concat(
+      item.nftList.map((nftItem) => {
+        return {
+          id: nftItem.id,
+          image: nftItem.image,
+          imgTitle: item.imgTitle,
+          avatar: item.avatar,
+          avatarName: item.avatarName,
+          price: item.price,
+          highestBid: item.highestBid,
+          fiatPrice: item.fiatPrice
+        };
+      })
+    );
+  }, []);
+
   let data = [...discoverData];
-  data.push(HIGHLIGHTED_NFT);
+  data.push(HIGHLIGHTED_NFT, ...allCollectionNFTs);
   let nft = data.find((item) => item.id == urlParams.id);
 
   return (

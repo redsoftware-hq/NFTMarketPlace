@@ -3,13 +3,13 @@ import Timer from '../Timer/Timer';
 import { FiGlobe } from 'react-icons/fi';
 import { COLLECTION, ARTIST } from '../../../utils/collectionPageData';
 
-function Hero() {
+function Hero({ collectionName, avatarName, avatarImage }) {
   const links = ['Etherscan', 'Original'];
   return (
     <section className="md:basis-1/2 lg:basis-3/5">
       <div className="text-white pt-4 pb-8 px-7 font-work-sans flex flex-col gap-2">
         <div className="header py-2 ">
-          <h1 className="py-2 text-3xl font-semibold">{COLLECTION.name}</h1>
+          <h1 className="py-2 text-3xl font-semibold">{collectionName}</h1>
           <span className="py-2 text-[#858584] capitalize text-base">
             minted on {COLLECTION.minted}
           </span>
@@ -19,11 +19,11 @@ function Hero() {
         </div>
         <div className="created-by">
           <span className="py-2 text-[#858584] font-space-mono">Created By</span>
-          <div className="py-2 flex gap-2">
-            <div className="max-w-[24px]">
-              <img className="w-full h-full" src={ARTIST.avatar} />
+          <div className="py-2 flex items-center gap-2">
+            <div className="w-6">
+              <img className="w-full h-full" src={avatarImage} />
             </div>
-            <span>{ARTIST.name}</span>
+            <span>{avatarName}</span>
           </div>
         </div>
 

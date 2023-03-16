@@ -67,10 +67,14 @@ export const collectionList = [
     avatarName: 'MrFox',
     avatar: art1,
     collectionSize: '143+',
+    price: '1.63 ETH',
+    highestBid: '0.33 wETH',
+    fiatPrice: '4.95',
+    isAvailabe: true,
     nftList: [
-      { id: 1, image: Puppy },
-      { id: 2, image: Mouse },
-      { id: 3, image: Bear }
+      { id: 9, image: Puppy },
+      { id: 10, image: Mouse },
+      { id: 11, image: Bear }
     ]
   },
   {
@@ -79,10 +83,14 @@ export const collectionList = [
     avatarName: 'Shroomie',
     avatar: art2,
     collectionSize: '235+',
+    price: '1.63 ETH',
+    highestBid: '0.33 wETH',
+    fiatPrice: '4.95',
+    isAvailabe: true,
     nftList: [
-      { id: 4, image: Mushroom_1 },
-      { id: 5, image: Mushroom_2 },
-      { id: 6, image: Mushroom_3 }
+      { id: 12, image: Mushroom_1 },
+      { id: 13, image: Mushroom_2 },
+      { id: 14, image: Mushroom_3 }
     ]
   },
   {
@@ -91,10 +99,14 @@ export const collectionList = [
     avatarName: 'BeKind2Robots',
     avatar: art3,
     collectionSize: '62+',
+    price: '1.63 ETH',
+    highestBid: '0.33 wETH',
+    fiatPrice: '4.95',
+    isAvailabe: true,
     nftList: [
-      { id: 7, image: Robot_1 },
-      { id: 8, image: Robot_2 },
-      { id: 9, image: Robot_3 }
+      { id: 15, image: Robot_1 },
+      { id: 16, image: Robot_2 },
+      { id: 17, image: Robot_3 }
     ]
   }
 ];
