@@ -27,7 +27,8 @@ const AvaliableListings = () => {
   return (
     <div
       className="mt-5 my-2 sm:my-4 md:my-6 cursor-pointer bg-[#3b3b3b] rounded-2xl"
-      onClick={toggleExpanded}>
+      onClick={toggleExpanded}
+    >
       <div className="px-6 text-left items-center h-20 select-none flex justify-between flex-row">
         <h5 className="flex-1 text-white text-base flex items-center gap-1">
           <span>
@@ -52,13 +53,15 @@ const AvaliableListings = () => {
       <div
         className={`px-6 pt-0 overflow-hidden transition-[max-height] duration-500 ease-in ${
           expanded ? 'max-h-[500px]' : 'max-h-0'
-        }`}>
+        }`}
+      >
         {listings &&
           listings.map((listing, index) => {
             return (
               <div
                 key={index}
-                className="bg-[#3b3b3b] rounded-2xl px-0 py-3 gap-3 flex items-center flex-wrap  justify-between w-full">
+                className="bg-[#3b3b3b] rounded-2xl px-0 py-3 gap-3 flex items-center flex-wrap  justify-between w-full"
+              >
                 <div className="text-[#858584] font-work-sans text-sm lg:basis-3/5">
                   Listed by
                   <span className="text-white px-2 font-space-mono text-base">

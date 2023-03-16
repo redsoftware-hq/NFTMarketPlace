@@ -16,32 +16,19 @@
   },
   "plugins": ["react"],
   "rules": {
-    "indent": [
-        "warn",
-        2
-      ],
-      "linebreak-style": [
-        "warn",
-        "unix"
-      ],
-      "quotes": [
-        "warn",
-        "single"
-      ],
-      "semi": [
-        "warn",
-        "always"
-      ],
-      "no-unused-vars": "warn",
-      "react/prop-types": "off",
-      "react/jsx-uses-vars": "warn",
-      "react/jsx-uses-react": "warn",
-      "react/jsx-no-undef": "warn",
-      "react/no-children-prop": "warn",
-      "react/no-deprecated": "warn",
-      "react/no-direct-mutation-state": "warn",
-      "react/no-typos": "warn",
-      "react/jsx-key": "warn",
-      "react/jsx-no-duplicate-props": "warn"
+    "indent": ["warn", 2],
+    "linebreak-style": ["warn", "unix"],
+    "quotes": ["warn", "single"],
+    "semi": ["warn", "always"],
+    "react/prop-types": "off",
+    "react/jsx-uses-vars": "warn",
+    "react/jsx-uses-react": "warn",
+    "react/jsx-no-undef": "warn",
+    "react/no-children-prop": "warn",
+    "react/no-deprecated": "warn",
+    "react/no-direct-mutation-state": "warn",
+    "react/no-typos": "warn",
+    "react/jsx-key": "warn",
+    "react/jsx-no-duplicate-props": "warn"
   }
 }

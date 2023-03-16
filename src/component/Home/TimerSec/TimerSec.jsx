@@ -34,12 +34,14 @@ const TimerSec = () => {
         className="w-full h-[660px] bg-no-repeat bg-center bg-cover mt-12 z-0 relative"
         style={{
           backgroundImage: `url(${Bg})`
-        }}>
+        }}
+      >
         <div
           className="w-full h-full absolute"
           style={{
             background: 'linear-gradient(180deg, rgba(162, 89, 255, 0) 0%, #F15623 100%)'
-          }}>
+          }}
+        >
           <div className="container mx-auto">
             <div className="py-12 px-8 md:px-12 lg:px-20">
               <div className="container-div mt-24 md:mt-[20rem]">
@@ -58,7 +60,8 @@ const TimerSec = () => {
                     </h2>
                     <button
                       onClick={handleClick}
-                      className="py-5 px-16 hidden md:flex items-center bg-[#ffff] hover:bg-[#3b3b3b] border-2 border-[#F15623] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3">
+                      className="py-5 px-16 hidden md:flex items-center bg-[#ffff] hover:bg-[#3b3b3b] border-2 border-[#F15623] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3"
+                    >
                       <img className="w-4 md:w-6" src={PurpleEye} alt="" /> See NFT
                     </button>
                   </div>
@@ -95,7 +98,8 @@ const TimerSec = () => {
                   </div>
                   <button
                     onClick={handleClick}
-                    className="py-5 px-24 md:hidden flex items-center mx-auto w-full bg-[#ffff] hover:bg-transparent border-2 border-[#A259FF] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3 mt-5">
+                    className="py-5 px-24 md:hidden flex items-center mx-auto w-full bg-[#ffff] hover:bg-transparent border-2 border-[#A259FF] hover:text-white ease-in-out duration-300 rounded-2xl capitalize text-black text-lg font-semibold gap-3 mt-5"
+                  >
                     <img className="w-5" src={PurpleEye} alt="" /> See NFT
                   </button>
                 </div>
