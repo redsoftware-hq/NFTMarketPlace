@@ -8,12 +8,15 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineInfoCircle } from 'react-icons/ai';
 import { mintWalletNew, updateBalanceAsync } from '../../../apis/cryptoApi';
 import Toast from '../Toast';
+import Stepper from '../Stepper';
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [error, setError] = useState(false);
   const [nav, setNav] = useState(false);
+  const [stepper, setStepper] = useState(false);
+
   const [walletData, setWalletData] = useReducer(
     (prev, next) => {
       return { ...prev, ...next };
@@ -30,6 +33,9 @@ const Navbar = () => {
   const [currAddress, updateAddress] = useState('0x');
   const [isOpen, setOpen] = React.useState(false);
   const [metamaskInstalled, setMetamaskInstalled] = useState(false);
+  const [signedStr, setSignedStr] = useState(false);
+  const [signedKeyLink, setSignedKeyLink] = useState(false);
+  const [stepsDone, setStepsDone] = useState(false);
 
   async function getAddress() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -41,6 +47,41 @@ const Navbar = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  async function getSignedString() {
+    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+    const signer = provider.getSigner();
+    const signedString = await signer.signMessage(
+      'Only sign this request if you’ve initiated an action with Immutable X.'
+    );
+    setSignedStr(true);
+    return signedString;
+  }
+
+  async function getSignedKeyLinking() {
+    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+    const signer = provider.getSigner();
+    const signedKeyLinking = await signer.signMessage(
+      'Only sign this key linking request from Immutable X'
+    );
+    setSignedKeyLink(true);
+    return signedKeyLinking;
+  }
+
+  async function tryCatchData(param1, param2) {
+    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+    const requestAccounts = await provider.send('eth_requestAccounts', []);
+    const signedWallet = await mintWalletNew({
+      walletAddress: requestAccounts[0],
+      blockchain: 'Ethereum_' + 'goerli',
+      signedStr: param1,
+      signedKeyLink: param2
+    });
+    const balanceImxWallet = await updateBalanceAsync(signedWallet);
+    localStorage.setItem('wallet', JSON.stringify(signedWallet));
+    localStorage.setItem('balance', JSON.stringify(balanceImxWallet[0]));
+    setStepsDone(true);
+  }
 
   const handleConnect = async () => {
     if (!window.ethereum) {
@@ -60,39 +101,25 @@ const Navbar = () => {
       const account = requestAccounts[0];
       const signer = provider.getSigner();
       const balance = await signer.getBalance();
-      const signedString = await signer.signMessage(
-        'Only sign this request if you’ve initiated an action with Immutable X.'
-      );
-      const signedKeyLinking = await signer.signMessage(
-        'Only sign this key linking request from Immutable X'
-      );
-      try {
-        const signedWallet = await mintWalletNew({
-          walletAddress: account,
-          blockchain: 'IMXStarkEx_' + network.name,
-          signedKeyLinking,
-          signedString
-        });
-        const balanceImxWallet = await updateBalanceAsync(signedWallet);
-        localStorage.setItem('wallet', JSON.stringify(signedWallet));
-        localStorage.setItem('balance', JSON.stringify(balanceImxWallet[0]));
-
-        setWalletData({
-          provider,
-          signer,
-          network,
-          walletAddress: account,
-          balance: ethers.utils.formatEther(balance)
-        });
-      } catch (e) {
-        setError(true);
-        console.log(e);
-      }
+      console.log(account);
+      setWalletData({
+        provider,
+        signer,
+        network,
+        walletAddress: account,
+        balance: ethers.utils.formatEther(balance)
+      });
+      const ab = await getSignedString();
+      const cd = await getSignedKeyLinking();
+      await tryCatchData(ab, cd);
     }
   };
 
   function handleNav() {
     setNav(!nav);
+  }
+  function handleStepper() {
+    setStepper(!stepper);
   }
 
   // FIXME: Need to check the behaviour to autoconnect wallet
@@ -141,9 +168,27 @@ const Navbar = () => {
                     ? 'border-2 border-[#F15623] bg-transparent py-4 px-7 rounded-2xl flex items-center gap-2 duration-300'
                     : 'bg-[#F15623] border-2 border-[transparent] py-4 px-7 rounded-2xl flex items-center gap-2 duration-300'
                 }>
-                <button className="" onClick={handleConnect}>
+                <button
+                  className="duration-300"
+                  // onClick={handleConnect}
+                  onClick={handleStepper}>
                   {walletData.walletAddress ? 'Wallet Connected' : 'Connect Wallet'}
                 </button>
+                <div
+                  className={`${
+                    stepper ? 'right-0' : 'right-[-100%]'
+                  } bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] px-4 lg:px-[35px] z-20 ease-in-out duration-500 transition-all`}>
+                  {stepper && (
+                    <Stepper
+                      setStepper={setStepper}
+                      handleConnect={handleConnect}
+                      signedStr={signedStr}
+                      signedKeyLink={signedKeyLink}
+                      stepsDone={stepsDone}
+                    />
+                  )}
+                </div>
+
                 {error ? (
                   <Toast message={"Couldn't connect wallet"} type={'error'} />
                 ) : (
@@ -178,11 +223,6 @@ const Navbar = () => {
                 )}
               </div>
             </div>
-            <button
-              onClick={() => navigate('/create-account')}
-              className="bg-[#F15623] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300">
-              <img className="w-5" src={User} alt="" /> Sign Up
-            </button>
           </div>
         </div>
         <div className="block lg:hidden" onClick={handleNav}>
@@ -196,7 +236,7 @@ const Navbar = () => {
         <div
           className={
             nav
-              ? 'fixed flex flex-col left-0 top-0 w-[60%] h-full border-r border-r-gray-900 text-white pt-6 ease-in-out duration-500 bg-[#2b2b2b]'
+              ? 'fixed flex flex-col left-0 top-0 w-[60%] h-full border-r border-r-gray-900 text-white pt-6 ease-in-out duration-500 bg-[#2b2b2b] z-50'
               : 'fixed left-[-100%]'
           }>
           <div className="flex flex-col mt-8 text-center">

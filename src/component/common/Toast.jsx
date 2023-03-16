@@ -5,12 +5,12 @@ const Toast = ({ message, type, callback, duration = 3000 }) => {
 
   const toastClass = () => {
     switch (type) {
-      case 'success':
-        return 'bg-green-500';
-      case 'error':
-        return 'bg-red-500';
-      default:
-        return 'bg-gray-500';
+    case 'success':
+      return 'bg-green-500';
+    case 'error':
+      return 'bg-red-500';
+    default:
+      return 'bg-gray-500';
     }
   };
 
