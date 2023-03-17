@@ -2,20 +2,20 @@ import React, { useRef, useState } from 'react';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import SearchIcon from '../../assets/icons/MagnifyingGlass.png';
 import { discoverData } from '../../utils/DiscoverData';
-import { collection } from '../../utils/TrendingCollections';
+import { collectionList } from '../../utils/TrendingCollections';
 import CollectionCard from '../Home/Cards/CollectionCard';
 import DiscoverCard from '../Home/Cards/DiscoverCard';
 
 function Marketplace() {
   const inputRef = useRef();
   const [nftData, setNftData] = useState(discoverData);
-  const [collectionData, setCollectionData] = useState(collection);
+  const [collectionData, setCollectionData] = useState(collectionList);
   const [tabIndex, setTabIndex] = useState(1);
 
   function collectionTabIndex() {
     setTabIndex(2);
     inputRef.current.value = '';
-    setCollectionData(collection);
+    setCollectionData(collectionList);
   }
 
   function nftTabIndex() {
@@ -41,7 +41,7 @@ function Marketplace() {
 
     if (value === '') {
       setNftData(discoverData);
-      setCollectionData(collection);
+      setCollectionData(collectionList);
     }
   }
 
@@ -107,8 +107,8 @@ function Marketplace() {
           <TabPanel>
             <div className="card-container">
               <div className="py-14 main-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {collectionData &&
-                  collectionData.map((item, index) => {
+                {collectionList &&
+                  collectionList.map((item, index) => {
                     return <CollectionCard key={index} item={item} />;
                   })}
               </div>
