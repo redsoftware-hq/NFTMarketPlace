@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { collectionList } from '../../utils/TrendingCollections';
 
 function Collections() {
+  window.scroll(0, 0);
   const urlParams = useParams();
   let data = [...collectionList];
   let nftData = data.find((item) => item.id == urlParams.id);
