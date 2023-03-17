@@ -10,6 +10,7 @@ import { createRoutesFromElements } from 'react-router';
 import { RouterProvider, createBrowserRouter, Route } from 'react-router-dom';
 import CreateCollection from './component/CreateCollection';
 import MintNft from './component/MintNft';
+import MyNfts from './component/MyNfts/MyNfts';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="collections/:id" element={<Collections />} />
       <Route path="collections/create-collection" element={<CreateCollection />} />
       <Route path="collections/create-nft" element={<MintNft />} />
+      <Route path="mynfts" element={<MyNfts />} />
     </Route>
   )
 );

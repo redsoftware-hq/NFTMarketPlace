@@ -18,7 +18,7 @@ const DiscoverCard = ({ item }) => {
     <div className="w-full hover:scale-[1.03] duration-300 cursor-pointer" onClick={handleClick}>
       <div className="relative">
         <img className="w-full rounded-t-2xl" src={item.image} alt="" />
-        {location.pathname === '/marketplace' && (
+        {location.pathname !== '/' && (
           <BsThreeDotsVertical
             size={25}
             className="absolute top-5 right-5 text-white bg-[#3b3b3b] rounded-full p-1 hover:bg-[#575757]"

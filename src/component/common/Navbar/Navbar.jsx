@@ -60,14 +60,14 @@ const Navbar = () => {
   async function tryCatchData(param1, param2) {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
     const requestAccounts = await provider.send('eth_requestAccounts', []);
-    
+
     const mintWalletData = {
       walletAddress: requestAccounts[0],
       blockchain: 'Ethereum_' + 'goerli',
       signedString: param1,
       signedKeyLinking: param2
     };
-    
+
     const signedWallet = await mintWalletNew(mintWalletData);
     const balanceImxWallet = await updateBalanceAsync(signedWallet);
     localStorage.setItem('wallet', JSON.stringify(signedWallet));
@@ -114,6 +114,10 @@ const Navbar = () => {
     setStepper(!stepper);
   }
 
+  const closeMenu = () => {
+    setNav(false);
+  };
+
   // FIXME: Need to check the behaviour to autoconnect wallet
   // React.useEffect(() => {
   //   if (window.ethereum) {
@@ -140,6 +144,13 @@ const Navbar = () => {
         <div className="hidden lg:flex">
           <div className="text-white flex items-center gap-5 font-medium font-work-sans space-x-5">
             <NavLink
+              to="mynfts"
+              className={({ isActive }) =>
+                isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
+              }>
+              MyNFTs
+            </NavLink>
+            <NavLink
               to="marketplace"
               className={({ isActive }) =>
                 isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
@@ -147,11 +158,11 @@ const Navbar = () => {
               Marketplace
             </NavLink>
             <NavLink
-              to="rankings"
+              to="collections/create-nft"
               className={({ isActive }) =>
                 isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
               }>
-              Rankings
+              Create a NFT
             </NavLink>
             <div className="flex justify-between items-center gap-2">
               <div
@@ -182,7 +193,7 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
+                  <Toast message={"Couldn't connect wallet"} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
@@ -231,28 +242,104 @@ const Navbar = () => {
               ? 'fixed flex flex-col left-0 top-0 w-[60%] h-full border-r border-r-gray-900 text-white pt-6 ease-in-out duration-500 bg-[#2b2b2b] z-50'
               : 'fixed left-[-100%]'
           }>
-          <div className="flex flex-col mt-8 text-center">
+          <div className="flex flex-col mt-8 text-center items-center">
+            <NavLink
+              to="mynfts"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-orange-500'
+                  : 'p-4 border-b border-gray-800 hover:text-[#F15623] duration-300'
+              }
+              onClick={closeMenu}>
+              MyNFTs
+            </NavLink>
             <NavLink
               to="marketplace"
-              className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300">
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-orange-500'
+                  : 'p-4 border-b border-gray-800 hover:text-[#F15623] duration-300'
+              }
+              onClick={closeMenu}>
               Marketplace
             </NavLink>
             <NavLink
-              to="rankings"
-              className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300">
-              Rankings
+              to="collections/create-nft"
+              className={({ isActive }) =>
+                isActive
+                  ? 'text-orange-500'
+                  : 'p-4 border-b border-gray-800 hover:text-[#F15623] duration-300'
+              }
+              onClick={closeMenu}>
+              Create a NFT
             </NavLink>
-            <a className="p-4 border-b border-gray-800 hover:text-[#F15623] duration-300" href="#">
-              Connect Wallet
-            </a>
+            <div className="mt-3 flex justify-between items-center gap-2" onClick={closeMenu}>
+              <div
+                className={
+                  walletData.walletAddress
+                    ? 'border-2 border-[#F15623] bg-transparent py-4 px-7 rounded-2xl flex items-center gap-2 duration-300'
+                    : 'bg-[#F15623] border-2 border-[transparent] py-4 px-7 rounded-2xl flex items-center gap-2 duration-300'
+                }>
+                <button className="duration-300" onClick={handleStepper}>
+                  {walletData.walletAddress ? 'Wallet Connected' : 'Connect Wallet'}
+                </button>
+                <div
+                  className={`${
+                    stepper ? 'right-0' : 'right-[-100%]'
+                  } bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] px-4 lg:px-[35px] z-20 ease-in-out duration-500 transition-all`}>
+                  {stepper && (
+                    <Stepper
+                      setStepper={setStepper}
+                      handleConnect={handleConnect}
+                      signedStr={signedStr}
+                      signedKeyLink={signedKeyLink}
+                      stepsDone={stepsDone}
+                    />
+                  )}
+                </div>
+
+                {error ? (
+                  <Toast message={"Couldn't connect wallet"} type={'error'} />
+                ) : (
+                  <>
+                    {walletData.walletAddress && walletData.network && (
+                      <div className="relative group cursor-pointer">
+                        <AiOutlineInfoCircle />
+                        <div className="absolute z-10 py-3 px-5 hidden w-[195px] text-sm text-white bg-[#3b3b3b] rounded-lg shadow-md top-8 right-0 group-hover:block space-y-3">
+                          <div className="flex flex-col mt-1">
+                            <span className="font-normal">Address:</span>
+                            <span className="font-light">{`${walletData.walletAddress.substring(
+                              0,
+                              9
+                            )}....${walletData.walletAddress.substring(
+                              walletData.walletAddress.length - 9
+                            )}`}</span>
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-normal">Connected To:</span>
+                            <span className="font-light">{walletData.network.name}</span>
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-normal">Wallet Balance:</span>
+                            <span className="font-light">
+                              {`${Number(walletData.balance).toFixed(2)} eth`}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-          <div className="flex justify-center mt-3 text-center">
+          {/* <div className="flex justify-center mt-3 text-center">
             <button
               onClick={() => navigate('/create-account')}
               className="bg-[#F15623] py-4 px-7 rounded-2xl flex items-center gap-2 border-2 border-[transparent] hover:border-[#F15623] hover:bg-transparent duration-300">
               <img className="w-5" src={User} alt="" /> Sign Up
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
       <Modal
