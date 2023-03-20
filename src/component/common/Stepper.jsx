@@ -5,7 +5,7 @@ import MetaMask from '../../assets/icons/metamask.png';
 const Stepper = ({ setStepper, handleConnect, signedStr, signedKeyLink, stepsDone }) => {
   return (
     <div>
-      <div className="mt-5 text-black flex items-center gap-2 pb-5">
+      <div className="mt-5 lg:mt-3 text-black flex items-center gap-2 pb-5 lg:pb-0">
         <AiOutlineClose
           size={20}
           className="cursor-pointer"

@@ -118,6 +118,10 @@ const Navbar = () => {
     setNav(false);
   };
 
+  const closeSteppepr = () => {
+    setStepper(false);
+  };
+
   // FIXME: Need to check the behaviour to autoconnect wallet
   // React.useEffect(() => {
   //   if (window.ethereum) {
@@ -133,7 +137,7 @@ const Navbar = () => {
   // }, []);
 
   return (
-    <nav className="py-5 md:py-8 md:px-10 px-5">
+    <nav className="py-5 md:py-8 md:px-10 px-5 relative">
       <div className="flex flex-1 justify-between items-center">
         <div className="navLogo flex items-center gap-2 cursor-pointer">
           <div className="w-auto h-[2rem]" onClick={() => navigate('/')}>
@@ -147,21 +151,24 @@ const Navbar = () => {
               to="mynfts"
               className={({ isActive }) =>
                 isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
-              }>
+              }
+              onClick={closeSteppepr}>
               MyNFTs
             </NavLink>
             <NavLink
               to="marketplace"
               className={({ isActive }) =>
                 isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
-              }>
+              }
+              onClick={closeSteppepr}>
               Marketplace
             </NavLink>
             <NavLink
               to="collections/create-nft"
               className={({ isActive }) =>
                 isActive ? 'text-orange-500' : 'text-white hover:text-[#F15623] duration-300'
-              }>
+              }
+              onClick={closeSteppepr}>
               Create a NFT
             </NavLink>
             <div className="flex justify-between items-center gap-2">
@@ -180,7 +187,7 @@ const Navbar = () => {
                 <div
                   className={`${
                     stepper ? 'right-0' : 'right-[-100%]'
-                  } bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] px-4 lg:px-[35px] z-20 ease-in-out duration-500 transition-all`}>
+                  } hidden lg:block bg-white fixed top-[100px] h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] px-4 lg:px-[35px] z-20 ease-in-out duration-500 transition-all`}>
                   {stepper && (
                     <Stepper
                       setStepper={setStepper}
@@ -286,7 +293,7 @@ const Navbar = () => {
                 <div
                   className={`${
                     stepper ? 'right-0' : 'right-[-100%]'
-                  } bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] px-4 lg:px-[35px] z-20 ease-in-out duration-500 transition-all`}>
+                  } block lg:hidden bg-white fixed top-0 h-full shadow-2xl md:w-[35vw] xl:max-w-[30vw] px-4 lg:px-[35px] z-20 ease-in-out duration-500 transition-all`}>
                   {stepper && (
                     <Stepper
                       setStepper={setStepper}
