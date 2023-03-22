@@ -1,7 +1,6 @@
 import Modal from '../Modal';
 import { ethers } from 'ethers';
 import { CgMenuLeft } from 'react-icons/cg';
-import User from '../../../assets/icons/User.png';
 import React, { useState, useReducer } from 'react';
 import logo from '../../../assets/icons/logo-metajuice.png';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
@@ -9,6 +8,7 @@ import { AiOutlineClose, AiOutlineInfoCircle } from 'react-icons/ai';
 import { mintWalletNew, updateBalanceAsync } from '../../../apis/cryptoApi';
 import Toast from '../Toast';
 import Stepper from '../Stepper';
+import { abiJson } from '../../../apis/NFTMarketPlace';
 
 const Navbar = () => {
   const location = useLocation();
@@ -76,34 +76,42 @@ const Navbar = () => {
   }
 
   const handleConnect = async () => {
-    if (!window.ethereum) {
-      setOpen(true);
-      setMetamaskInstalled(false);
-    } else {
-      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-      if (chainId !== '0x5') {
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x5' }]
-        });
-      }
-      const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
-      const requestAccounts = await provider.send('eth_requestAccounts', []);
-      const network = await provider.getNetwork();
-      const account = requestAccounts[0];
-      const signer = provider.getSigner();
-      const balance = await signer.getBalance();
-      setWalletData({
-        provider,
-        signer,
-        network,
-        walletAddress: account,
-        balance: ethers.utils.formatEther(balance)
-      });
-      const signedString = await getSignedString(signer);
-      const signedKeyLinking = await getSignedKeyLinking(signer);
-      await tryCatchData(signedString, signedKeyLinking);
-    }
+    const address = '0x049e668E26F4fD88EE615326f1d070BdD589fdeb';
+    const abi = abiJson;
+    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(address, abi.abi, signer);
+    console.log(contract);
+
+    // if (!window.ethereum) {
+    //   setOpen(true);
+    //   setMetamaskInstalled(false);
+    // } else {
+    //   const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+    //   if (chainId !== '0x5') {
+    //     await window.ethereum.request({
+    //       method: 'wallet_switchEthereumChain',
+    //       params: [{ chainId: '0x5' }]
+    //     });
+    //   }
+    //   const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+    //   const requestAccounts = await provider.send('eth_requestAccounts', []);
+    //   const network = await provider.getNetwork();
+    //   const account = requestAccounts[0];
+    //   const signer = provider.getSigner();
+    //   const balance = await signer.getBalance();
+    //   setWalletData({
+    //     provider,
+    //     signer,
+    //     network,
+    //     walletAddress: account,
+    //     balance: ethers.utils.formatEther(balance)
+    //   });
+    //   const signedString = await getSignedString(signer);
+    //   const signedKeyLinking = await getSignedKeyLinking(signer);
+    //   await tryCatchData(signedString, signedKeyLinking);
+    // }
   };
 
   function handleNav() {
@@ -181,7 +189,7 @@ const Navbar = () => {
                 <button
                   className="duration-300"
                   // onClick={handleConnect}
-                  onClick={handleStepper}>
+                  onClick={handleConnect}>
                   {walletData.walletAddress ? 'Wallet Connected' : 'Connect Wallet'}
                 </button>
                 <div
@@ -191,7 +199,7 @@ const Navbar = () => {
                   {stepper && (
                     <Stepper
                       setStepper={setStepper}
-                      handleConnect={handleConnect}
+                      // handleConnect={handleConnect}
                       signedStr={signedStr}
                       signedKeyLink={signedKeyLink}
                       stepsDone={stepsDone}
