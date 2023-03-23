@@ -172,6 +172,51 @@ const Navbar = () => {
   //   }
   // }, []);
 
+  React.useEffect(() => {
+    const isConnected = window.ethereum.isConnected();
+
+    if(isConnected) {
+      updateWalletData();
+    }
+  });
+
+  const updateWalletData = async () => {
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+
+    if (chainId !== '0x13881') {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+          {
+            chainId: '0x13881'
+          }
+        ]
+      });
+    }
+    
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
+
+    const requestAccounts = await provider.send('eth_requestAccounts', []);
+    const account = requestAccounts[0];
+    const signer = provider.getSigner();
+    const balance = await signer.getBalance();
+    const network = await provider.getNetwork();
+    const balanceFormatted = ethers.utils.formatEther(balance);
+    
+    const walletDataObject = {
+      provider,
+      signer,
+      network,
+      walletAddress: account,
+      balance: balanceFormatted
+    };
+
+    setWalletData({
+      ...walletDataObject
+    });
+  };
+
   return (
     <nav className="py-5 md:py-8 md:px-10 px-5 relative">
       <div className="flex flex-1 justify-between items-center">
@@ -216,8 +261,8 @@ const Navbar = () => {
                 }>
                 <button
                   className="duration-300"
-                  // onClick={handleConnect}
-                  onClick={handleConnect}>
+                  onClick={handleConnect}
+                  disabled={walletData.walletAddress}>
                   {walletData.walletAddress ? 'Wallet Connected' : 'Connect Wallet'}
                 </button>
                 <div
@@ -227,16 +272,16 @@ const Navbar = () => {
                   {stepper && (
                     <Stepper
                       setStepper={setStepper}
-                      // handleConnect={handleConnect}
                       signedStr={signedStr}
-                      signedKeyLink={signedKeyLink}
                       stepsDone={stepsDone}
+                      signedKeyLink={signedKeyLink}
+                      // handleConnect={handleConnect}
                     />
                   )}
                 </div>
 
                 {error ? (
-                  <Toast message={"Couldn't connect wallet"} type={'error'} />
+                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
@@ -342,7 +387,7 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={"Couldn't connect wallet"} type={'error'} />
+                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
