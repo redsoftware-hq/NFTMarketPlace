@@ -1,20 +1,20 @@
 import Modal from '../Modal';
+import Toast from '../Toast';
 import { ethers } from 'ethers';
+import Stepper from '../Stepper';
 import { CgMenuLeft } from 'react-icons/cg';
 import React, { useState, useReducer } from 'react';
 import logo from '../../../assets/icons/logo-metajuice.png';
+import { contract } from '../../../apis/redsoftContractAbi';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineInfoCircle } from 'react-icons/ai';
 import { mintWalletNew, updateBalanceAsync } from '../../../apis/cryptoApi';
-import Toast from '../Toast';
-import Stepper from '../Stepper';
-import { abiJson } from '../../../apis/NFTMarketPlace';
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [error, setError] = useState(false);
   const [nav, setNav] = useState(false);
+  const [error, setError] = useState(false);
   const [stepper, setStepper] = useState(false);
 
   const [walletData, setWalletData] = useReducer(
@@ -29,13 +29,13 @@ const Navbar = () => {
       walletAddress: null
     }
   );
+  const [isOpen, setOpen] = useState(false);
+  const [signedStr, setSignedStr] = useState(false);
+  const [stepsDone, setStepsDone] = useState(false);
   const [connected, toggleConnect] = useState(false);
   const [currAddress, updateAddress] = useState('0x');
-  const [isOpen, setOpen] = React.useState(false);
-  const [metamaskInstalled, setMetamaskInstalled] = useState(false);
-  const [signedStr, setSignedStr] = useState(false);
   const [signedKeyLink, setSignedKeyLink] = useState(false);
-  const [stepsDone, setStepsDone] = useState(false);
+  const [metamaskInstalled, setMetamaskInstalled] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -76,14 +76,24 @@ const Navbar = () => {
   }
 
   const handleConnect = async () => {
-    const address = '0x049e668E26F4fD88EE615326f1d070BdD589fdeb';
-    const abi = abiJson;
-    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
+
+    const requestAccounts = await provider.send('eth_requestAccounts', []);
+    const account = requestAccounts[0];
     const signer = provider.getSigner();
+    const balance = await signer.getBalance();
+    const network = await provider.getNetwork();
 
-    const contract = new ethers.Contract(address, abi.abi, signer);
-    console.log(contract);
+    setWalletData({
+      provider,
+      signer,
+      network,
+      walletAddress: account,
+      balance: ethers.utils.formatEther(balance)
+    });
 
+    // const contractConnector = new ethers.Contract(contract.address, contract.abi, signer);
     // if (!window.ethereum) {
     //   setOpen(true);
     //   setMetamaskInstalled(false);
@@ -208,7 +218,7 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={"Couldn't connect wallet"} type={'error'} />
+                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
@@ -314,7 +324,7 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={"Couldn't connect wallet"} type={'error'} />
+                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
