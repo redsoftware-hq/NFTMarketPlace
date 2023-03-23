@@ -76,6 +76,19 @@ const Navbar = () => {
   }
 
   const handleConnect = async () => {
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+
+    if (chainId !== '0x13881') {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+          {
+            chainId: '0x13881'
+          }
+        ]
+      });
+    }
+
     await window.ethereum.request({ method: 'eth_requestAccounts' });
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
 
@@ -84,13 +97,18 @@ const Navbar = () => {
     const signer = provider.getSigner();
     const balance = await signer.getBalance();
     const network = await provider.getNetwork();
-
-    setWalletData({
+    const balanceFormatted = ethers.utils.formatEther(balance);
+    
+    const walletDataObject = {
       provider,
       signer,
       network,
       walletAddress: account,
-      balance: ethers.utils.formatEther(balance)
+      balance: balanceFormatted
+    };
+
+    setWalletData({
+      ...walletDataObject
     });
 
     // const contractConnector = new ethers.Contract(contract.address, contract.abi, signer);
@@ -218,7 +236,7 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
+                  <Toast message={"Couldn't connect wallet"} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
@@ -324,7 +342,7 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
+                  <Toast message={"Couldn't connect wallet"} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
