@@ -131,12 +131,12 @@ const DropdownMenu = () => {
           onClick={callListNft}>
           <span className="">List</span>
         </li>
-        <li
-          className="hover:bg-[#575757] rounded-b-md duration-300 py-2 px-2"
-          onClick={callDelistNft}>
+        <li className="hover:bg-[#575757] duration-300 py-2 px-2" onClick={callDelistNft}>
           <span className="">De-list</span>
         </li>
-        <li className="hover:bg-[#575757] duration-300 py-2 px-2" onClick={callBurnNft}>
+        <li
+          className="hover:bg-[#575757] rounded-b-md duration-300 py-2 px-2"
+          onClick={callBurnNft}>
           <span className="">Burn</span>
         </li>
       </ul>
