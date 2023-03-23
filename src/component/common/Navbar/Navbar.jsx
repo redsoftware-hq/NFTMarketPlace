@@ -76,12 +76,11 @@ const Navbar = () => {
   }
 
   const handleConnect = async () => {
-    const address = '0x049e668E26F4fD88EE615326f1d070BdD589fdeb';
     const abi = abiJson;
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
     const signer = provider.getSigner();
 
-    const contract = new ethers.Contract(address, abi.abi, signer);
+    const contract = new ethers.Contract(abi.contract.address, abi.contract.abi, signer);
     console.log(contract);
 
     // if (!window.ethereum) {

@@ -8,6 +8,7 @@ import ErrorMessage from '../../common/Form/ErrorMessage';
 import TextArea from '../../common/Form/TextArea';
 import SecondaryButton from '../../common/Buttons/SecondaryButton';
 import { mintNft } from '../../../apis/cryptoApi';
+import axios from 'axios';
 
 const labels = { name: 'name', description: 'description' };
 
@@ -76,17 +77,64 @@ export default function MintNftForm({ setToastMessage }) {
     return dataURI;
   }
 
+  let imgHash;
+  const sendFileToIPFS = async (file) => {
+    if (file) {
+      try {
+        const formData = new FormData();
+        formData.append('file', file[0]);
+
+        let apiKey = '98cbaf5b71172582997a';
+        let secretApiKey = '7157138cbed6fe3dab8dd7b274d2c390d079e167d8132e8b1c7f78368c881148';
+
+        const resFile = await axios({
+          method: 'post',
+          url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
+          data: formData,
+          headers: {
+            pinata_api_key: apiKey,
+            pinata_secret_api_key: secretApiKey,
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        imgHash = `ipfs://${resFile.data.IpfsHash}`;
+      } catch (error) {
+        console.log('Error sending File to IPFS: ');
+        console.log(error);
+      }
+    }
+    return imgHash;
+  };
+
+  const uploadMetadataToPinata = async (metadata) => {
+    const apiEndpoint = 'https://api.pinata.cloud/pinning/pinJSONToIPFS';
+
+    let apiKey = '98cbaf5b71172582997a';
+    let secretApiKey = '7157138cbed6fe3dab8dd7b274d2c390d079e167d8132e8b1c7f78368c881148';
+
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        pinata_api_key: apiKey,
+        pinata_secret_api_key: secretApiKey
+      }
+    };
+
+    try {
+      const response = await axios.post(apiEndpoint, metadata, options);
+      console.log(`ipfs://${response.data.IpfsHash}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onSubmit = async (data) => {
     try {
       const { name, description, metadata, upload } = data;
-
       const fileName = upload[0].name;
       const fileData = await convert(upload[0]);
 
-      const textData = {
-        name: name,
-        description: description
-      };
+      const textData = {};
 
       if (metadata.length !== 0) {
         metadata.forEach((ele) => {
@@ -104,6 +152,17 @@ export default function MintNftForm({ setToastMessage }) {
           data: fileData
         }
       };
+
+      await sendFileToIPFS(upload);
+
+      let pinataMetaData = {
+        name: name,
+        description: description,
+        imageUrl: imgHash,
+        metadata: textData
+      };
+
+      await uploadMetadataToPinata(pinataMetaData);
 
       mintNft(payload).then((response) => {
         setToastMessage(`Token Id: ${response[1].text.data}`);
