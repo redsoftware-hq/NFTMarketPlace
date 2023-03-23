@@ -41,6 +41,9 @@ export default function MintNftForm({ setToastMessage }) {
     name: DYNAMIC_FIELD.name
   });
 
+  let apiKey = '98cbaf5b71172582997a';
+  let secretApiKey = '7157138cbed6fe3dab8dd7b274d2c390d079e167d8132e8b1c7f78368c881148';
+
   useEffect(() => {
     try {
       const getWallet = async () => {
@@ -60,7 +63,6 @@ export default function MintNftForm({ setToastMessage }) {
       })();
     } catch (error) {
       setToastMessage('Cannot get wallet details');
-      console.log(error);
     }
   }, []);
 
@@ -77,15 +79,12 @@ export default function MintNftForm({ setToastMessage }) {
     return dataURI;
   }
 
-  let imgHash;
   const sendFileToIPFS = async (file) => {
-    if (file) {
+    let imgHash;
+    if (file[0]) {
       try {
         const formData = new FormData();
-        formData.append('file', file[0]);
-
-        let apiKey = '98cbaf5b71172582997a';
-        let secretApiKey = '7157138cbed6fe3dab8dd7b274d2c390d079e167d8132e8b1c7f78368c881148';
+        formData.append('file', file[0], file[0].name);
 
         const resFile = await axios({
           method: 'post',
@@ -100,7 +99,6 @@ export default function MintNftForm({ setToastMessage }) {
         imgHash = `ipfs://${resFile.data.IpfsHash}`;
       } catch (error) {
         console.log('Error sending File to IPFS: ');
-        console.log(error);
       }
     }
     return imgHash;
@@ -108,9 +106,6 @@ export default function MintNftForm({ setToastMessage }) {
 
   const uploadMetadataToPinata = async (metadata) => {
     const apiEndpoint = 'https://api.pinata.cloud/pinning/pinJSONToIPFS';
-
-    let apiKey = '98cbaf5b71172582997a';
-    let secretApiKey = '7157138cbed6fe3dab8dd7b274d2c390d079e167d8132e8b1c7f78368c881148';
 
     const options = {
       headers: {
@@ -122,7 +117,6 @@ export default function MintNftForm({ setToastMessage }) {
 
     try {
       const response = await axios.post(apiEndpoint, metadata, options);
-      console.log(`ipfs://${response.data.IpfsHash}`);
     } catch (error) {
       console.error(error);
     }
@@ -153,7 +147,7 @@ export default function MintNftForm({ setToastMessage }) {
         }
       };
 
-      await sendFileToIPFS(upload);
+      let imgHash = await sendFileToIPFS(upload);
 
       let pinataMetaData = {
         name: name,
