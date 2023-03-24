@@ -1,20 +1,20 @@
 import Modal from '../Modal';
+import Toast from '../Toast';
 import { ethers } from 'ethers';
+import Stepper from '../Stepper';
 import { CgMenuLeft } from 'react-icons/cg';
 import React, { useState, useReducer } from 'react';
 import logo from '../../../assets/icons/logo-metajuice.png';
+import { contract } from '../../../apis/redsoftContractAbi';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineInfoCircle } from 'react-icons/ai';
 import { mintWalletNew, updateBalanceAsync } from '../../../apis/cryptoApi';
-import Toast from '../Toast';
-import Stepper from '../Stepper';
-import { abiJson } from '../../../apis/NFTMarketPlace';
 
 const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [error, setError] = useState(false);
   const [nav, setNav] = useState(false);
+  const [error, setError] = useState(false);
   const [stepper, setStepper] = useState(false);
 
   const [walletData, setWalletData] = useReducer(
@@ -29,13 +29,13 @@ const Navbar = () => {
       walletAddress: null
     }
   );
+  const [isOpen, setOpen] = useState(false);
+  const [signedStr, setSignedStr] = useState(false);
+  const [stepsDone, setStepsDone] = useState(false);
   const [connected, toggleConnect] = useState(false);
   const [currAddress, updateAddress] = useState('0x');
-  const [isOpen, setOpen] = React.useState(false);
-  const [metamaskInstalled, setMetamaskInstalled] = useState(false);
-  const [signedStr, setSignedStr] = useState(false);
   const [signedKeyLink, setSignedKeyLink] = useState(false);
-  const [stepsDone, setStepsDone] = useState(false);
+  const [metamaskInstalled, setMetamaskInstalled] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -76,13 +76,42 @@ const Navbar = () => {
   }
 
   const handleConnect = async () => {
-    const abi = abiJson;
-    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+
+    if (chainId !== '0x13881') {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+          {
+            chainId: '0x13881'
+          }
+        ]
+      });
+    }
+
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
+
+    const requestAccounts = await provider.send('eth_requestAccounts', []);
+    const account = requestAccounts[0];
     const signer = provider.getSigner();
+    const balance = await signer.getBalance();
+    const network = await provider.getNetwork();
+    const balanceFormatted = ethers.utils.formatEther(balance);
 
-    const contract = new ethers.Contract(abi.contract.address, abi.contract.abi, signer);
-    console.log(contract);
+    const walletDataObject = {
+      provider,
+      signer,
+      network,
+      walletAddress: account,
+      balance: balanceFormatted
+    };
 
+    setWalletData({
+      ...walletDataObject
+    });
+
+    // const contractConnector = new ethers.Contract(contract.address, contract.abi, signer);
     // if (!window.ethereum) {
     //   setOpen(true);
     //   setMetamaskInstalled(false);
@@ -143,6 +172,51 @@ const Navbar = () => {
   //   }
   // }, []);
 
+  React.useEffect(() => {
+    const isConnected = window.ethereum.isConnected();
+
+    if (isConnected) {
+      updateWalletData();
+    }
+  });
+
+  const updateWalletData = async () => {
+    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+
+    if (chainId !== '0x13881') {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [
+          {
+            chainId: '0x13881'
+          }
+        ]
+      });
+    }
+
+    await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
+
+    const requestAccounts = await provider.send('eth_requestAccounts', []);
+    const account = requestAccounts[0];
+    const signer = provider.getSigner();
+    const balance = await signer.getBalance();
+    const network = await provider.getNetwork();
+    const balanceFormatted = ethers.utils.formatEther(balance);
+
+    const walletDataObject = {
+      provider,
+      signer,
+      network,
+      walletAddress: account,
+      balance: balanceFormatted
+    };
+
+    setWalletData({
+      ...walletDataObject
+    });
+  };
+
   return (
     <nav className="py-5 md:py-8 md:px-10 px-5 relative">
       <div className="flex flex-1 justify-between items-center">
@@ -187,8 +261,8 @@ const Navbar = () => {
                 }>
                 <button
                   className="duration-300"
-                  // onClick={handleConnect}
-                  onClick={handleConnect}>
+                  onClick={handleConnect}
+                  disabled={walletData.walletAddress}>
                   {walletData.walletAddress ? 'Wallet Connected' : 'Connect Wallet'}
                 </button>
                 <div
@@ -198,10 +272,10 @@ const Navbar = () => {
                   {stepper && (
                     <Stepper
                       setStepper={setStepper}
-                      // handleConnect={handleConnect}
                       signedStr={signedStr}
-                      signedKeyLink={signedKeyLink}
                       stepsDone={stepsDone}
+                      signedKeyLink={signedKeyLink}
+                      // handleConnect={handleConnect}
                     />
                   )}
                 </div>

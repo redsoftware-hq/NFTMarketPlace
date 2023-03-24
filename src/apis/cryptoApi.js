@@ -1,4 +1,3 @@
-import { ethers } from 'ethers';
 import { JSONRPCClient } from 'json-rpc-2.0';
 
 export function extractFullReturnError(error) {
