@@ -44,12 +44,13 @@ const MyNfts = () => {
     const tokenUri = await contractConnector.tokenURI(tk);
     console.log(tokenUri);
 
-    fetchMetadata(tokenUri).then((data) => console.log(data));
+    // fetchMetadata(tokenUri).then((data) => console.log(data));
 
-    // const cid = tokenUri.replace('ipfs://', '');
-    // const data = ipfs.cat(cid);
-    // const metadata = JSON.parse(data.toString());
-    // console.log(metadata);
+    let call = await axios.get(
+      'https://ipfs.io/ipfs/QmaoPmNL5JH8KRYEaxgXhc5Hddi2mX3xMpXyo62PgkGeCB'
+    );
+
+    console.log(call);
   };
 
   useEffect(() => {
