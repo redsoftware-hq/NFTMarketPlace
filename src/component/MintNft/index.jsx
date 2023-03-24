@@ -7,7 +7,7 @@ export default function MintNft() {
   const [toastMessage, setToastMessage] = React.useState('');
   const navigate = useNavigate();
   const redirectCallback = () => {
-    navigate('/');
+    navigate('/mynfts');
   };
   return (
     <section className="px-1 grid justify-center gap-2 md:m-auto md:max-w-[768px]">
