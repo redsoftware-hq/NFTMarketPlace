@@ -98,7 +98,7 @@ const Navbar = () => {
     const balance = await signer.getBalance();
     const network = await provider.getNetwork();
     const balanceFormatted = ethers.utils.formatEther(balance);
-    
+
     const walletDataObject = {
       provider,
       signer,
@@ -175,7 +175,7 @@ const Navbar = () => {
   React.useEffect(() => {
     const isConnected = window.ethereum.isConnected();
 
-    if(isConnected) {
+    if (isConnected) {
       updateWalletData();
     }
   });
@@ -193,7 +193,7 @@ const Navbar = () => {
         ]
       });
     }
-    
+
     await window.ethereum.request({ method: 'eth_requestAccounts' });
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
 
@@ -203,7 +203,7 @@ const Navbar = () => {
     const balance = await signer.getBalance();
     const network = await provider.getNetwork();
     const balanceFormatted = ethers.utils.formatEther(balance);
-    
+
     const walletDataObject = {
       provider,
       signer,
@@ -281,7 +281,7 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
+                  <Toast message={"Couldn't connect wallet"} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
@@ -387,7 +387,7 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
+                  <Toast message={"Couldn't connect wallet"} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (

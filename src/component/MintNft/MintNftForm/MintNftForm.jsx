@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { ethers } from 'ethers';
+import React, { useState } from 'react';
 import { useForm, Controller, useFieldArray } from 'react-hook-form';
 import UploadImage from '../../common/Form/UploadImage';
 import Input from '../../common/Form/Input';
@@ -7,7 +6,7 @@ import PrimaryButton from '../../common/Buttons/PrimaryButton';
 import ErrorMessage from '../../common/Form/ErrorMessage';
 import TextArea from '../../common/Form/TextArea';
 import SecondaryButton from '../../common/Buttons/SecondaryButton';
-import { mintNft } from '../../../apis/cryptoApi';
+import axios from 'axios';
 
 const labels = { name: 'name', description: 'description' };
 
@@ -27,7 +26,6 @@ const DYNAMIC_FIELD = { name: 'metadata', key: 'key', value: 'value' };
 const METADATA_OBJ = { key: '', value: '' };
 
 export default function MintNftForm({ setToastMessage }) {
-  const [wallet, setWallet] = useState({ walletAddress: '', blockchain: '' });
   const {
     register,
     handleSubmit,
@@ -40,28 +38,8 @@ export default function MintNftForm({ setToastMessage }) {
     name: DYNAMIC_FIELD.name
   });
 
-  useEffect(() => {
-    try {
-      const getWallet = async () => {
-        const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
-        const requestAccounts = await provider.send('eth_requestAccounts', []);
-        const network = await provider.getNetwork();
-        const walletAddress = requestAccounts[0];
-        const blockchain = 'Ethereum_' + network.name;
-        return {
-          walletAddress,
-          blockchain
-        };
-      };
-      (async function () {
-        const walletObj = await getWallet();
-        setWallet(walletObj);
-      })();
-    } catch (error) {
-      setToastMessage('Cannot get wallet details');
-      console.log(error);
-    }
-  }, []);
+  let apiKey = '98cbaf5b71172582997a';
+  let secretApiKey = '7157138cbed6fe3dab8dd7b274d2c390d079e167d8132e8b1c7f78368c881148';
 
   const toBase64 = (file) =>
     new Promise((resolve, reject) => {
@@ -76,17 +54,54 @@ export default function MintNftForm({ setToastMessage }) {
     return dataURI;
   }
 
+  const sendFileToIPFS = async (file) => {
+    let imgHash;
+    if (file[0]) {
+      try {
+        const formData = new FormData();
+        formData.append('file', file[0]);
+
+        const resFile = await axios({
+          method: 'post',
+          url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
+          data: formData,
+          headers: {
+            pinata_api_key: apiKey,
+            pinata_secret_api_key: secretApiKey,
+            'Content-Type': 'multipart/form-data'
+          }
+        });
+        imgHash = `ipfs://${resFile.data.IpfsHash}`;
+      } catch (error) {
+        console.log('Error sending File to IPFS: ');
+      }
+    }
+    return imgHash;
+  };
+
+  const uploadMetadataToPinata = async (metadata) => {
+    const apiEndpoint = 'https://api.pinata.cloud/pinning/pinJSONToIPFS';
+
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        pinata_api_key: apiKey,
+        pinata_secret_api_key: secretApiKey
+      }
+    };
+
+    try {
+      const response = await axios.post(apiEndpoint, metadata, options);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const onSubmit = async (data) => {
     try {
       const { name, description, metadata, upload } = data;
 
-      const fileName = upload[0].name;
-      const fileData = await convert(upload[0]);
-
-      const textData = {
-        name: name,
-        description: description
-      };
+      const textData = {};
 
       if (metadata.length !== 0) {
         metadata.forEach((ele) => {
@@ -94,20 +109,16 @@ export default function MintNftForm({ setToastMessage }) {
         });
       }
 
-      const payload = {
-        walletAddress: wallet.walletAddress,
-        blockchain: wallet.blockchain,
-        nftID: textData.name,
-        textData: textData,
-        fileData: {
-          name: fileName,
-          data: fileData
-        }
+      let imgHash = await sendFileToIPFS(upload);
+
+      let pinataMetaData = {
+        name: name,
+        description: description,
+        imageUrl: imgHash,
+        metadata: textData
       };
 
-      mintNft(payload).then((response) => {
-        setToastMessage(`Token Id: ${response[1].text.data}`);
-      });
+      await uploadMetadataToPinata(pinataMetaData);
     } catch (error) {
       setToastMessage('Cannot Mint nft');
       console.log(error);
