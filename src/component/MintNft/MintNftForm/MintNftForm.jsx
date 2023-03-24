@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useForm, Controller, useFieldArray } from 'react-hook-form';
+import React from 'react';
 import UploadImage from '../../common/Form/UploadImage';
 import Input from '../../common/Form/Input';
 import PrimaryButton from '../../common/Buttons/PrimaryButton';
 import ErrorMessage from '../../common/Form/ErrorMessage';
 import TextArea from '../../common/Form/TextArea';
-import SecondaryButton from '../../common/Buttons/SecondaryButton';
 import axios from 'axios';
 import { ethers } from 'ethers';
 import { contract } from '../../../apis/redsoftContractAbi';
+import SecondaryButton from '../../common/Buttons/SecondaryButton';
+import { useForm, Controller, useFieldArray } from 'react-hook-form';
 
 const labels = { name: 'name', description: 'description' };
 
@@ -107,7 +107,6 @@ export default function MintNftForm({ setToastMessage }) {
       const { name, description, metadata, upload } = data;
 
       const textData = {};
-
       if (metadata.length !== 0) {
         metadata.forEach((ele) => {
           textData[ele.key] = ele.value;
