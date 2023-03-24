@@ -73,7 +73,7 @@ export default function MintNftForm({ setToastMessage }) {
             'Content-Type': 'multipart/form-data'
           }
         });
-        imgHash = `ipfs://${resFile.data.IpfsHash}`;
+        imgHash = `https://ipfs.io/ipfs/${resFile.data.IpfsHash}`;
       } catch (error) {
         console.log('Error sending File to IPFS: ');
       }
@@ -95,7 +95,7 @@ export default function MintNftForm({ setToastMessage }) {
 
     try {
       const response = await axios.post(apiEndpoint, metadata, options);
-      metaHash = `ipfs://${response.data.IpfsHash}`;
+      metaHash = `https://ipfs.io/ipfs/${response.data.IpfsHash}`;
     } catch (error) {
       console.error(error);
     }
@@ -132,9 +132,9 @@ export default function MintNftForm({ setToastMessage }) {
       const tokenHash = await provider.getTransactionReceipt(mintingToken.hash);
       const tokenId = parseInt(tokenHash.logs[0].topics[3], 16);
 
-      setToastMessage(`TokenID: ${tokenId}`);
+      setToastMessage(`NFT Minted With Token ID ${tokenId}`);
     } catch (error) {
-      setToastMessage('Cannot Mint nft');
+      setToastMessage('Cannot Mint NFT');
       console.log(error);
     }
   };

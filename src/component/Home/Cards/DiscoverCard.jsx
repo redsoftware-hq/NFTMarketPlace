@@ -5,7 +5,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 
 const DiscoverCard = ({ item }) => {
   const navigate = useNavigate();
-  const handleClick = () => navigate(`/marketplace/${item.id}`);
+  const handleClick = () => navigate(`/marketplace/${item?.tokenId}`);
   const [dropdown, setDropdown] = useState(false);
   const location = useLocation();
 
@@ -17,7 +17,7 @@ const DiscoverCard = ({ item }) => {
   return (
     <div className="w-full hover:scale-[1.03] duration-300 cursor-pointer" onClick={handleClick}>
       <div className="relative">
-        <img className="w-full rounded-t-2xl" src={item.image} alt="" />
+        <img className="w-full h-80 rounded-t-2xl" src={item?.imageUrl} alt="" />
         {location.pathname !== '/' && (
           <BsThreeDotsVertical
             size={25}
@@ -29,16 +29,17 @@ const DiscoverCard = ({ item }) => {
       </div>
       <div className="bg-[#3b3b3b] rounded-b-2xl py-5 px-7 space-y-5">
         <div className="text-white">
-          <p className="text-xl font-bold">{item.imgTitle}</p>
-          <p className="pt-2 flex items-center gap-3">
+          <p className="text-xl font-bold">{item?.name}</p>
+          <p className="text-xl font-bold">{item?.description}</p>
+          {/* <p className="pt-2 flex items-center gap-3">
             <span>
               <img src={item.avatar} alt="" />
             </span>
             <span className="font-space-mono">{item.avatarName}</span>
-          </p>
+          </p> */}
         </div>
 
-        <div className="font-space-mono flex justify-between">
+        {/* <div className="font-space-mono flex justify-between">
           <div className="price-div ">
             <span className="text-[#858584] text-xs">Price</span>
             <p className="text-white">{item.price}</p>
@@ -47,7 +48,7 @@ const DiscoverCard = ({ item }) => {
             <span className="capitalize text-[#858584] text-xs">highest bid</span>
             <p className="text-white">{item.highestBid}</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
