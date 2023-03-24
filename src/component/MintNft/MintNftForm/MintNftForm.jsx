@@ -7,6 +7,8 @@ import ErrorMessage from '../../common/Form/ErrorMessage';
 import TextArea from '../../common/Form/TextArea';
 import SecondaryButton from '../../common/Buttons/SecondaryButton';
 import axios from 'axios';
+import { ethers } from 'ethers';
+import { contract } from '../../../apis/redsoftContractAbi';
 
 const labels = { name: 'name', description: 'description' };
 
@@ -80,6 +82,7 @@ export default function MintNftForm({ setToastMessage }) {
   };
 
   const uploadMetadataToPinata = async (metadata) => {
+    let metaHash;
     const apiEndpoint = 'https://api.pinata.cloud/pinning/pinJSONToIPFS';
 
     const options = {
@@ -92,9 +95,11 @@ export default function MintNftForm({ setToastMessage }) {
 
     try {
       const response = await axios.post(apiEndpoint, metadata, options);
+      metaHash = `ipfs://${response.data.IpfsHash}`;
     } catch (error) {
       console.error(error);
     }
+    return metaHash;
   };
 
   const onSubmit = async (data) => {
@@ -118,7 +123,17 @@ export default function MintNftForm({ setToastMessage }) {
         metadata: textData
       };
 
-      await uploadMetadataToPinata(pinataMetaData);
+      const metaHash = await uploadMetadataToPinata(pinataMetaData);
+
+      const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
+      const signer = provider.getSigner();
+      const contractConnector = new ethers.Contract(contract.address, contract.abi, signer);
+      const mintingToken = await contractConnector.mintToken(metaHash);
+      await provider.waitForTransaction(mintingToken.hash);
+      const tokenHash = await provider.getTransactionReceipt(mintingToken.hash);
+      const tokenId = parseInt(tokenHash.logs[0].topics[3], 16);
+
+      setToastMessage(`TokenID: ${tokenId}`);
     } catch (error) {
       setToastMessage('Cannot Mint nft');
       console.log(error);
