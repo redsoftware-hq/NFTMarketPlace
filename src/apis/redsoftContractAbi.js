@@ -1,5 +1,5 @@
 export const contract = {
-  address: '0x3286272f8D57D60bB1DF6BA7A3aDEEa6add8bB3D',
+  address: '0xCf9A56B5d0b617B7403F4753AF6E4D3C09346953',
   abi: [
     { type: 'constructor', payable: false, inputs: [] },
     {
@@ -94,7 +94,7 @@ export const contract = {
     },
     {
       type: 'function',
-      name: 'burnToken',
+      name: 'burnNFT',
       constant: false,
       payable: false,
       inputs: [{ type: 'uint256', name: 'tokenId' }],
@@ -102,7 +102,7 @@ export const contract = {
     },
     {
       type: 'function',
-      name: 'buyNft',
+      name: 'buyNFT',
       constant: false,
       stateMutability: 'payable',
       payable: true,
@@ -111,7 +111,7 @@ export const contract = {
     },
     {
       type: 'function',
-      name: 'delistNft',
+      name: 'delistNFT',
       constant: false,
       payable: false,
       inputs: [{ type: 'uint256', name: 'tokenId' }],
@@ -233,7 +233,7 @@ export const contract = {
     },
     {
       type: 'function',
-      name: 'getDeployerListedTokens',
+      name: 'getDeployerListedNFTs',
       constant: true,
       stateMutability: 'view',
       payable: false,
@@ -242,7 +242,7 @@ export const contract = {
     },
     {
       type: 'function',
-      name: 'getDeployerMintedTokens',
+      name: 'getDeployerMintedNFTs',
       constant: true,
       stateMutability: 'view',
       payable: false,
@@ -290,7 +290,7 @@ export const contract = {
     },
     {
       type: 'function',
-      name: 'listNft',
+      name: 'listNFT',
       constant: false,
       stateMutability: 'payable',
       payable: true,
@@ -302,7 +302,7 @@ export const contract = {
     },
     {
       type: 'function',
-      name: 'mintToken',
+      name: 'mintNFT',
       constant: false,
       payable: false,
       inputs: [{ type: 'string', name: 'tokenURI' }],
@@ -337,7 +337,7 @@ export const contract = {
     },
     {
       type: 'function',
-      name: 'resellToken',
+      name: 'resellNFT',
       constant: false,
       stateMutability: 'payable',
       payable: true,

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import DropdownMenu from '../../common/DropdownMenu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 
-const DiscoverCard = ({ item }) => {
+const DiscoverCard = ({ item, openListNFT, setModalTokenId }) => {
   const navigate = useNavigate();
   const handleClick = () => navigate(`/marketplace/${item?.metadata?.tokenId}`);
   const [dropdown, setDropdown] = useState(false);
@@ -17,7 +17,11 @@ const DiscoverCard = ({ item }) => {
   return (
     <div className="w-full hover:scale-[1.03] duration-300 cursor-pointer" onClick={handleClick}>
       <div className="relative">
-        <img className="w-full h-80 rounded-t-2xl object-cover" src={item?.metadata?.imageUrl} alt="" />
+        <img
+          className="w-full h-80 rounded-t-2xl object-cover"
+          src={item?.metadata?.imageUrl}
+          alt=""
+        />
         {location.pathname !== '/' && (
           <BsThreeDotsVertical
             size={25}
@@ -25,12 +29,19 @@ const DiscoverCard = ({ item }) => {
             onClick={buttonClicked}
           />
         )}
-        {dropdown && <DropdownMenu />}
+        {dropdown && (
+          <DropdownMenu
+            tokenId={item.tokenId}
+            openListNFT={openListNFT}
+            setModalTokenId={setModalTokenId}
+          />
+        )}
       </div>
       <div className="bg-[#3b3b3b] rounded-b-2xl py-5 px-7 space-y-5">
         <div className="text-white">
           <p className="text-xl font-bold">{item?.metadata?.name}</p>
           <p className="text-lg">{item?.metadata?.description}</p>
+          {item?.price && <p className="text-lg">Price: {item?.price} ether</p>}
           {/* <p className="pt-2 flex items-center gap-3">
             <span>
               <img src={item.avatar} alt="" />

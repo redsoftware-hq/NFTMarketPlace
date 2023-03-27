@@ -55,7 +55,7 @@ contract RedsoftContract is ERC721URIStorage {
   }
 
   // Mints a token
-  function mintToken(string memory tokenURI) public returns (uint256) {
+  function mintNFT(string memory tokenURI) public returns (uint256) {
     _tokenIds.increment();
     uint256 newTokenId = _tokenIds.current();
     _mint(msg.sender, newTokenId);
@@ -77,7 +77,7 @@ contract RedsoftContract is ERC721URIStorage {
   }
 
   // Allows someone to resell a token they have purchased
-  function resellToken(uint256 tokenId, uint256 price) public payable {
+  function resellNFT(uint256 tokenId, uint256 price) public payable {
     require(
       tokenIdToNftObject[tokenId].ownerOfNft == msg.sender,
       'Only item owner can perform this operation'
@@ -93,7 +93,7 @@ contract RedsoftContract is ERC721URIStorage {
   }
 
   // Lists a token
-  function listNft(uint256 tokenId, uint256 price) public payable {
+  function listNFT(uint256 tokenId, uint256 price) public payable {
     require(_exists(tokenId), 'Token does not exist');
     require(
       msg.sender == tokenIdToNftObject[tokenId].sellerOfNft,
@@ -122,7 +122,12 @@ contract RedsoftContract is ERC721URIStorage {
     Nft[] memory nfts = new Nft[](tokenCount);
     uint256 j = 0;
     for (uint256 i = 1; i <= _tokenIds.current(); i++) {
-      if (_exists(i) && ownerOf(i) == user && tokenIdToNftObject[i].sold == false) {
+      if (
+        _exists(i) &&
+        ownerOf(i) == user &&
+        tokenIdToNftObject[i].sold == false &&
+        tokenIdToNftObject[i].isListed == false
+      ) {
         Nft memory nft = tokenIdToNftObject[i];
         nfts[j] = nft;
         j++;
@@ -192,24 +197,6 @@ contract RedsoftContract is ERC721URIStorage {
     return userItems;
   }
 
-  // Transfers ownership of the item as well as funds between parties
-  // function buyNFT(uint256 tokenId) public payable {
-  //     require(
-  //         tokenIdToNftObject[tokenId].sellerOfNft != address(0),
-  //         "NFT not listed for sale"
-  //     );
-  //     require(
-  //         msg.value == tokenIdToNftObject[tokenId].price,
-  //         "Incorrect amount sent"
-  //     );
-  //     // Approve buyer to transfer token
-  //     approve(msg.sender, tokenId);
-  //     address seller = tokenIdToNftObject[tokenId].sellerOfNft;
-  //     tokenIdToNftObject[tokenId].sellerOfNft = payable(address(0));
-  //     tokenIdToNftObject[tokenId].ownerOfNft = payable(msg.sender);
-  //     payable(seller).transfer(msg.value);
-  //     safeTransferFrom(ownerOf(tokenId), msg.sender, tokenId);
-  // }
   // Transfers ownership of the NFT as well as funds between parties
   // function buyNft(uint256 tokenId) public payable {
   //     require(
@@ -233,21 +220,20 @@ contract RedsoftContract is ERC721URIStorage {
   //     seller.transfer(msg.value);
   //     emit NFTSoldEvent(tokenId, msg.value);
   // }
-  function buyNft(uint256 tokenId) public payable {
+  function buyNFT(uint256 tokenId) public payable {
     require(tokenIdToNftObject[tokenId].sellerOfNft != address(0), 'NFT not listed for sale');
     require(msg.value == tokenIdToNftObject[tokenId].price, 'Incorrect amount sent');
     address payable buyer = payable(msg.sender);
     address payable seller = payable(tokenIdToNftObject[tokenId].sellerOfNft);
-    // Approve the buyer to transfer the NFT
-    approve(buyer, tokenId);
     tokenIdToNftObject[tokenId].sellerOfNft = payable(address(0));
-    tokenIdToNftObject[tokenId].ownerOfNft = payable(msg.sender);
-    safeTransferFrom(ownerOf(tokenId), msg.sender, tokenId);
+    tokenIdToNftObject[tokenId].ownerOfNft = buyer;
+    // Transfer the NFT directly to the buyer using safeTransferFrom
+    _transfer(ownerOf(tokenId), buyer, tokenId);
     seller.transfer(msg.value);
   }
 
   // Burns a token
-  function burnToken(uint256 tokenId) public {
+  function burnNFT(uint256 tokenId) public {
     require(_isApprovedOrOwner(msg.sender, tokenId), 'Caller is not owner nor approved');
     _burn(tokenId);
     delete tokenIdToNftObject[tokenId];
@@ -275,7 +261,7 @@ contract RedsoftContract is ERC721URIStorage {
     return listedTokens;
   }
 
-  function delistNft(uint256 tokenId) public {
+  function delistNFT(uint256 tokenId) public {
     require(_exists(tokenId), 'Token does not exist');
     require(ownerOf(tokenId) == msg.sender, 'You do not own this token');
     require(tokenIdToNftObject[tokenId].isListed == true, 'Token is not listed');
@@ -289,12 +275,12 @@ contract RedsoftContract is ERC721URIStorage {
   }
 
   // Returns an array of all the deployer's minted tokens
-  function getDeployerMintedTokens() public view returns (uint256[] memory) {
+  function getDeployerMintedNFTs() public view returns (uint256[] memory) {
     return deployerTokens[ownerOfContract];
   }
 
   // Returns an array of all the deployer's listed tokens
-  function getDeployerListedTokens() public view returns (uint256[] memory) {
+  function getDeployerListedNFTs() public view returns (uint256[] memory) {
     return deployerListings[ownerOfContract];
   }
 

@@ -127,7 +127,7 @@ export default function MintNftForm({ setToastMessage }) {
       const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
       const signer = provider.getSigner();
       const contractConnector = new ethers.Contract(contract.address, contract.abi, signer);
-      const mintingToken = await contractConnector.mintToken(metaHash);
+      const mintingToken = await contractConnector.mintNFT(metaHash);
       await provider.waitForTransaction(mintingToken.hash);
       const tokenHash = await provider.getTransactionReceipt(mintingToken.hash);
       const tokenId = parseInt(tokenHash.logs[0].topics[3], 16);
