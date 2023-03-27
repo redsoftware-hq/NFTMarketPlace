@@ -1,5 +1,5 @@
 export const contract = {
-  address: '0xE2Aca409e6C7C037B093E07EB11D242855d7d0F5',
+  address: '0x912b97b50884EF1b3DAac3eAa4f368Dc4C7651e3',
   abi: [
     { type: 'constructor', payable: false, inputs: [] },
     {
@@ -21,6 +21,12 @@ export const contract = {
         { type: 'address', name: 'operator', indexed: true },
         { type: 'bool', name: 'approved', indexed: false }
       ]
+    },
+    {
+      type: 'event',
+      anonymous: false,
+      name: 'NFTDelistedEvent',
+      inputs: [{ type: 'uint256', name: 'tokenId', indexed: true }]
     },
     {
       type: 'event',
@@ -88,12 +94,49 @@ export const contract = {
     },
     {
       type: 'function',
-      name: 'buyNFT',
+      name: 'burnToken',
+      constant: false,
+      payable: false,
+      inputs: [{ type: 'uint256', name: 'tokenId' }],
+      outputs: []
+    },
+    {
+      type: 'function',
+      name: 'buyNft',
       constant: false,
       stateMutability: 'payable',
       payable: true,
       inputs: [{ type: 'uint256', name: 'tokenId' }],
       outputs: []
+    },
+    {
+      type: 'function',
+      name: 'delistNft',
+      constant: false,
+      payable: false,
+      inputs: [{ type: 'uint256', name: 'tokenId' }],
+      outputs: []
+    },
+    {
+      type: 'function',
+      name: 'fetchAllListedTokens',
+      constant: true,
+      stateMutability: 'view',
+      payable: false,
+      inputs: [],
+      outputs: [
+        {
+          type: 'tuple[]',
+          components: [
+            { type: 'uint256', name: 'tokenId' },
+            { type: 'address', name: 'sellerOfNft' },
+            { type: 'address', name: 'ownerOfNft' },
+            { type: 'bool', name: 'isListed' },
+            { type: 'uint256', name: 'price' },
+            { type: 'bool', name: 'sold' }
+          ]
+        }
+      ]
     },
     {
       type: 'function',
@@ -190,12 +233,48 @@ export const contract = {
     },
     {
       type: 'function',
+      name: 'getDeployerListedTokens',
+      constant: true,
+      stateMutability: 'view',
+      payable: false,
+      inputs: [],
+      outputs: [{ type: 'uint256[]' }]
+    },
+    {
+      type: 'function',
+      name: 'getDeployerMintedTokens',
+      constant: true,
+      stateMutability: 'view',
+      payable: false,
+      inputs: [],
+      outputs: [{ type: 'uint256[]' }]
+    },
+    {
+      type: 'function',
       name: 'getListingPrice',
       constant: true,
       stateMutability: 'view',
       payable: false,
       inputs: [],
       outputs: [{ type: 'uint256' }]
+    },
+    {
+      type: 'function',
+      name: 'getUnsoldNFTs',
+      constant: true,
+      stateMutability: 'view',
+      payable: false,
+      inputs: [],
+      outputs: [{ type: 'uint256[]' }]
+    },
+    {
+      type: 'function',
+      name: 'getUnsoldNFTsForUser',
+      constant: true,
+      stateMutability: 'view',
+      payable: false,
+      inputs: [{ type: 'address', name: 'user' }],
+      outputs: [{ type: 'uint256[]' }]
     },
     {
       type: 'function',
