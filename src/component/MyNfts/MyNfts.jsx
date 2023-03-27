@@ -2,7 +2,6 @@ import axios from 'axios';
 import { ethers } from 'ethers';
 import React, { useEffect } from 'react';
 import DiscoverCard from '../Home/Cards/DiscoverCard';
-import { discoverData } from '../../utils/DiscoverData';
 import { contract } from '../../apis/redsoftContractAbi';
 
 const MyNfts = () => {
