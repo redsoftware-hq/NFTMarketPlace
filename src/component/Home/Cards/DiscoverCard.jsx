@@ -3,8 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import DropdownMenu from '../../common/DropdownMenu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 
-const DiscoverCard = ({ item, toggleModal, openListNFT, modalTokenId, setModalTokenId }) => {
-  console.log(item);
+const DiscoverCard = ({ item, openListNFT, setModalTokenId }) => {
   const navigate = useNavigate();
   const handleClick = () => navigate(`/marketplace/${item?.metadata?.tokenId}`);
   const [dropdown, setDropdown] = useState(false);
@@ -32,10 +31,8 @@ const DiscoverCard = ({ item, toggleModal, openListNFT, modalTokenId, setModalTo
         )}
         {dropdown && (
           <DropdownMenu
-            openListNFT={openListNFT}
-            toggleModal={toggleModal}
             tokenId={item.tokenId}
-            modalTokenId={modalTokenId}
+            openListNFT={openListNFT}
             setModalTokenId={setModalTokenId}
           />
         )}
@@ -44,6 +41,7 @@ const DiscoverCard = ({ item, toggleModal, openListNFT, modalTokenId, setModalTo
         <div className="text-white">
           <p className="text-xl font-bold">{item?.metadata?.name}</p>
           <p className="text-lg">{item?.metadata?.description}</p>
+          {item?.price && <p className="text-lg">Price: {item?.price} ether</p>}
           {/* <p className="pt-2 flex items-center gap-3">
             <span>
               <img src={item.avatar} alt="" />

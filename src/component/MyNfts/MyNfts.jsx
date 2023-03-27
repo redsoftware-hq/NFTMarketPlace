@@ -1,15 +1,16 @@
 import axios from 'axios';
 import { ethers } from 'ethers';
+import Modal from '../common/Modal';
 import React, { useEffect } from 'react';
+import ModalInput from '../ModalInput/ModalInput';
 import DiscoverCard from '../Home/Cards/DiscoverCard';
 import { contract } from '../../apis/redsoftContractAbi';
-import Modal from '../common/Modal';
-import ModalInput from '../ModalInput/ModalInput';
 
 const MyNfts = () => {
-  const [mintedNftList, setMintedNftList] = React.useState([]);
   const [visible, setVisible] = React.useState(false);
   const [modalTokenId, setModalTokenId] = React.useState();
+  const [mintedNftList, setMintedNftList] = React.useState([]);
+  const [listedNftList, setListedNftList] = React.useState([]);
 
   const fetchNFT = async () => {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
@@ -21,9 +22,9 @@ const MyNfts = () => {
 
     if (fetchNftMinted) {
       for (const nft of fetchNftMinted) {
+        const regex = /\/([^/]+)$/;
         let tokenId = nft?.tokenId.toString();
         const tokenUri = await contractConnector.tokenURI(tokenId);
-        const regex = /\/([^/]+)$/;
 
         const match = tokenUri.match(regex);
 
@@ -34,19 +35,28 @@ const MyNfts = () => {
           setMintedNftList((prev) => [...prev, newMintedNftData]);
         }
       }
-      // fetchNftMinted.map(async (i) => {
-      //   let tokenId = i?.tokenId.toString();
-      //   const tokenUri = await contractConnector.tokenURI(tokenId);
-      //   const tokenIpfsCid = tokenUri.replace('ipfs://', '');
+    }
 
-      //   if (tokenIpfsCid) {
-      //     let fetchMetadata = await axios.get(
-      //       `https://ipfs.io/ipfs/${tokenIpfsCid}`
-      //     )?.data;
+    const fetchNftListed = await contractConnector.fetchNFTsListedUser(account);
 
-      //     console.log(fetchMetadata);
-      //   }
-      // });
+    if (fetchNftListed) {
+      for (const nft of fetchNftListed) {
+        const regex = /\/([^/]+)$/;
+        let tokenId = nft?.tokenId.toString();
+        let price = parseFloat(ethers.utils.formatEther(nft?.price));
+        const tokenUri = await contractConnector.tokenURI(tokenId);
+
+        const match = tokenUri.match(regex);
+
+        if (tokenUri) {
+          let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
+          const newListedNftData = { tokenId, metadata: fetchMetadata?.data, price };
+
+          console.log('newListedNftData', newListedNftData);
+
+          setListedNftList((prev) => [...prev, newListedNftData]);
+        }
+      }
     }
   };
 
@@ -54,29 +64,42 @@ const MyNfts = () => {
     fetchNFT();
   }, []);
 
-  function toggleModal(e) {
+  function openListNFT(e, toggleTo) {
     e.stopPropagation();
-    setVisible(!visible);
-  }
-
-  function openListNFT(e) {
-    e.stopPropagation();
-    setVisible(true);
+    setVisible(toggleTo);
   }
 
   return (
     <section className="container mx-auto">
       <div className="py-12 px-8 md:px-12 lg:px-20">
-        <div className="creators-container">
-          <div className="mt-10 creators-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {mintedNftList.length &&
+        <div className="creators-container  mb-10">
+          <h4 className="capitalize text-3xl md:text-4xl font-semibold">My Minted NFTs</h4>
+          <div className="mt-5 creators-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {!!mintedNftList.length &&
               mintedNftList.map((item, index) => {
                 return (
                   <DiscoverCard
                     key={index}
                     item={item}
                     openListNFT={openListNFT}
-                    toggleModal={toggleModal}
+                    modalTokenId={modalTokenId}
+                    setModalTokenId={setModalTokenId}
+                  />
+                );
+              })}
+          </div>
+        </div>
+
+        <div className="creators-container mb-10">
+          <h4 className="capitalize text-3xl md:text-4xl font-semibold">My Listed NFTs</h4>
+          <div className="mt-5 creators-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {!!listedNftList &&
+              listedNftList.map((item, index) => {
+                return (
+                  <DiscoverCard
+                    key={index}
+                    item={item}
+                    openListNFT={openListNFT}
                     modalTokenId={modalTokenId}
                     setModalTokenId={setModalTokenId}
                   />
@@ -86,11 +109,9 @@ const MyNfts = () => {
         </div>
       </div>
       {visible && (
-        <Modal
-          heading={'Listing Price'}
-          isOpen={visible}
-          children={<ModalInput toggleModal={toggleModal} modalTokenId={modalTokenId} />}
-        />
+        <Modal heading={'Listing Price'} isOpen={visible}>
+          <ModalInput openListNFT={openListNFT} modalTokenId={modalTokenId} />
+        </Modal>
       )}
     </section>
   );

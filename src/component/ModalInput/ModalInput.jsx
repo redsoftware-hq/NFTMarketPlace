@@ -1,33 +1,20 @@
-import { ethers } from 'ethers';
 import React from 'react';
+import { ethers } from 'ethers';
 import { contract } from '../../apis/redsoftContractAbi';
 
-const ModalInput = ({ toggleModal, tokenId, modalTokenId }) => {
-  const [listValue, setListValue] = React.useState('');
+const ModalInput = ({ openListNFT, modalTokenId }) => {
+  const [price, setPrice] = React.useState();
 
-  function convertValueToEther(e) {
-    const etherValue = ethers.utils.parseEther(listValue);
-    // console.log(tokenId);
-    console.log(etherValue);
-    console.log(modalTokenId);
-    toggleModal(e);
-    return etherValue;
-  }
-
-  async function handleList(e) {
+  async function handleListNft(e) {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
     const signer = provider.getSigner();
-    const price = ethers.utils.parseUnits(listValue, 'ether');
-    console.log(price);
+    const etherPrice = ethers.utils.parseUnits(price, 'ether');
     const contractConnector = new ethers.Contract(contract.address, contract.abi, signer);
-    const listingNft = await contractConnector.listNft(modalTokenId, price, {
+    const listingNft = await contractConnector.listNFT(modalTokenId, etherPrice, {
       value: ethers.utils.parseUnits('0.005', 'ether')
     });
+    openListNFT(e, false);
     console.log(listingNft);
-    toggleModal(e);
-
-    // let listingNft = await contract.getListPrice();
-    // listingPrice = listingPrice.toString();
   }
 
   return (
@@ -36,10 +23,10 @@ const ModalInput = ({ toggleModal, tokenId, modalTokenId }) => {
       <input
         className="border border-black py-1 px-2 rounded-sm"
         type="number"
-        value={listValue}
-        onChange={(e) => setListValue(e.target.value)}
+        value={price}
+        onChange={(e) => setPrice(e.target.value)}
       />
-      <button onClick={handleList} className="py-1 px-2 bg-[#f15623] text-white">
+      <button onClick={handleListNft} className="py-1 px-2 bg-[#f15623] text-white">
         Submit
       </button>
     </div>

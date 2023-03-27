@@ -1,15 +1,6 @@
 import React from 'react';
-import { ethers } from 'ethers';
-import {
-  listNftForSaleNonce,
-  listNftForSale,
-  burnNft,
-  burnNftNonce,
-  delistNftNonce,
-  delistNft
-} from '../../apis/cryptoApi';
 
-const DropdownMenu = ({ openListNFT, tokenId, modalTokenId, setModalTokenId }) => {
+const DropdownMenu = ({ openListNFT, tokenId, setModalTokenId }) => {
   // let listNftForSaleNonceResponse;
 
   // const callListNft = async (e) => {
@@ -124,7 +115,7 @@ const DropdownMenu = ({ openListNFT, tokenId, modalTokenId, setModalTokenId }) =
   // };
 
   function setListTokenId(e) {
-    openListNFT(e);
+    openListNFT(e, true);
     setModalTokenId(tokenId);
   }
 
@@ -134,13 +125,13 @@ const DropdownMenu = ({ openListNFT, tokenId, modalTokenId, setModalTokenId }) =
         <li
           className="hover:bg-[#575757] rounded-t-md duration-300 py-2 px-2"
           onClick={(e) => setListTokenId(e)}>
-          <span className="">List</span>
+          <span className="">List NFT</span>
         </li>
         <li className="hover:bg-[#575757] duration-300 py-2 px-2">
-          <span className="">De-list</span>
+          <span className="">Delist NFT</span>
         </li>
         <li className="hover:bg-[#575757] rounded-b-md duration-300 py-2 px-2">
-          <span className="">Burn</span>
+          <span className="">Burn NFT</span>
         </li>
       </ul>
     </div>
