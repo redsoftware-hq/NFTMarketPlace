@@ -17,6 +17,7 @@ export default function UploadImage({ register, options = {}, upload = 'upload' 
       setImagePreview(reader.result);
     };
   }
+  
   return (
     <div className="upload inline-grid p-1 gap-3">
       <label className="px-2 text-white" htmlFor={upload}>

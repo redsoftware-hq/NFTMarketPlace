@@ -20,9 +20,13 @@ const MyNfts = () => {
       for (const nft of fetchNftMinted) {
         let tokenId = nft?.tokenId.toString();
         const tokenUri = await contractConnector.tokenURI(tokenId);
+        const regex = /\/([^/]+)$/;
+
+        const match = tokenUri.match(regex);
+        console.log(match);
 
         if (tokenUri) {
-          let fetchMetadata = await axios.get(tokenUri);
+          let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
           const newMintedNftData = fetchMetadata?.data;
 
           setMintedNftList((prev) => [...prev, newMintedNftData]);
