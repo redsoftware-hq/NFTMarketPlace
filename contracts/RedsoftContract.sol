@@ -9,7 +9,7 @@ contract RedsoftContract is ERC721URIStorage {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
   Counters.Counter private _itemsSold;
-  uint256 listingPrice = 1 ether;
+  uint256 listingPrice = 0.005 ether;
   address payable public ownerOfContract;
   mapping(uint256 => Nft) private tokenIdToNftObject;
   mapping(address => uint256[]) private deployerTokens;
