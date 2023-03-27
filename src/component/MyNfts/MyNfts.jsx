@@ -31,19 +31,6 @@ const MyNfts = () => {
           setMintedNftList((prev) => [...prev, newMintedNftData]);
         }
       }
-      // fetchNftMinted.map(async (i) => {
-      //   let tokenId = i?.tokenId.toString();
-      //   const tokenUri = await contractConnector.tokenURI(tokenId);
-      //   const tokenIpfsCid = tokenUri.replace('ipfs://', '');
-
-      //   if (tokenIpfsCid) {
-      //     let fetchMetadata = await axios.get(
-      //       `https://ipfs.io/ipfs/${tokenIpfsCid}`
-      //     )?.data;
-
-      //     console.log(fetchMetadata);
-      //   }
-      // });
     }
   };
 
