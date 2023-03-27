@@ -24,15 +24,17 @@ const MyNfts = () => {
       for (const nft of fetchNftMinted) {
         const regex = /\/([^/]+)$/;
         let tokenId = nft?.tokenId.toString();
-        const tokenUri = await contractConnector.tokenURI(tokenId);
+        if (tokenId !== '0') {
+          const tokenUri = await contractConnector.tokenURI(tokenId);
 
-        const match = tokenUri.match(regex);
+          const match = tokenUri.match(regex);
 
-        if (tokenUri) {
-          let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
-          const newMintedNftData = { tokenId, metadata: fetchMetadata?.data };
+          if (tokenUri) {
+            let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
+            const newMintedNftData = { tokenId, metadata: fetchMetadata?.data };
 
-          setMintedNftList((prev) => [...prev, newMintedNftData]);
+            setMintedNftList((prev) => [...prev, newMintedNftData]);
+          }
         }
       }
     }
@@ -51,8 +53,6 @@ const MyNfts = () => {
         if (tokenUri) {
           let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
           const newListedNftData = { tokenId, metadata: fetchMetadata?.data, price };
-
-          console.log('newListedNftData', newListedNftData);
 
           setListedNftList((prev) => [...prev, newListedNftData]);
         }
