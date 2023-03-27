@@ -23,11 +23,10 @@ const MyNfts = () => {
         const regex = /\/([^/]+)$/;
 
         const match = tokenUri.match(regex);
-        console.log(match);
 
         if (tokenUri) {
           let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
-          const newMintedNftData = fetchMetadata?.data;
+          const newMintedNftData = {tokenId, metadata: fetchMetadata?.data};
 
           setMintedNftList((prev) => [...prev, newMintedNftData]);
         }
