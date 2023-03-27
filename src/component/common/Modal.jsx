@@ -17,8 +17,7 @@ const Modal = ({ isOpen, onClose, children, showCloseButton, heading }) => {
             <svg
               className="w-6 h-6 fill-current text-gray-700"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
+              viewBox="0 0 24 24">
               <path d="M18.364 17.364l-1.414 1.414L12 13.414l-4.95 4.95-1.414-1.414L10.586 12 5.636 7.05l1.414-1.414L12 10.586l4.95-4.95 1.414 1.414L13.414 12l4.95 4.95z" />
             </svg>
           </button>

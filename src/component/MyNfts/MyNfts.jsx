@@ -26,7 +26,7 @@ const MyNfts = () => {
 
         if (tokenUri) {
           let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
-          const newMintedNftData = {tokenId, metadata: fetchMetadata?.data};
+          const newMintedNftData = { tokenId, metadata: fetchMetadata?.data };
 
           setMintedNftList((prev) => [...prev, newMintedNftData]);
         }
