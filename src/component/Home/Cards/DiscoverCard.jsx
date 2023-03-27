@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import DropdownMenu from '../../common/DropdownMenu';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 
-const DiscoverCard = ({ item, toggleModal }) => {
+const DiscoverCard = ({ item, toggleModal, openListNFT, modalTokenId, setModalTokenId }) => {
   console.log(item);
   const navigate = useNavigate();
-  const handleClick = () => navigate(`/marketplace/${item?.tokenId}`);
+  const handleClick = () => navigate(`/marketplace/${item?.metadata?.tokenId}`);
   const [dropdown, setDropdown] = useState(false);
   const location = useLocation();
 
@@ -20,7 +20,7 @@ const DiscoverCard = ({ item, toggleModal }) => {
       <div className="relative">
         <img
           className="w-full h-80 rounded-t-2xl object-cover"
-          src={item.metadata.imageUrl}
+          src={item?.metadata?.imageUrl}
           alt=""
         />
         {location.pathname !== '/' && (
@@ -30,12 +30,20 @@ const DiscoverCard = ({ item, toggleModal }) => {
             onClick={buttonClicked}
           />
         )}
-        {dropdown && <DropdownMenu toggleModal={toggleModal} />}
+        {dropdown && (
+          <DropdownMenu
+            openListNFT={openListNFT}
+            toggleModal={toggleModal}
+            tokenId={item.tokenId}
+            modalTokenId={modalTokenId}
+            setModalTokenId={setModalTokenId}
+          />
+        )}
       </div>
       <div className="bg-[#3b3b3b] rounded-b-2xl py-5 px-7 space-y-5">
         <div className="text-white">
-          <p className="text-xl font-bold">{item.metadata.name}</p>
-          <p className="text-lg">{item.metadata.description}</p>
+          <p className="text-xl font-bold">{item?.metadata?.name}</p>
+          <p className="text-lg">{item?.metadata?.description}</p>
           {/* <p className="pt-2 flex items-center gap-3">
             <span>
               <img src={item.avatar} alt="" />
