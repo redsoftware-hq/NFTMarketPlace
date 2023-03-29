@@ -1,6 +1,6 @@
 import React from 'react';
 import NFTCard from './Cards/NFTCard';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MakeOffer from './MakeOffer/MakeOffer';
 import Bg from '../../assets/timersec/bg.png';
 import Properties from './Properties/Properties';
@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import { ethers } from 'ethers';
 import { contract } from '../../apis/redsoftContractAbi';
 import axios from 'axios';
+import Toast from '../common/Toast';
 
 function Details() {
   window.scrollTo(0, 0);
@@ -19,6 +20,12 @@ function Details() {
   const [seletedNft, setSelectedNft] = React.useState([]);
   const [listedNftList, setListedNftList] = React.useState([]);
   const urlParams = useParams();
+
+  const [toastMessage, setToastMessage] = React.useState('');
+  const navigate = useNavigate();
+  const redirectCallback = () => {
+    navigate('/mynfts');
+  };
 
   async function fetchListedNFT() {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
@@ -73,9 +80,12 @@ function Details() {
     <section className="flex flex-col p-2 gap-4 md:flex-row lg:justify-between m-auto max-w-[1280px]">
       <NFTCard image={nft?.metadata?.imageUrl} isAvailable={'available'} />
       <div className="md:w-3/6 mt-1">
-        <MakeOffer nft={nft} />
+        <MakeOffer nft={nft} setToastMessage={setToastMessage} />
         <Properties />
         <AvaliableListings />
+        {toastMessage !== '' && (
+          <Toast type="success" message={toastMessage} callback={redirectCallback} />
+        )}
       </div>
     </section>
   );

@@ -3,7 +3,7 @@ import React from 'react';
 import { contract } from '../../../apis/redsoftContractAbi';
 import PrimaryButton from '../../common/Buttons/PrimaryButton';
 
-function MakeOffer({ nft }) {
+function MakeOffer({ nft, setToastMessage }) {
   async function handleBuy() {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
     const signer = provider.getSigner();
@@ -12,6 +12,8 @@ function MakeOffer({ nft }) {
     const buyingNft = await contractConnector.buyNFT(tokenId, {
       value: ethers.utils.parseUnits(nft?.price.toString(), 'ether')
     });
+
+    setToastMessage(`Purchase Successful.`);
   }
   return (
     <div className="flex flex-col gap-3 w-full">
