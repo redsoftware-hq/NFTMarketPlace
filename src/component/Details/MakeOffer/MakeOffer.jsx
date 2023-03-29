@@ -4,16 +4,14 @@ import { contract } from '../../../apis/redsoftContractAbi';
 import PrimaryButton from '../../common/Buttons/PrimaryButton';
 
 function MakeOffer({ nft }) {
-  // console.log(nft);
   async function handleBuy() {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
     const signer = provider.getSigner();
     const contractConnector = new ethers.Contract(contract.address, contract.abi, signer);
     let tokenId = nft?.tokenId.toString();
     const buyingNft = await contractConnector.buyNFT(tokenId, {
-      value: ethers.utils.parseUnits('0.005', 'ether')
+      value: ethers.utils.parseUnits(nft?.price.toString(), 'ether')
     });
-    console.log(buyingNft);
   }
   return (
     <div className="flex flex-col gap-3 w-full">
