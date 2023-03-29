@@ -125,8 +125,6 @@ const MyNfts = () => {
     broughtedNft();
   }, []);
 
-  console.log(allBroughtedNft);
-
   function openListNFT(e, toggleTo) {
     e.stopPropagation();
     setVisible(toggleTo);
