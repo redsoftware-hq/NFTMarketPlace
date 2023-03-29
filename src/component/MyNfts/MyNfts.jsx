@@ -13,6 +13,7 @@ const MyNfts = () => {
   const [modalTokenId, setModalTokenId] = React.useState();
   const [mintedNftList, setMintedNftList] = React.useState([]);
   const [listedNftList, setListedNftList] = React.useState([]);
+  const [allNftist, setAlldNftList] = React.useState([]);
 
   const [toastMessage, setToastMessage] = React.useState('');
   const navigate = useNavigate();
@@ -67,8 +68,34 @@ const MyNfts = () => {
     }
   };
 
+  async function allNft() {
+    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
+    const signer = provider.getSigner();
+    const contractConnector = new ethers.Contract(contract.address, contract.abi, signer);
+    const fetchAllNft = await contractConnector.fetchNFTsUser();
+
+    if (fetchAllNft) {
+      for (const nft of fetchAllNft) {
+        const regex = /\/([^/]+)$/;
+        let tokenId = nft?.tokenId.toString();
+        let price = parseFloat(ethers.utils.formatEther(nft?.price));
+        const tokenUri = await contractConnector.tokenURI(tokenId);
+
+        const match = tokenUri.match(regex);
+
+        if (tokenUri) {
+          let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
+          const newAllNftData = { tokenId, metadata: fetchMetadata?.data, price };
+
+          setAlldNftList((prev) => [...prev, newAllNftData]);
+        }
+      }
+    }
+  }
+
   useEffect(() => {
     fetchNFT();
+    allNft();
   }, []);
 
   function openListNFT(e, toggleTo) {
@@ -79,6 +106,16 @@ const MyNfts = () => {
   return (
     <section className="container mx-auto">
       <div className="py-12 px-8 md:px-12 lg:px-20">
+        <div className="creators-container  mb-10">
+          <h4 className="capitalize text-3xl md:text-4xl font-semibold">All NFTs</h4>
+          <div className="mt-5 creators-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {!!allNftist.length &&
+              allNftist.map((item, index) => {
+                return <DiscoverCard key={index} item={item} />;
+              })}
+          </div>
+        </div>
+
         <div className="creators-container  mb-10">
           <h4 className="capitalize text-3xl md:text-4xl font-semibold">My Minted NFTs</h4>
           <div className="mt-5 creators-card grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
