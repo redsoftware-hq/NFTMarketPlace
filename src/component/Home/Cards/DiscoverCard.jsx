@@ -5,7 +5,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 
 const DiscoverCard = ({ item, openListNFT, setModalTokenId }) => {
   const navigate = useNavigate();
-  const handleClick = () => navigate(`/marketplace/${item?.metadata?.tokenId}`);
+  const handleClick = () => navigate(`/marketplace/${item?.tokenId}`);
   const [dropdown, setDropdown] = useState(false);
   const location = useLocation();
 

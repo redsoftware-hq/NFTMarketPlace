@@ -5,12 +5,20 @@ import React, { useEffect } from 'react';
 import ModalInput from '../ModalInput/ModalInput';
 import DiscoverCard from '../Home/Cards/DiscoverCard';
 import { contract } from '../../apis/redsoftContractAbi';
+import Toast from '../common/Toast';
+import { useNavigate } from 'react-router-dom';
 
 const MyNfts = () => {
   const [visible, setVisible] = React.useState(false);
   const [modalTokenId, setModalTokenId] = React.useState();
   const [mintedNftList, setMintedNftList] = React.useState([]);
   const [listedNftList, setListedNftList] = React.useState([]);
+
+  const [toastMessage, setToastMessage] = React.useState('');
+  const navigate = useNavigate();
+  const redirectCallback = () => {
+    navigate('/mynfts');
+  };
 
   const fetchNFT = async () => {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
@@ -32,7 +40,6 @@ const MyNfts = () => {
           if (tokenUri) {
             let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
             const newMintedNftData = { tokenId, metadata: fetchMetadata?.data };
-
             setMintedNftList((prev) => [...prev, newMintedNftData]);
           }
         }
@@ -110,8 +117,16 @@ const MyNfts = () => {
       </div>
       {visible && (
         <Modal heading={'Listing Price'} isOpen={visible}>
-          <ModalInput openListNFT={openListNFT} modalTokenId={modalTokenId} />
+          <ModalInput
+            openListNFT={openListNFT}
+            modalTokenId={modalTokenId}
+            setToastMessage={setToastMessage}
+          />
         </Modal>
+      )}
+
+      {toastMessage !== '' && (
+        <Toast type="success" message={toastMessage} callback={redirectCallback} />
       )}
     </section>
   );
