@@ -11,6 +11,7 @@ const MyNfts = () => {
   const [modalTokenId, setModalTokenId] = React.useState();
   const [mintedNftList, setMintedNftList] = React.useState([]);
   const [listedNftList, setListedNftList] = React.useState([]);
+  // console.log(listedNftList);
 
   const fetchNFT = async () => {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
@@ -32,7 +33,6 @@ const MyNfts = () => {
           if (tokenUri) {
             let fetchMetadata = await axios.get(`https://ipfs.io/ipfs/${match[1]}`);
             const newMintedNftData = { tokenId, metadata: fetchMetadata?.data };
-
             setMintedNftList((prev) => [...prev, newMintedNftData]);
           }
         }
