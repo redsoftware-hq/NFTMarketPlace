@@ -19,7 +19,6 @@ const MyNfts = () => {
   const redirectCallback = () => {
     navigate('/mynfts');
   };
-  // console.log(listedNftList);
 
   const fetchNFT = async () => {
     const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
