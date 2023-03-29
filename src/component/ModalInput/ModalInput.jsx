@@ -2,7 +2,7 @@ import React from 'react';
 import { ethers } from 'ethers';
 import { contract } from '../../apis/redsoftContractAbi';
 
-const ModalInput = ({ openListNFT, modalTokenId }) => {
+const ModalInput = ({ openListNFT, modalTokenId, setToastMessage }) => {
   const [price, setPrice] = React.useState();
 
   async function handleListNft(e) {
@@ -15,6 +15,7 @@ const ModalInput = ({ openListNFT, modalTokenId }) => {
     });
     openListNFT(e, false);
     console.log(listingNft);
+    setToastMessage('Listed Successfully');
   }
 
   return (

@@ -5,12 +5,20 @@ import React, { useEffect } from 'react';
 import ModalInput from '../ModalInput/ModalInput';
 import DiscoverCard from '../Home/Cards/DiscoverCard';
 import { contract } from '../../apis/redsoftContractAbi';
+import Toast from '../common/Toast';
+import { useNavigate } from 'react-router-dom';
 
 const MyNfts = () => {
   const [visible, setVisible] = React.useState(false);
   const [modalTokenId, setModalTokenId] = React.useState();
   const [mintedNftList, setMintedNftList] = React.useState([]);
   const [listedNftList, setListedNftList] = React.useState([]);
+
+  const [toastMessage, setToastMessage] = React.useState('');
+  const navigate = useNavigate();
+  const redirectCallback = () => {
+    navigate('/mynfts');
+  };
   // console.log(listedNftList);
 
   const fetchNFT = async () => {
@@ -110,8 +118,16 @@ const MyNfts = () => {
       </div>
       {visible && (
         <Modal heading={'Listing Price'} isOpen={visible}>
-          <ModalInput openListNFT={openListNFT} modalTokenId={modalTokenId} />
+          <ModalInput
+            openListNFT={openListNFT}
+            modalTokenId={modalTokenId}
+            setToastMessage={setToastMessage}
+          />
         </Modal>
+      )}
+
+      {toastMessage !== '' && (
+        <Toast type="success" message={toastMessage} callback={redirectCallback} />
       )}
     </section>
   );
