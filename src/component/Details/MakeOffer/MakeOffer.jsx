@@ -13,7 +13,7 @@ function MakeOffer({ nft, setToastMessage }) {
       value: ethers.utils.parseUnits(nft?.price.toString(), 'ether')
     });
 
-    setToastMessage(`Purchase Successful.`);
+    setToastMessage('Purchase Successful.');
   }
   return (
     <div className="flex flex-col gap-3 w-full">
