@@ -11,7 +11,6 @@ import { AiOutlineClose, AiOutlineInfoCircle } from 'react-icons/ai';
 import { mintWalletNew, updateBalanceAsync } from '../../../apis/cryptoApi';
 
 const Navbar = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const [nav, setNav] = useState(false);
   const [error, setError] = useState(false);
@@ -29,87 +28,94 @@ const Navbar = () => {
       walletAddress: null
     }
   );
-  const [isOpen, setOpen] = useState(false);
   const [signedStr, setSignedStr] = useState(false);
   const [stepsDone, setStepsDone] = useState(false);
-  const [connected, toggleConnect] = useState(false);
-  const [currAddress, updateAddress] = useState('0x');
+  // const [connected, toggleConnect] = useState(false);
+  // const [currAddress, updateAddress] = useState('0x');
   const [signedKeyLink, setSignedKeyLink] = useState(false);
-  const [metamaskInstalled, setMetamaskInstalled] = useState(false);
+  const [metamaskNotInstalled, setMetamaskNotInstalled] = useState(false);
 
   const handleClose = () => {
-    setOpen(false);
+    setMetamaskNotInstalled(false);
   };
 
-  async function getSignedString(signer) {
-    const signedString = await signer.signMessage(
-      'Only sign this request if you’ve initiated an action with Immutable X.'
-    );
-    setSignedStr(true);
-    return signedString;
-  }
+  // async function getSignedString(signer) {
+  //   const signedString = await signer.signMessage(
+  //     'Only sign this request if you’ve initiated an action with Immutable X.'
+  //   );
+  //   setSignedStr(true);
+  //   return signedString;
+  // }
 
-  async function getSignedKeyLinking(signer) {
-    const signedKeyLinking = await signer.signMessage(
-      'Only sign this key linking request from Immutable X'
-    );
-    setSignedKeyLink(true);
-    return signedKeyLinking;
-  }
+  // async function getSignedKeyLinking(signer) {
+  //   const signedKeyLinking = await signer.signMessage(
+  //     'Only sign this key linking request from Immutable X'
+  //   );
+  //   setSignedKeyLink(true);
+  //   return signedKeyLinking;
+  // }
 
-  async function tryCatchData(param1, param2) {
-    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
-    const requestAccounts = await provider.send('eth_requestAccounts', []);
+  // async function tryCatchData(param1, param2) {
+  //   const provider = new ethers.providers.Web3Provider(window?.ethereum, 'goerli');
+  //   const requestAccounts = await provider.send('eth_requestAccounts', []);
 
-    const mintWalletData = {
-      walletAddress: requestAccounts[0],
-      blockchain: 'Ethereum_' + 'goerli',
-      signedString: param1,
-      signedKeyLinking: param2
-    };
+  //   const mintWalletData = {
+  //     walletAddress: requestAccounts[0],
+  //     blockchain: 'Ethereum_' + 'goerli',
+  //     signedString: param1,
+  //     signedKeyLinking: param2
+  //   };
 
-    const signedWallet = await mintWalletNew(mintWalletData);
-    const balanceImxWallet = await updateBalanceAsync(signedWallet);
-    localStorage.setItem('wallet', JSON.stringify(signedWallet));
-    localStorage.setItem('balance', JSON.stringify(balanceImxWallet[0]));
-    setStepsDone(true);
-  }
+  //   const signedWallet = await mintWalletNew(mintWalletData);
+  //   const balanceImxWallet = await updateBalanceAsync(signedWallet);
+  //   localStorage.setItem('wallet', JSON.stringify(signedWallet));
+  //   localStorage.setItem('balance', JSON.stringify(balanceImxWallet[0]));
+  //   setStepsDone(true);
+  // }
 
   const handleConnect = async () => {
-    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+    try {
+      if (window?.ethereum) {
+        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
 
-    if (chainId !== '0x13881') {
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [
-          {
-            chainId: '0x13881'
-          }
-        ]
-      });
+        if (chainId !== '0x13881') {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [
+              {
+                chainId: '0x13881'
+              }
+            ]
+          });
+        }
+
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
+
+        const requestAccounts = await provider.send('eth_requestAccounts', []);
+        const account = requestAccounts[0];
+        const signer = provider.getSigner();
+        const balance = await signer.getBalance();
+        const network = await provider.getNetwork();
+        const balanceFormatted = ethers.utils.formatEther(balance);
+
+        const walletDataObject = {
+          provider,
+          signer,
+          network,
+          walletAddress: account,
+          balance: balanceFormatted
+        };
+
+        setWalletData({
+          ...walletDataObject
+        });
+      } else {
+        setMetamaskNotInstalled(true);
+      }
+    } catch (error) {
+      console.log(error);
     }
-
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
-
-    const requestAccounts = await provider.send('eth_requestAccounts', []);
-    const account = requestAccounts[0];
-    const signer = provider.getSigner();
-    const balance = await signer.getBalance();
-    const network = await provider.getNetwork();
-    const balanceFormatted = ethers.utils.formatEther(balance);
-
-    const walletDataObject = {
-      provider,
-      signer,
-      network,
-      walletAddress: account,
-      balance: balanceFormatted
-    };
-
-    setWalletData({
-      ...walletDataObject
-    });
 
     // const contractConnector = new ethers.Contract(contract.address, contract.abi, signer);
     // if (!window.ethereum) {
@@ -172,50 +178,55 @@ const Navbar = () => {
   //   }
   // }, []);
 
-  React.useEffect(() => {
-    const isConnected = window.ethereum.isConnected();
+  // React.useEffect(() => {
+  //   try {
+  //     if (window?.ethereum) {
+  //       const isConnected = window.ethereum.isConnected();
+  //       if (isConnected) {
+  //         updateWalletData();
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // });
 
-    if (isConnected) {
-      updateWalletData();
-    }
-  });
+  // const updateWalletData = async () => {
+  //   const chainId = await window.ethereum.request({ method: 'eth_chainId' });
 
-  const updateWalletData = async () => {
-    const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+  //   if (chainId !== '0x13881') {
+  //     await window.ethereum.request({
+  //       method: 'wallet_switchEthereumChain',
+  //       params: [
+  //         {
+  //           chainId: '0x13881'
+  //         }
+  //       ]
+  //     });
+  //   }
 
-    if (chainId !== '0x13881') {
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [
-          {
-            chainId: '0x13881'
-          }
-        ]
-      });
-    }
+  //   await window.ethereum.request({ method: 'eth_requestAccounts' });
+  //   const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
 
-    await window.ethereum.request({ method: 'eth_requestAccounts' });
-    const provider = new ethers.providers.Web3Provider(window?.ethereum, 'maticmum');
+  //   const requestAccounts = await provider.send('eth_requestAccounts', []);
+  //   const account = requestAccounts[0];
+  //   const signer = provider.getSigner();
+  //   const balance = await signer.getBalance();
+  //   const network = await provider.getNetwork();
+  //   const balanceFormatted = ethers.utils.formatEther(balance);
 
-    const requestAccounts = await provider.send('eth_requestAccounts', []);
-    const account = requestAccounts[0];
-    const signer = provider.getSigner();
-    const balance = await signer.getBalance();
-    const network = await provider.getNetwork();
-    const balanceFormatted = ethers.utils.formatEther(balance);
+  //   const walletDataObject = {
+  //     provider,
+  //     signer,
+  //     network,
+  //     walletAddress: account,
+  //     balance: balanceFormatted
+  //   };
 
-    const walletDataObject = {
-      provider,
-      signer,
-      network,
-      walletAddress: account,
-      balance: balanceFormatted
-    };
-
-    setWalletData({
-      ...walletDataObject
-    });
-  };
+  //   setWalletData({
+  //     ...walletDataObject
+  //   });
+  // };
 
   return (
     <nav className="py-5 md:py-8 md:px-10 px-5 relative">
@@ -279,9 +290,8 @@ const Navbar = () => {
                     />
                   )}
                 </div>
-
                 {error ? (
-                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
+                  <Toast message={"Couldn't connect wallet"} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
@@ -387,7 +397,7 @@ const Navbar = () => {
                 </div>
 
                 {error ? (
-                  <Toast message={'Couldn\'t connect wallet'} type={'error'} />
+                  <Toast message={"Couldn't connect wallet"} type={'error'} />
                 ) : (
                   <>
                     {walletData.walletAddress && walletData.network && (
@@ -431,9 +441,9 @@ const Navbar = () => {
         </div>
       </div>
       <Modal
-        isOpen={isOpen}
+        isOpen={metamaskNotInstalled}
         onClose={handleClose}
-        showCloseButton={isOpen}
+        showCloseButton={metamaskNotInstalled}
         heading={'Metamask is not installed on your browser.'}>
         <div>
           <p className="mb-4">
