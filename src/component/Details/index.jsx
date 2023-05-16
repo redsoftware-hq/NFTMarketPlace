@@ -9,12 +9,12 @@ import { ethers } from 'ethers';
 import { contract } from '../../apis/redsoftContractAbi';
 import axios from 'axios';
 import Toast from '../common/Toast';
+import { discoverData } from '../../utils/DiscoverData';
 
 function Details() {
-  window.scrollTo(0, 0);
-  const [listedNftList, setListedNftList] = React.useState([]);
+  // window.scrollTo(0, 0);
+  // const [listedNftList, setListedNftList] = React.useState([]);
   const urlParams = useParams();
-
   const [toastMessage, setToastMessage] = React.useState('');
   const navigate = useNavigate();
   const redirectCallback = () => {
@@ -42,15 +42,15 @@ function Details() {
     }
   }
 
-  useEffect(() => {
-    fetchListedNFT();
-  }, []);
+  // useEffect(() => {
+  //   fetchListedNFT();
+  // }, []);
 
-  let nft = listedNftList.find((item) => item.tokenId == urlParams.id);
+  let nft = discoverData.find((item) => item.tokenId == urlParams.id);
 
   return (
     <section className="flex flex-col p-2 gap-4 md:flex-row lg:justify-between m-auto max-w-[1280px]">
-      <NFTCard image={nft?.metadata?.imageUrl} isAvailable={'available'} />
+      <NFTCard image={nft?.image} isAvailable={'available'} />
       <div className="md:w-3/6 mt-1">
         <MakeOffer nft={nft} setToastMessage={setToastMessage} />
         <Properties />

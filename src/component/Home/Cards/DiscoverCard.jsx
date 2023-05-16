@@ -19,7 +19,7 @@ const DiscoverCard = ({ item, openListNFT, setModalTokenId }) => {
       <div className="relative">
         <img
           className="w-full h-80 rounded-t-2xl object-cover"
-          src={item?.metadata?.imageUrl}
+          src={item?.image}
           alt=""
         />
         {location.pathname !== '/' && (
@@ -41,16 +41,16 @@ const DiscoverCard = ({ item, openListNFT, setModalTokenId }) => {
         <div className="text-white">
           <p className="text-xl font-bold">{item?.metadata?.name}</p>
           <p className="text-lg">{item?.metadata?.description}</p>
-          {item?.price && <p className="text-lg">Price: {item?.price} ether</p>}
-          {/* <p className="pt-2 flex items-center gap-3">
+          {/* {item?.price && <p className="text-lg">Price: {item?.price}</p>} */}
+          <p className="pt-2 flex items-center gap-3">
             <span>
               <img src={item.avatar} alt="" />
             </span>
             <span className="font-space-mono">{item.avatarName}</span>
-          </p> */}
+          </p>
         </div>
 
-        {/* <div className="font-space-mono flex justify-between">
+        <div className="font-space-mono flex justify-between">
           <div className="price-div ">
             <span className="text-[#858584] text-xs">Price</span>
             <p className="text-white">{item.price}</p>
@@ -59,7 +59,7 @@ const DiscoverCard = ({ item, openListNFT, setModalTokenId }) => {
             <span className="capitalize text-[#858584] text-xs">highest bid</span>
             <p className="text-white">{item.highestBid}</p>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
